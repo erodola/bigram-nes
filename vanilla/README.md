@@ -1,6 +1,6 @@
 # 🍦 Vanilla Model
 
-![gen](./gen.gif)
+![gen](../gen.gif)
 
 A minimal name generator showcasing a simple bigram model running natively on the NES.
 

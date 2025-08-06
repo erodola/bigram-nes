@@ -1,6 +1,6 @@
 # 🐉 Bigram NES
 
-![gen](./gen.gif)
+![gen](./gen.gif) ![demo](./ff1-1.gif) ![demo](./ff1-2.gif)
 
 This project explores simple bigram-based name generation models running on NES hardware.
 

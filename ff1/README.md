@@ -1,6 +1,6 @@
 # 🧙 Final Fantasy I Hack
 
-![demo](./demo.gif)
+![demo](../ff1-1.gif) ![demo](../ff1-2.gif)
 
 This ROM hack adds a tiny AI-powered name generator to the **Final Fantasy I (NES)** character naming screen.
 
