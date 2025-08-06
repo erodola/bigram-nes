@@ -23,7 +23,7 @@ The MD5 hash of the ROM file should be `d111fc7770e12f67474897aaad834c0c`.
 
 ## 🙏 Acknowledgments
 
-The project wouldn't have been possible without the fully commented FF1 disassembly by [Michael Bennett](https://github.com/Entroper/FF1Disassembly/)
+The project wouldn't have been possible without the fully commented FF1 disassembly by [Michael Bennett](https://github.com/Entroper/FF1Disassembly/).
 
 ## 📄 License
 
