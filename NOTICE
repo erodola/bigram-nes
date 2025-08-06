@@ -1,0 +1,15 @@
+# Third Party Licenses
+
+This project includes code, concepts, and/or resources from the following projects:
+
+1. **nesdoug**
+   - License: MIT
+   - Copyright (c) 2018 Doug Fraker
+   - See `licenses/LICENSE_nesdoug`
+
+2. **Final Fantasy (NES)**
+   - Copyright (c) 1987 Square
+
+All included third-party code is used under their respective licenses for educational, non-commercial purposes only.
+
+This project does **not** distribute or include any original game assets or ROMs.

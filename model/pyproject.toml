@@ -1,0 +1,13 @@
+[project]
+name = "bigram-nes"
+version = "0.1.0"
+description = "A simple bigram model with char-level tokens and length-one context."
+authors = [{ name = "Emanuele Rodolà", email = "e.rodola@gmail.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = "==3.11.*"
+dependencies = [
+    "ipykernel>=6.29.5",
+    "matplotlib>=3.10.3",
+    "numpy>=2.2.6",
+]
