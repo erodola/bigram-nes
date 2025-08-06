@@ -1,6 +1,7 @@
 model/.venv
 model/uv.lock
 model/__pycache__
+model/*.egg-info
 
 dev/build
 dev/utils/bin

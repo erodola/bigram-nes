@@ -57,6 +57,8 @@ To build the patched ROM:
    d111fc7770e12f67474897aaad834c0c
    ```
 
+   Rename the ROM as `ff1.nes`, and place inside the `ff1/` folder.
+
 2. **Install dependencies**
 
    - [`cc65`](https://cc65.github.io/) toolchain

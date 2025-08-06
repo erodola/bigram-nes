@@ -19,11 +19,11 @@ Use the appropriate build script for your platform:
 
 ## 2. Scripts to generate offsets for the asset extraction step (./utils)
 
-Starting from a full game ROM and pre-extracted game assets contained in `bin` and `dat` folders, the script seeks the assets within the ROM and outputs their offsets in a text file (`offsets`).
+Starting with a full game ROM and pre-extracted assets (`bin/` and `dat/`), the `seek_data.sh` script scans the ROM to locate matching data and records their offsets in a file called `offsets`.
 
-Simply edit the paths in `seek_data.sh`, and run the script.
+To use it, update the paths in `seek_data.sh`, then run the script.
 
-The `compare_folder.py` script is used to compare pre-extracted `bin`/`dat` folders with those extracted during the build pipeline.
+Use `compare_folder.py` to verify that the extracted assets match the pre-extracted `bin/` and `dat/` folders.
 
 ### 🙏 Acknowledgments
 
