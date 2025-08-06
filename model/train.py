@@ -1,6 +1,6 @@
 from bigram import train, quantize_transition_matrix
 
-data_fname = '../data/human_names.txt'
+data_fname = './data/human_names.txt'
 export_asm = '../ff1/asm/T_matrix.asm'
 export_dev = '../dev/src/T_matrix.h'
 export_vanilla = '../vanilla/src/T_matrix.h'

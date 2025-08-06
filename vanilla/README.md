@@ -1,5 +1,7 @@
 # 🍦 Vanilla Model
 
+![gen](./gen.gif)
+
 This is a minimal name generator designed to demonstrate the capabilities of a simple bigram-based model running natively on the NES.
 
 This version is intended as a lightweight proof of concept. The code is not optimized, and serves primarily to validate the feasibility of running generative logic on NES hardware.
