@@ -2,6 +2,13 @@
 
 set -e
 
+# Check for required subfolders
+if [ ! -d "asm/bin" ] || [ ! -d "asm/dat" ]; then
+    echo "ERROR: asm/bin/ and/or asm/dat/ folder(s) not found."
+    echo "You should run extract.sh before running the build."
+    exit 1
+fi
+
 echo "==> Starting build process..."
 
 # Optional: uncomment to temporarily add cc65 to path

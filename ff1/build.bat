@@ -1,6 +1,21 @@
 :: Uncomment the line below to temporarily update the system path
 :: set path=%path%;..\tools\cc65\bin\
 
+IF NOT EXIST asm\bin (
+    echo ERROR: Folder "asm\bin" not found.
+    echo You should run extract.bat before running the build.
+	pause
+    goto :eof
+)
+
+IF NOT EXIST asm\dat (
+    echo ERROR: Folder "asm\dat" not found.
+    echo You should run extract.bat before running the build.
+	pause
+    goto :eof
+)
+
+
 if not exist build (
     mkdir build
 )
