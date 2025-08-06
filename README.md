@@ -4,7 +4,7 @@
 
 This project explores simple bigram-based name generation models running on NES hardware.
 
-The NES only has **2KB of RAM** and a **128KB ROM** for the code. What can we fit in there?
+The NES only has **2KB RAM** and a **128KB ROM** for the code. What can we fit in there?
 
 The project includes two subprojects:
 

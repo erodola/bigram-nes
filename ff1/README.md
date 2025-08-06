@@ -1,50 +1,26 @@
-\# 🧙 Final Fantasy I Hack
+# 🧙 Final Fantasy I Hack
 
+![demo](./demo.gif)
 
-
-!\[demo](./demo.gif)
-
-
-
-This ROM hack adds a tiny AI-powered name generator to the \*\*Final Fantasy I (NES)\*\* character naming screen.
-
-
+This ROM hack adds a tiny AI-powered name generator to the **Final Fantasy I (NES)** character naming screen.
 
 The model produces fantasy-style names of 3–4 letters (matching the original game's naming constraints) while compressing a name space of nearly half a million possibilities into a form small enough to run on NES hardware.
 
-
-
-\## 🧠 Model
-
-
+## 🧠 Model
 
 The generator is a character-level bigram model (context size = 1), with `uint8`-quantized weights trained offline and embedded in the ROM. All inference runs natively on the NES, written entirely in 6502 assembly.
 
+**Size \& Placement**:
 
+- **Model weights**: 729 bytes
+- **Inference code**: 144 bytes
+- Stored in **bank 0E** of the ROM.
 
-\*\*Size \& Placement\*\*:
-
-
-
-\- \*\*Model weights\*\*: 729 bytes
-
-\- \*\*Inference code\*\*: 144 bytes
-
-\- Stored in \*\*bank 0E\*\* of the ROM.
-
-
-
-\*\*Inference.\*\* Name generation is autoregressive and constrained to 3–4 letters (shorter names are rejected at sample time). The 6502 assembly handles all steps (multinomial sampling, token-to-tile mapping, etc.) with careful attention to both CPU cycles and byte footprint.
-
-
+**Inference.** Name generation is autoregressive and constrained to 3–4 letters (shorter names are rejected at sample time). The 6502 assembly handles all steps (multinomial sampling, token-to-tile mapping, etc.) with careful attention to both CPU cycles and byte footprint.
 
 Some original FF1 code in bank 0E was rewritten to make space, preserving full functionality.
 
-
-
-\*\*Training.\*\* Re-training isn't required, but if you'd like to experiment (e.g. with Pokémon names), run:
-
-
+**Training.** Re-training isn't required, but if you'd like to experiment (e.g. with Pokémon names), run:
 
 ```bash
 git clone https://github.com/erodola/bigram-nes.git
@@ -54,95 +30,52 @@ uv pip install -e .
 uv run train.py
 ```
 
-
-
 This will output quantized weights in the correct format and location.
 
-
-
-\## 🕹️ In-Game
-
-
+## 🕹️ In-Game
 
 When starting a new game, you are presented with freshly generated names and random classes.
 
-
-
-\* Press \*\*B\*\* to generate new ones.
-
-\* Press \*\*A\*\* to confirm.
-
-
+- Press **B** to generate new ones.
+- Press **A** to confirm.
 
 A fresh seed is used on every run to keep results varied.
 
-
-
-\## 🔧 Building
-
-
+## 🔧 Building
 
 To build the patched ROM:
 
+1. **Get a clean FF1 ROM**
 
+   The North American NES release (PRG0).
 
-1\. \*\*Get a clean FF1 ROM\*\*
+   MD5 hash must be:
 
-&nbsp;  The North American NES release (PRG0).
+   ```
+   d111fc7770e12f67474897aaad834c0c
+   ```
 
-&nbsp;  MD5 hash must be:
+2. **Install dependencies**
 
+   - [`cc65`](https://cc65.github.io/) toolchain
+   - Add the `bin/` folder to `PATH`
 
+3. **Extract game assets**
 
-&nbsp;  ```
+   This step pulls necessary data from the base ROM into `asm/`.
 
-&nbsp;  d111fc7770e12f67474897aaad834c0c
+   Use `extract.sh` (Linux/MacOS) or `extract.bat` (Windows)
 
-&nbsp;  ```
+4. **Build the patched ROM**
 
-
-
-2\. \*\*Install dependencies\*\*
-
-
-
-&nbsp;  \* \[`cc65`](https://cc65.github.io/) toolchain
-
-&nbsp;  \* Add the `bin/` folder to `PATH`
-
-
-
-3\. \*\*Extract game assets\*\*
-
-&nbsp;  This step pulls necessary data from the base ROM into `asm/`.
-
-
-
-&nbsp;  - Use `extract.sh` (Linux/MacOS) or `extract.bat` (Windows)
-
-
-
-4\. \*\*Build the patched ROM\*\*
-
-&nbsp;  This assembles the ROM with the embedded generator.
-
-
+   This assembles the ROM with the embedded generator.
 
    Use `build.sh` Linux/MacOS or `build.bat` (Windows)
 
-
-
 The final ROM will be located in the `build/` folder.
-
-
 
 Run it with your favorite NES emulator.
 
+## 🙏 Credits
 
-
-\## 🙏 Credits
-
-
-
-Built on top of the excellent, fully commented FF1 disassembly by \[Michael Bennett](https://github.com/Entroper/FF1Disassembly)
-
+Built on top of the excellent, fully commented FF1 disassembly by [Michael Bennett](https://github.com/Entroper/FF1Disassembly)
