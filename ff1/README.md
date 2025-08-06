@@ -18,6 +18,8 @@ The generator is a character-level bigram model (context size = 1), with `uint8`
 
 **Inference.** Name generation is autoregressive and constrained to 3–4 letters (shorter names are rejected at sample time). The 6502 assembly handles all steps (multinomial sampling, token-to-tile mapping, etc.) with careful attention to both CPU cycles and byte footprint.
 
+The inference code is fully commented and stored in [asm/inference.asm](https://github.com/erodola/bigram-nes/blob/main/ff1/asm/inference.asm)
+
 Some original FF1 code in bank 0E was rewritten to make space, preserving full functionality.
 
 **Training.** Re-training isn't required, but if you'd like to experiment (e.g. with Pokémon names), run:
@@ -47,7 +49,7 @@ To build the patched ROM:
 
 1. **Get a clean FF1 ROM**
 
-   The North American NES release (PRG0).
+   The North American NES release.
 
    MD5 hash must be:
 
@@ -70,11 +72,10 @@ To build the patched ROM:
 
    This assembles the ROM with the embedded generator.
 
-   Use `build.sh` Linux/MacOS or `build.bat` (Windows)
+   Use `build.sh` Linux/MacOS or `build.bat` (Windows)
 
-The final ROM will be located in the `build/` folder.
 
-Run it with your favorite NES emulator.
+The final ROM will be located in the `build/` folder. Run it with your favorite NES emulator.
 
 ## 🙏 Credits
 
