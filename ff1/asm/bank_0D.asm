@@ -112,7 +112,7 @@ MiniGame_ShufflePuzzle:
 
   @CheckRight:
     CPY #$FF             ; see if we're trying to slide right (from the left)
-                         ; [RETRO AI] fix range error
+                         ; [BIGRAM-NES] fix range error
     BNE @LegalMove      ;  if not, move is legal, so jump ahead to do it
 
       AND #$03          ; otherwise check the column
@@ -1254,7 +1254,7 @@ MiniGame_ProcessInput:
     BEQ @Move         ; if they are... move
 
     LDX #$FF          ; otherwise, they're moving left... so make a change of -1 instead  
-	                  ; [RETRO AI] fix range error
+	                  ; [BIGRAM-NES] fix range error
     BNE @Move         ; (always branches)
 
   @Vertical:

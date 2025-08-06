@@ -1946,7 +1946,7 @@ BattleTarget_Down:
     LDA btlcurs             ; see if the cursor is at our max
     CMP btlcurs_max
     BNE :+                  ; if it's at the max, replace with -1 (so we INC it to zero)
-      LDA #$FF              ; [RETRO AI] fix range error
+      LDA #$FF              ; [BIGRAM-NES] fix range error
       STA btlcurs
   : INC btlcurs             ; inc to next slot
   ; JMP BattleTarget_DownSub            ; <- flows into
@@ -2163,7 +2163,7 @@ MenuSelection_Magic:
     CMP #$02
     BNE :+              ; if in right column
       LDA #$FF           ; change to -1 (so we INC to zero) 
-	                     ; [RETRO AI] fix range error
+	                     ; [BIGRAM-NES] fix range error
       STA btlcurs_x
   : INC btlcurs_x
     RTS
@@ -2354,7 +2354,7 @@ SetNaturalPose:
 CharWalkAnimationLeft:
     PHA         ; push char index
     LDA #( -2 & $FF )     ; negative directional value = move left
-	                      ; [RETRO AI] fix range error
+	                      ; [BIGRAM-NES] fix range error
     BNE :+      ;  <-- FLOW:  This label is in CharWalkAnimationRight
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2477,7 +2477,7 @@ WalkForwardAndStrike:
     STX btlattackspr_gfx        ; X = attack sprite graphic
     STY btlattackspr_wepmag     ; Y = 0,1 to choose between weapon/magic
     
-    LDA #( -2 & $FF )           ; [RETRO AI] fix range error
+    LDA #( -2 & $FF )           ; [BIGRAM-NES] fix range error
     STA $68AB                   ; walk the character to the left
     JSR CharacterWalkAnimation
     
@@ -2564,7 +2564,7 @@ __PrepAttackSprite_Magic_AFrame:
     LDA btl_drawflagsA                      ; turn on the magic drawflag bit, and turn off the weapon
     ORA #$40                                ; drawflag bit.
     AND #( ~$20 & $FF )                     ; this will cause the BG color to flash. 
-	                                        ; [RETRO AI] fix range error
+	                                        ; [BIGRAM-NES] fix range error
     STA btl_drawflagsA
     RTS
     
@@ -3877,12 +3877,12 @@ Battle_PlayerTryWakeup:
     
   : LDY #btlch_ailments             ; remove sleep ailment from IB stats
     LDA (btl_ib_charstat_ptr), Y
-    AND #( ~AIL_SLEEP & $FF )       ; [RETRO AI] fix range error
+    AND #( ~AIL_SLEEP & $FF )       ; [BIGRAM-NES] fix range error
     STA (btl_ib_charstat_ptr), Y
     
     LDY #ch_ailments - ch_stats     ; and OB stats
     LDA (btl_ob_charstat_ptr), Y
-    AND #( ~AIL_SLEEP & $FF )       ; [RETRO AI] fix range error
+    AND #( ~AIL_SLEEP & $FF )       ; [BIGRAM-NES] fix range error
     STA (btl_ob_charstat_ptr), Y
     
     LDA #BTLMSG_WOKEUP              ; print "Woke up" message and exit
@@ -3913,12 +3913,12 @@ Battle_PlayerTryUnstun:
       
   : LDY #btlch_ailments                 ; remove Stun ailment from IB ailments
     LDA (btl_ib_charstat_ptr), Y
-    AND #( ~AIL_STUN & $FF )            ; [RETRO AI] fix range error
+    AND #( ~AIL_STUN & $FF )            ; [BIGRAM-NES] fix range error
     STA (btl_ib_charstat_ptr), Y
     
     LDY #ch_ailments - ch_stats         ; ... and also from OB ailments
     LDA (btl_ob_charstat_ptr), Y
-    AND #( ~AIL_STUN & $FF )            ; [RETRO AI] fix range error
+    AND #( ~AIL_STUN & $FF )            ; [BIGRAM-NES] fix range error
     STA (btl_ob_charstat_ptr), Y
     
     LDA #BTLMSG_CURED                   ; print "Cured!" message, and exit!
@@ -6705,7 +6705,7 @@ Battle_DoEnemyTurn:
     JSR BattleRNG_L         ; random number between [0,255]
     CMP #25                 ; if that number is less than 25 (less than 10% chance)
     BCS :+                  ; then the paralysis is cured:
-      LDA #( ~AIL_STUN & $FF )      ; [RETRO AI] fix range error
+      LDA #( ~AIL_STUN & $FF )      ; [BIGRAM-NES] fix range error
       JSR ApplyEnemyAilmentMask     ; remove STUN ailment mask
       LDA #ALTBTLMSG_CURED_2        ; display "Cured!" message and end their turn
       BNE @PrintAndEnd
@@ -6729,7 +6729,7 @@ Battle_DoEnemyTurn:
     LDA btl_mathbuf+1       ; Then check the high byte
     BMI :+                          ; if negative, keep sleeping.  Note again, this is IMPOSSIBLE because the value
       LDA #( ~AIL_SLEEP & $FF )               ;  MathBuf_Sub *CAPS THE DIFFERENCE AT ZERO* so it will NEVER result in a negative number. 
-                                              ; [RETRO AI] fix range error
+                                              ; [BIGRAM-NES] fix range error
       JSR ApplyEnemyAilmentMask     ;  This is so broken.
       LDA #ALTBTLMSG_WOKEUP
       BNE @PrintAndEnd              ; Regardless, the end result is that an enemy will ALWAYS immediately wake up when asleep.
@@ -6748,7 +6748,7 @@ Battle_DoEnemyTurn:
     JSR BattleRNG_L                     ; random [0,$FF]
     CMP #$40
     BCS :+                              ; cured if < $40  (25% chance)
-      LDA #( ~AIL_CONF & $FF )          ; [RETRO AI] fix range error
+      LDA #( ~AIL_CONF & $FF )          ; [BIGRAM-NES] fix range error
       JSR ApplyEnemyAilmentMask
       JSR DrawCombatBox_Attacker
       LDA #ALTBTLMSG_CURED_1

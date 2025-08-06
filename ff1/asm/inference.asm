@@ -11,7 +11,7 @@ VOCAB_SIZE = 27
 
 
 ; ==================================
-; [RETRO AI] ItoS
+; [BIGRAM-NES] ItoS
 ;
 ; Convert an unsigned char index to a tile address in the PPU.
 ;
@@ -35,7 +35,7 @@ ItoS:
 
 
 ; ==================================
-; [RETRO AI] Rand8
+; [BIGRAM-NES] Rand8
 ;
 ; Generate a random 8-bit number (0 - 255).
 ; Uses the frame counter as a seed to index into FF1's RNG lookup table.
@@ -53,7 +53,7 @@ Rand8:
 
 
 ; ==================================
-; [RETRO AI] Multinomial
+; [BIGRAM-NES] Multinomial
 ;
 ; Draw one sample from a 8bit distribution.
 ;
@@ -89,7 +89,7 @@ Multinomial:
 
 
 ; ==================================
-; [RETRO AI] LoadRowPtr
+; [BIGRAM-NES] LoadRowPtr
 ;
 ; Set the probs_ptr to point to the transition matrix row for the given index.
 ;
@@ -125,7 +125,7 @@ LoadRowPtr:
 
 
 ; ==================================
-; [RETRO AI] GenerateName
+; [BIGRAM-NES] GenerateName
 ;
 ; Generate a random name of 3 to 4 characters using ancestral sampling
 ; with a bigram model.

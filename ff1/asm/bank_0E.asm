@@ -234,7 +234,7 @@ PrintCharStat:
 @Luck:
     LDABRA <ch_luck, @Stat2Digit
 
-; [RETRO AI] commenting out unused code to save bytes
+; [BIGRAM-NES] commenting out unused code to save bytes
 ; @Stat1Digit:       ; same as below routines -- but 1 byte, 1 digit
     ; CLC            ;  I do not believe this 1Digit code is ever called
     ; ADC char_index
@@ -356,7 +356,7 @@ PrintNumber_3Digit:            ; more of same...
     JSR TrimZeros_3Digits
     LDABRA <format_buf-3, PrintNumber_Exit
 
-; [RETRO AI] commenting out unused code to save bytes
+; [BIGRAM-NES] commenting out unused code to save bytes
 ; PrintNumber_4Digit:            ; more of same.
     ; JSR FormatNumber_4Digits   ; though... I don't think this 4-digit routine is used anywhere in the game
     ; JSR TrimZeros_4Digits
@@ -430,7 +430,7 @@ PrintNumber_Exit:         ; on exit, each of the above routines put the low byte
     ; RTS
 	
 ; ==================================
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Rewriting the code above to save some bytes.
 ; The new code is functionally equivalent.
 ; ==================================
@@ -443,7 +443,7 @@ TrimZeros_5Digits:
         LDY #1
         JMP TrimZeros_Loop      ; 5 bytes
 
-; [RETRO AI] commenting out unused code to save bytes
+; [BIGRAM-NES] commenting out unused code to save bytes
 ; TrimZeros_4Digits:
         ; LDY #2
         ; JMP TrimZeros_Loop      ; 5 bytes
@@ -807,11 +807,11 @@ SetGameEventFlag:
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI] commenting out unused code to save bytes
+; [BIGRAM-NES] commenting out unused code to save bytes
 ; ClearGameEventFlag:
 ;     LDA game_flags, Y  ; get game flags
 ;     AND #( ~GMFLG_EVENT & $FF )  ; clear event bit  
-                                   ; [RETRO AI] fix range error
+                                   ; [BIGRAM-NES] fix range error
 ;     STA game_flags, Y  ; write back
 ;     RTS
 
@@ -849,7 +849,7 @@ IsObjectVisible:
 HideThisMapObject:
     LDA game_flags, Y        ; get the game flags using object ID as index
     AND #( ~GMFLG_OBJVISIBLE & $FF )   ; flip off the obj visibility flag (hide object)  
-                                       ; [RETRO AI] fix range error
+                                       ; [BIGRAM-NES] fix range error
     STA game_flags, Y        ; write it back
 
     LDA #0                   ; kill the object on the map by removing it from the list of
@@ -1007,7 +1007,7 @@ HideMapObject:
     STY tmp                   ; back up the object ID
     LDA game_flags, Y
     AND #( ~GMFLG_OBJVISIBLE & $FF )   ; clear the visibility flag for this object  
-                                       ; [RETRO AI] fix range error
+                                       ; [BIGRAM-NES] fix range error
     STA game_flags, Y
 
     LDY #0                ; zero Y for loop counter / mapobject indexing
@@ -2617,7 +2617,7 @@ DrawCharacterName:
 
 
 ; ==================================
-; [RETRO AI] GetRandomClass
+; [BIGRAM-NES] GetRandomClass
 ;
 ; Draw a random class for the given character.
 ;
@@ -2668,7 +2668,7 @@ NewGamePartyGeneration:
                     ;   and not with the actual drawing makes no sense to me.
 
   ; ==================================
-  ; [RETRO AI]
+  ; [BIGRAM-NES]
   ; Replace user input with AI-generated names.
   ; ==================================
   @Char_0:
@@ -2703,7 +2703,7 @@ NewGamePartyGeneration:
     JSR MenuWaitForBtn_SFX      ; Wait for the user to press A (or B) again, to
     LDA joy                     ;  confirm their party decisions.
 
-    ; [RETRO AI] generate new names if B was pressed
+    ; [BIGRAM-NES] generate new names if B was pressed
     AND #$40
     BNE @Char_0                 ; If they pressed B, jump back to regenerate all four names
 
@@ -2778,7 +2778,7 @@ PtyGen_DrawScreen:
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Skip this code completely, will be replaced by language model.
 
 ; DoPartyGen_OnCharacter:
@@ -2834,7 +2834,7 @@ PtyGen_DrawScreen:
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Skip this code completely, will be replaced by language model.
 
 ; DoNameInput:
@@ -3004,7 +3004,7 @@ PtyGen_DrawScreen:
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI] unused with language model
+; [BIGRAM-NES] unused with language model
 ; PtyGen_Frame:
     ; JSR ClearOAM           ; wipe OAM then draw all sprites
     ; JSR PtyGen_DrawChars
@@ -3029,7 +3029,7 @@ PtyGen_DrawScreen:
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Skip this code completely, will be replaced by language model.
 
 ; CharName_Frame:
@@ -3062,7 +3062,7 @@ PtyGen_DrawScreen:
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI] unused by language model
+; [BIGRAM-NES] unused by language model
 ; PtyGen_Joy:              ; reached directly from above by fall-through
     ; LDA joy
     ; AND #$0F
@@ -3231,7 +3231,7 @@ PtyGen_DrawOneText:         ; reached from above by fall-through
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI] unused by the language model
+; [BIGRAM-NES] unused by the language model
 ; PtyGen_DrawCursor:
     ; LDX char_index          ; use the current index to get the cursor
     ; LDA ptygen_curs_x, X    ;  coords from the ptygen buffer.
@@ -3250,7 +3250,7 @@ PtyGen_DrawOneText:         ; reached from above by fall-through
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Skip this code completely, will be replaced by language model.
 
 ; CharName_DrawCursor:
@@ -3325,7 +3325,7 @@ PtyGen_DrawChars:
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Skip this code completely, will be replaced by language model.
 
 ; NameInput_DrawName:
@@ -3370,7 +3370,7 @@ PtyGen_DrawChars:
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Skip this code completely, will be replaced by language model.
 
 ; DrawNameInputScreen:
@@ -3430,7 +3430,7 @@ PtyGen_DrawChars:
 ;;
 ;;    offset (in usable characters) to start of each row in the below lut_NameInput
 
-; [RETRO AI] not needed anymore
+; [BIGRAM-NES] not needed anymore
 ; lut_NameInputRowStart:
   ; .BYTE  0, 10, 20, 30, 40, 50, 60  ; 10 characters of data per row
                                     ;  (which is actually 20 bytes, because they have spaces between them)
@@ -3443,7 +3443,7 @@ PtyGen_DrawChars:
 ;;  but it also is stored in null-terminated string form so that the entire thing can be drawn with
 ;;  with a single call to DrawComplexString.  It's intersperced with $FF (spaces) and $01 (double line breaks)
 
-; [RETRO AI] not needed anymore
+; [BIGRAM-NES] not needed anymore
 ; lut_NameInput:
   ; .BYTE $8A, $FF, $8B, $FF, $8C, $FF, $8D, $FF, $8E, $FF, $8F, $FF, $90, $FF, $91, $FF, $92, $FF, $93, $01  ; A - J
   ; .BYTE $94, $FF, $95, $FF, $96, $FF, $97, $FF, $98, $FF, $99, $FF, $9A, $FF, $9B, $FF, $9C, $FF, $9D, $01  ; K - T
@@ -3667,7 +3667,7 @@ EnterTitleScreen:
     BNE :+
        @Left:
          LDA #$FF            ; or -1 if left
-                             ; [RETRO AI] fix range error
+                             ; [BIGRAM-NES] fix range error
 :   CLC
     ADC respondrate         ; add/subtract 1 from respond rate
     AND #7                  ; mask to wrap it from 0<->7
@@ -4879,7 +4879,7 @@ ClinicBuildNameString:
 ;    RTS
 	
 ; ==================================
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Rewriting the code above to save some bytes.
 ; The new code is functionally equivalent.
 ; ==================================
@@ -7903,7 +7903,7 @@ MoveItemMenuCurs:
     ; RTS
 	
 ; ==================================
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Rewriting the code above to save some bytes.
 ; The new code is functionally equivalent.
 ; ==================================

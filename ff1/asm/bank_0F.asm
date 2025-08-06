@@ -4001,7 +4001,7 @@ StartMapMove:
     STA sm_player_y
 
     LDA #$FF              ; we want to subtract 1 from mapdraw_y
-	                      ; [RETRO AI] fix range error
+	                      ; [BIGRAM-NES] fix range error
     STA tmp              ;  which is the same as adding -1  ($FF)
 
     LDA mapdraw_nty
@@ -4022,7 +4022,7 @@ StartMapMove:
 
     LDA mapflags         ; turn off the 'draw column' map flag
     AND #( ~$02 & $FF )            ; to indicate we want to draw a row
-	                               ; [RETRO AI] fix range error
+	                               ; [BIGRAM-NES] fix range error
     STA mapflags
 
     JSR LoadOWMapRow     ; need to decompress a new row when moving vertically on the OW map
@@ -8998,7 +8998,7 @@ MapObjectMove:
     LDA tmp+5
     STA mapobj_physY, X
     STA mapobj_gfxY, X       ; update the graphic position immediately because it's a negative move
-    LDA #$FF                 ; [RETRO AI] fix range error
+    LDA #$FF                 ; [BIGRAM-NES] fix range error
     STA mapobj_spdY, X
     LDA #$0F
     STA mapobj_ctrY, X       ; set the Y counter to max right away -- this has to do with how
@@ -9040,7 +9040,7 @@ MapObjectMove:
     LDA tmp+4
     STA mapobj_gfxX, X    ; update graphic position immediately (again, seems unnecessary)
     STA mapobj_physX, X
-    LDA #$FF              ; [RETRO AI] fix range error
+    LDA #$FF              ; [BIGRAM-NES] fix range error
     STA mapobj_spdX, X
     LDA #$0F
     STA mapobj_ctrX, X    ; set counter to max for same reason we did when moving up (negative move)
@@ -14070,7 +14070,7 @@ Dialogue_CoverSprites_VBl:
       BNE @SetPrio     ; and jump ahead (always branches)
    @FGPrio:
       AND #( ~$20 & $FF )        ; for FG prio, clear priority bit  
-	                             ; [RETRO AI] fix range error
+	                             ; [BIGRAM-NES] fix range error
 
   @SetPrio:
     STA oam_a, X       ; record priority bit

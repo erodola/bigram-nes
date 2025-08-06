@@ -815,7 +815,7 @@ mm_decorchr     = $7000   ; $300 bytes -- should be on page bound, shared
 mm_titlechr     = $7300   ; $280 bytes -- should be on page bound, shared
 
 ; ==================================
-; [RETRO AI]
+; [BIGRAM-NES]
 ; Reusing some game variables that are not needed when naming characters.
 ; ==================================
 tok_idx         = cursor       ; (1 byte) stores the last generated token (0 - VOCAB_SIZE-1)
