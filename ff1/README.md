@@ -28,7 +28,7 @@ Some original FF1 code in bank 0E was rewritten to make space, preserving full f
 git clone https://github.com/erodola/bigram-nes.git
 cd model
 uv venv
-uv pip install -e .
+uv pip install -r pyproject.toml
 uv run train.py
 ```
 

@@ -2,11 +2,9 @@
 
 ![gen](./gen.gif)
 
-This is a minimal name generator designed to demonstrate the capabilities of a simple bigram-based model running natively on the NES.
+A minimal name generator showcasing a simple bigram model running natively on the NES.
 
-This version is intended as a lightweight proof of concept. The code is not optimized, and serves primarily to validate the feasibility of running generative logic on NES hardware.
-
-While this implementation is minimal, it's likely that larger and more capable models could also be made to run on the NES; this remains an open area for future exploration.
+This lightweight proof of concept isn't optimized, but demonstrates the feasibility of generative logic on NES hardware. More advanced models may be possible; an open area for future exploration!
 
 ## 🛠️ Building
 
