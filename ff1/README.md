@@ -1,4 +1,4 @@
-# 🧙 Final Fantasy I Hack
+# 🧙 Final Fantasy: The AI Roster
 
 ![demo](../ff1-1.gif) ![demo](../ff1-2.gif)
 
@@ -81,4 +81,4 @@ The final ROM will be located in the `build/` folder. Run it with your favorite 
 
 ## 🙏 Credits
 
-Built on top of the excellent, fully commented FF1 disassembly by [Michael Bennett](https://github.com/Entroper/FF1Disassembly)
+Built on top of the excellent, fully commented [FF1 disassembly](https://github.com/Entroper/FF1Disassembly) by Disch.

@@ -9,7 +9,7 @@ The NES only has **2KB RAM** and a **128KB ROM** for the code. What can we fit i
 The project includes two subprojects:
 
 - 🍦 [**Vanilla Model**](./vanilla) — a standalone name generator that runs on an NES ROM
-- 🧙 [**Final Fantasy I Hack**](./ff1) — a ROM hack that integrates the generator in the FF1 name screen
+- 🧙 [**Final Fantasy: The AI Roster**](./ff1) — a ROM hack that integrates the generator in the FF1 name screen
 
 Each subfolder contains its own README with instructions for building and usage.
 
@@ -20,10 +20,6 @@ Each subfolder contains its own README with instructions for building and usage.
 - A legally owned game ROM of Final Fantasy 1 (NES), US version
 
 The MD5 hash of the ROM file should be `d111fc7770e12f67474897aaad834c0c`.
-
-## 🙏 Acknowledgments
-
-The project wouldn't have been possible without the fully commented FF1 disassembly by [Michael Bennett](https://github.com/Entroper/FF1Disassembly/).
 
 ## 📄 License
 
