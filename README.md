@@ -19,8 +19,6 @@ Each subfolder contains its own README with instructions for building and usage.
 - An NES emulator (e.g. [FCEUX](http://fceux.com/) or [Mesen](https://www.mesen.ca/))
 - A legally owned game ROM of Final Fantasy 1 (NES), US version
 
-The MD5 hash of the ROM file should be `d111fc7770e12f67474897aaad834c0c`.
-
 ## 📄 License
 
 This project is licensed under the [MIT License](./LICENSE).

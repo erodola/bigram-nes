@@ -51,11 +51,9 @@ To build the patched ROM:
 
    The North American NES release.
 
-   MD5 hash must be:
+   The file's MD5 hash must be either `cd4e3c7b65f3cc45594c5122f2e17fdb` or `d111fc7770e12f67474897aaad834c0c`.
 
-   ```
-   d111fc7770e12f67474897aaad834c0c
-   ```
+   Equivalently, the ROM-only (no headers) MD5 must be `24ae5edf8375162f91a6846d3202e3d6`.
 
    Rename the ROM as `ff1.nes`, and place inside the `ff1/` folder.
 
