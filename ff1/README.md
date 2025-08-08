@@ -45,7 +45,7 @@ A fresh seed is used on every run to keep results varied.
 
 ## 🔧 Building
 
-To build the patched ROM:
+You can either [download the binary patch from its dedicated page on ROMHacking.net](https://www.romhacking.net/hacks/9080/), or build the patched ROM yourself from the assembly source:
 
 1. **Get a clean FF1 ROM**
 
@@ -68,7 +68,7 @@ To build the patched ROM:
 
    Use `extract.sh` (Linux/MacOS) or `extract.bat` (Windows)
 
-4. **Build the patched ROM**
+4. **Assemble**
 
    This assembles the ROM with the embedded generator.
 
