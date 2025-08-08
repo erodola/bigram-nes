@@ -45,7 +45,7 @@ A fresh seed is used on every run to keep results varied.
 
 ## 🔧 Building
 
-You can either [download the binary patch from its dedicated page on ROMHacking.net](https://www.romhacking.net/hacks/9080/), or build the patched ROM yourself from the assembly source:
+You can either [download the binary patch](https://www.romhacking.net/hacks/9080/) from its dedicated page on ROMHacking.net, or build the patched ROM yourself from the assembly source:
 
 1. **Get a clean FF1 ROM**
 
