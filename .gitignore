@@ -9,7 +9,12 @@ dev/utils/dat
 
 vanilla/build
 
-dw/
+dw/asm/bin
+dw/asm/Bank00.asm
+dw/asm/Bank01.asm
+dw/asm/Bank02.asm
+dw/asm/Bank03.asm
+dw/scripts
 
 ff1/asm/*.o
 ff1/build
