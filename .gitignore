@@ -10,6 +10,7 @@ dev/utils/dat
 vanilla/build
 
 dw/asm/bin
+dw/asm/*.dat
 dw/asm/Bank00.asm
 dw/asm/Bank01.asm
 dw/asm/Bank02.asm
