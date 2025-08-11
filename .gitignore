@@ -12,9 +12,9 @@ vanilla/build
 dw/asm/bin
 dw/asm/*.dat
 dw/asm/Bank01.asm
-dw/asm/Bank02.asm
 dw/asm/Bank03.asm
 dw/scripts
+dw/build
 
 ff1/asm/*.o
 ff1/build

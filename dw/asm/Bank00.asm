@@ -263,196 +263,196 @@ L80AF:  .byte $10               ;Stone.
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 DLCstlGFDat:
-.incbin "bin/dragonlord_gf.bin"
+.incbin "bin/Bank00/dragonlord_gf.bin"
 
 ;Hauksness. Map #$03.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 HauksnessDat:
-.incbin "bin/hauksness.bin"
+.incbin "bin/Bank00/hauksness.bin"
 
 ;Tantegel castle ground floor. Map #$04.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 TantGFDat:
-.incbin "bin/tantegel_gf.bin"
+.incbin "bin/Bank00/tantegel_gf.bin"
 
 ;Throne room. Map #$05.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 ThrnRoomDat:
-.incbin "bin/throne_room.bin"
+.incbin "bin/Bank00/throne_room.bin"
 
 ;Dragonlord's castle - bottom level. Map #$06.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 DgnLrdBLDat:
-.incbin "bin/dragonlord_bl.bin"
+.incbin "bin/Bank00/dragonlord_bl.bin"
 
 ;Kol. Map #$07.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 KolDat:
-.incbin "bin/kol.bin"
+.incbin "bin/Bank00/kol.bin"
 
 ;Brecconary. Map #$08.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 BrecconaryDat:
-.incbin "bin/brecconary.bin"
+.incbin "bin/Bank00/brecconary.bin"
 
 ;Cantlin. Map #$0A.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 CantlinDat:
-.incbin "bin/cantlin.bin"
+.incbin "bin/Bank00/cantlin.bin"
 
 ;Garinham. Map #$09.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 GarinhamDat:
-.incbin "bin/garinham.bin"
+.incbin "bin/Bank00/garinham.bin"
 
 ;Rimuldar. Map #$0B.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Trees, $9-Poison, $A-Force Field,
 ;$B-Door, $C-Weapon Shop Sign, $D-Inn Sign, $E-Bridge, $F-Large Tile.
 RimuldarDat:
-.incbin "bin/rimuldar.bin"
+.incbin "bin/Bank00/rimuldar.bin"
 
 ;Tantagel castle - sublevel. Map #$0C.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Grass, $9-Sand, $A-Water,
 ;$B-Treasure Chest, $C-Stone, $D-Stairs Up, $E-Brick, $F-Stairs Down.
 TantSLDat:
-.incbin "bin/tantagel_sub.bin"
+.incbin "bin/Bank00/tantagel_sub.bin"
 
 ;Staff of rain cave. Map #$0D.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Grass, $9-Sand, $A-Water,
 ;$B-Treasure Chest, $C-Stone, $D-Stairs Up, $E-Brick, $F-Stairs Down.
 RainCaveDat:
-.incbin "bin/rain.bin"
+.incbin "bin/Bank00/rain.bin"
 
 ;Rainbow drop cave. Map #$0E.
 ;Tile mapping: $0-Grass, $1-Sand, $2-Water, $3-Treasure Chest, $4-Stone,
 ;$5-Stairs Up, $6-Brick, $7-Stairs Down, $8-Grass, $9-Sand, $A-Water,
 ;$B-Treasure Chest, $C-Stone, $D-Stairs Up, $E-Brick, $F-Stairs Down.
 DropCaveDat:
-.incbin "bin/rainbow.bin"
+.incbin "bin/Bank00/rainbow.bin"
 
 ;Dragonlord's castle - sublevel 1. Map #$0F.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 DgnLrdSL1Dat:
-.incbin "bin/dragonlord_sub1.bin"
+.incbin "bin/Bank00/dragonlord_sub1.bin"
 
 ;Dragonlord's castle - sublevel 2. Map #$10.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 DgnLrdSL2Dat:
-.incbin "bin/dragonlord_sub2.bin"
+.incbin "bin/Bank00/dragonlord_sub2.bin"
 
 ;Dragonlord's castle - sublevel 3. Map #$11.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 DgnLrdSL3Dat:
-.incbin "bin/dragonlord_sub3.bin"
+.incbin "bin/Bank00/dragonlord_sub3.bin"
 
 ;Dragonlord's castle - sublevel 4. Map #$12.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 DgnLrdSL4Dat:
-.incbin "bin/dragonlord_sub4.bin"
+.incbin "bin/Bank00/dragonlord_sub4.bin"
 
 ;Dragonlord's castle - sublevel 5. Map #$13.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 DgnLrdSL5Dat:
-.incbin "bin/dragonlord_sub5.bin"
+.incbin "bin/Bank00/dragonlord_sub5.bin"
 
 ;Dragonlord's castle - sublevel 6. Map #$14.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 DgnLrdSL6Dat:
-.incbin "bin/dragonlord_sub6.bin"
+.incbin "bin/Bank00/dragonlord_sub6.bin"
 
 ;Swamp cave. Map #$15.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 SwampCaveDat:
-.incbin "bin/swamp.bin"
+.incbin "bin/Bank00/swamp.bin"
 
 ;Rock mountain cave - B1. Map #$16.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 RckMtnB1Dat:
-.incbin "bin/rock_b1.bin"
+.incbin "bin/Bank00/rock_b1.bin"
 
 ;Rock mountain cave - B2. Map #$17.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 RckMtnB2Dat:
-.incbin "bin/rock_b2.bin"
+.incbin "bin/Bank00/rock_b2.bin"
 
 ;Cave of garinham - B1. Map #$18.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 GarinCaveB1Dat:
-.incbin "bin/garincave_b1.bin"
+.incbin "bin/Bank00/garincave_b1.bin"
 
 ;Cave of garinham - B3. Map #$1A.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 GarinCaveB3Dat:
-.incbin "bin/garincave_b3.bin"
+.incbin "bin/Bank00/garincave_b3.bin"
 
 ;Cave of garinham - B4. Map #$1B.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 GarinCaveB4Dat:
-.incbin "bin/garincave_b4.bin"
+.incbin "bin/Bank00/garincave_b4.bin"
 
 ;Cave of garinham - B2. Map #$19.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 GarinCaveB2Dat:
-.incbin "bin/garincave_b2.bin"
+.incbin "bin/Bank00/garincave_b2.bin"
 
 ;Erdrick's cave - B1. Map #$1C.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 ErdCaveB1Dat:
-.incbin "bin/erdcave_b1.bin"
+.incbin "bin/Bank00/erdcave_b1.bin"
 
 ;Erdrick's cave - B2. Map #$1D.
 ;Tile mapping: $0-Stone, $1-Stairs Up, $2-Brick, $3-Stairs Down, 
 ;$4-Treasure Chest, $5-Door, $6-Gwaelin, $7-Blank, $8-Stone, $9-Stairs Up, 
 ;$A-Brick, $B-Stairs Down, $C-Treasure Chest, $D-Door, $E-Gwaelin, $F-Blank.
 ErdCaveB2Dat:
-.incbin "bin/erdcave_b2.bin"
+.incbin "bin/Bank00/erdcave_b2.bin"
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -471,7 +471,7 @@ CharSpriteTblPtr:
 L9332:  .word CharSpriteTbl     ;Pointer to the table below.
 
 CharSpriteTbl:
-.incbin "bin/sprites.bin"
+.incbin "bin/Bank00/sprites.bin"
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -525,57 +525,57 @@ L9762:  .word TaDLStatTbl       ;($97CE)Tantagel castle, after dragonlord defeat
 ;----------------------------------------------------------------------------------------------------
 
 TantMobTbl:
-.incbin "bin/TantMobTbl.bin"
+.incbin "bin/Bank00/TantMobTbl.bin"
 TantStatTbl:
-.incbin "bin/TantStatTbl.bin"
+.incbin "bin/Bank00/TantStatTbl.bin"
 ThRmMobTbl:
-.incbin "bin/ThRmMobTbl.bin"
+.incbin "bin/Bank00/ThRmMobTbl.bin"
 ThRmStatTbl:
-.incbin "bin/ThRmStatTbl.bin"
+.incbin "bin/Bank00/ThRmStatTbl.bin"
 TaSLMobTbl:
 L97B3:  .byte $FF               ;No mobile NPCs.
 
 TaSLStatTbl:
-.incbin "bin/TaSLStatTbl.bin"
+.incbin "bin/Bank00/TaSLStatTbl.bin"
 TaDLMobTbl:
-.incbin "bin/TaDLMobTbl.bin"
+.incbin "bin/Bank00/TaDLMobTbl.bin"
 TaDLStatTbl:
-.incbin "bin/TaDLStatTbl.bin"
+.incbin "bin/Bank00/TaDLStatTbl.bin"
 DLBFMobTbl:
 L97EA:  .byte $FF               ;No mobile NPCs.
 
 DLBFStatTbl:
-.incbin "bin/DLBFStatTbl.bin"
+.incbin "bin/Bank00/DLBFStatTbl.bin"
 RainMobTbl:
 L97EF:  .byte $FF               ;No mobile NPCs.
 
 RainStatTbl:
-.incbin "bin/RainStatTbl.bin"
+.incbin "bin/Bank00/RainStatTbl.bin"
 RnbwMobTbl:
 L97F4:  .byte $FF               ;No mobile NPCs.
 
 RnbwStatTbl:
-.incbin "bin/RnbwStatTbl.bin"
+.incbin "bin/Bank00/RnbwStatTbl.bin"
 CantMobTbl:
-.incbin "bin/CantMobTbl.bin"
+.incbin "bin/Bank00/CantMobTbl.bin"
 CantStatTbl:
-.incbin "bin/CantStatTbl.bin"
+.incbin "bin/Bank00/CantStatTbl.bin"
 RimMobTbl:
-.incbin "bin/RimMobTbl.bin"
+.incbin "bin/Bank00/RimMobTbl.bin"
 RimStatTbl:
-.incbin "bin/RimStatTbl.bin"
+.incbin "bin/Bank00/RimStatTbl.bin"
 BrecMobTbl:
-.incbin "bin/BrecMobTbl.bin"
+.incbin "bin/Bank00/BrecMobTbl.bin"
 BrecStatTbl:
-.incbin "bin/BrecStatTbl.bin"
+.incbin "bin/Bank00/BrecStatTbl.bin"
 KolMobTbl:
-.incbin "bin/KolMobTbl.bin"
+.incbin "bin/Bank00/KolMobTbl.bin"
 KolStatTbl:
-.incbin "bin/KolStatTbl.bin"
+.incbin "bin/Bank00/KolStatTbl.bin"
 GarMobTbl:
-.incbin "bin/GarMobTbl.bin"
+.incbin "bin/Bank00/GarMobTbl.bin"
 GarStatTbl:
-.incbin "bin/GarStatTbl.bin"
+.incbin "bin/Bank00/GarStatTbl.bin"
 MapEntryDirTbl:
 L9914:  .byte DIR_RIGHT, DIR_DOWN, DIR_UP,    DIR_RIGHT, DIR_UP,   DIR_RIGHT, DIR_UP,   DIR_RIGHT
 L991C:  .byte DIR_RIGHT, DIR_LEFT, DIR_RIGHT, DIR_DOWN,  DIR_DOWN, DIR_RIGHT, DIR_DOWN, DIR_DOWN
@@ -622,17 +622,17 @@ L9987:  .word $0000             ;Rainbow drop       - 0     gold.
 ;----------------------------------------------------------------------------------------------------
 
 KeyCostTbl:
-.incbin "bin/KeyCostTbl.bin"
+.incbin "bin/Bank00/KeyCostTbl.bin"
 InnCostTbl:
-.incbin "bin/InnCostTbl.bin"
+.incbin "bin/Bank00/InnCostTbl.bin"
 ShopItemsTbl:
-.incbin "bin/ShopItemsTbl.bin"
+.incbin "bin/Bank00/ShopItemsTbl.bin"
 WeaponsBonusTbl:
-.incbin "bin/WeaponsBonusTbl.bin"
+.incbin "bin/Bank00/WeaponsBonusTbl.bin"
 ArmorBonusTbl:
-.incbin "bin/ArmorBonusTbl.bin"
+.incbin "bin/Bank00/ArmorBonusTbl.bin"
 ShieldBonusTbl:
-.incbin "bin/ShieldBonusTbl.bin"
+.incbin "bin/Bank00/ShieldBonusTbl.bin"
 WrldBlkConvTbl:
 L99E3:  .byte BLK_GRASS         ;Index $00 - G = Grass.
 L99E4:  .byte BLK_SAND          ;Index $01 - D = Desert.
@@ -734,11 +734,11 @@ BlackPal:
 L9A3A:  .byte $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E
 
 OverworldPal:
-.incbin "bin/OverworldPal.bin"
+.incbin "bin/Bank00/OverworldPal.bin"
 TownPal:
-.incbin "bin/TownPal.bin"
+.incbin "bin/Bank00/TownPal.bin"
 DungeonPal:
-.incbin "bin/DungeonPal.bin"
+.incbin "bin/Bank00/DungeonPal.bin"
 PreGamePal:
 L9A73:  .byte $30, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E, $0E
 
@@ -885,7 +885,7 @@ L9C83:  .byte $21, $22, $27, $17, $0C, $30, $07, $15, $30, $21, $27, $15
 ;to right, top to bottom.
 
 CombatBckgndGFX:
-.incbin "bin/CombatBckgndGFX.bin"
+.incbin "bin/Bank00/CombatBckgndGFX.bin"
 SpellCostTbl:
 L9D53:  .byte $04               ;Heal      4MP.
 L9D54:  .byte $02               ;Hurt      2MP.
@@ -5422,9 +5422,9 @@ LBBF7:  RTS                     ;
 ;next two bytes are the PPU address for the tile pattern.
 
 EndBossBGTiles:
-.incbin "bin/EndBossBGTiles.bin"
+.incbin "bin/Bank00/EndBossBGTiles.bin"
 EndBossSPTiles:
-.incbin "bin/endboss.bin"
+.incbin "bin/Bank00/endboss.bin"
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -5521,7 +5521,7 @@ LBDD0:  .byte $F7, $20, $5F, $FC    ;1 row of blank tiles.
 
 ;Dragon Warrior graphic starts here.
 
-.incbin "bin/dw.bin"
+.incbin "bin/Bank00/dw.bin"
 
 ;Dragon Warrior graphic ends here.
 
