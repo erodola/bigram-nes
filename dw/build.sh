@@ -47,8 +47,8 @@ cat build/Header.bin \
     > build/DragonWarrior.nes
 
 printf "${magenta}Cleaning up intermediate files......${reset}\n"	
-rm -f build/*.o
-rm -f build/*.bin
+#rm -f build/*.o
+#rm -f build/*.bin
 
 printf "\n${magenta}Verifying final ROM checksum...${reset}\n\n"
 final_md5=($(md5sum build/DragonWarrior.nes))
