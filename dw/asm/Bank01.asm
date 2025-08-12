@@ -479,53 +479,53 @@ L8361:  .word OpnDoorSFX                            ;($84B6)Open door.
 L8363:  .word FireSFX                               ;($8365)Breath fire.
 
 FireSFX:
-.include "bin/Bank01/FireSFX.dat"
+.incbin "bin/Bank01/FireSFX.bin"
 FFDamageSFX:
-.include "bin/Bank01/FFDamageSFX.dat"
+.incbin "bin/Bank01/FFDamageSFX.bin"
 WyvernWngSFX:
-.include "bin/Bank01/WyvernWngSFX.dat"
+.incbin "bin/Bank01/WyvernWngSFX.bin"
 StairsSFX:
-.include "bin/Bank01/StairsSFX.dat"
+.incbin "bin/Bank01/StairsSFX.bin"
 RunSFX:
-.include "bin/Bank01/RunSFX.dat"
+.incbin "bin/Bank01/RunSFX.bin"
 SwmpDmgSFX:
-.include "bin/Bank01/SwmpDmgSFX.dat"
+.incbin "bin/Bank01/SwmpDmgSFX.bin"
 MenuSFX:
-.include "bin/Bank01/MenuSFX.dat"
+.incbin "bin/Bank01/MenuSFX.bin"
 ConfirmSFX:
-.include "bin/Bank01/ConfirmSFX.dat"
+.incbin "bin/Bank01/ConfirmSFX.bin"
 EnHitSFX:
-.include "bin/Bank01/EnHitSFX.dat"
+.incbin "bin/Bank01/EnHitSFX.bin"
 ExclntMvSFX:
-.include "bin/Bank01/ExclntMvSFX.dat"
+.incbin "bin/Bank01/ExclntMvSFX.bin"
 AttackSFX:
-.include "bin/Bank01/AttackSFX.dat"
+.incbin "bin/Bank01/AttackSFX.bin"
 HitSFX:
-.include "bin/Bank01/HitSFX.dat"
+.incbin "bin/Bank01/HitSFX.bin"
 AtckPrepSFX:
-.include "bin/Bank01/AtckPrepSFX.dat"
+.incbin "bin/Bank01/AtckPrepSFX.bin"
 Missed1SFX:
-.include "bin/Bank01/Missed1SFX.dat"
+.incbin "bin/Bank01/Missed1SFX.bin"
 Missed2SFX:
-.include "bin/Bank01/Missed2SFX.dat"
+.incbin "bin/Bank01/Missed2SFX.bin"
 WallSFX:
-.include "bin/Bank01/WallSFX.dat"
+.incbin "bin/Bank01/WallSFX.bin"
 TextSFX:
-.include "bin/Bank01/TextSFX.dat"
+.incbin "bin/Bank01/TextSFX.bin"
 SpellSFX:
-.include "bin/Bank01/SpellSFX.dat"
+.incbin "bin/Bank01/SpellSFX.bin"
 RadiantSFX:
-.include "bin/Bank01/RadiantSFX.dat"
+.incbin "bin/Bank01/RadiantSFX.bin"
 OpnChestSFX:
-.include "bin/Bank01/OpnChestSFX.dat"
+.incbin "bin/Bank01/OpnChestSFX.bin"
 OpnDoorSFX:
-.include "bin/Bank01/OpnDoorSFX.dat"
+.incbin "bin/Bank01/OpnDoorSFX.bin"
 SQNoSnd:
-.include "bin/Bank01/SQNoSnd.dat"
+.incbin "bin/Bank01/SQNoSnd.bin"
 TRINoSnd:
-.include "bin/Bank01/TRINoSnd.dat"
+.incbin "bin/Bank01/TRINoSnd.bin"
 SQ1ThrnRm:
-.include "bin/Bank01/SQ1ThrnRm.dat"
+.incbin "bin/Bank01/SQ1ThrnRm.bin"
 SQ1ThrnRmLoop:
 L84D5:  .byte $FB,    $8F   ;50% duty, len counter yes, env yes, vol=15.
 L84D7:  .byte $FE             ;Jump to new music address.
@@ -563,9 +563,9 @@ L851B:  .byte $FE             ;Jump to new music address.
 L851C:  .word SQ1ThrnRmLoop         ;($84D5).
 
 SQ1ThrnRm2:
-.include "bin/Bank01/SQ1ThrnRm2.dat"
+.incbin "bin/Bank01/SQ1ThrnRm2.bin"
 SQ1ThrnRm3:
-.include "bin/Bank01/SQ1ThrnRm3.dat"
+.incbin "bin/Bank01/SQ1ThrnRm3.bin"
 TRIThrnRm:
 L853E:  .byte $FE             ;Jump to new music address.
 L853F:  .word TRITantagel2          ;($85EB).
@@ -586,23 +586,23 @@ L85B7:  .byte $FE             ;Jump to new music address.
 L85B8:  .word TRITantagel           ;($85B4).
 
 SQ1Tantagel2:
-.include "bin/Bank01/SQ1Tantagel2.dat"
+.incbin "bin/Bank01/SQ1Tantagel2.bin"
 TRITantagel2:
-.include "bin/Bank01/TRITantagel2.dat"
+.incbin "bin/Bank01/TRITantagel2.bin"
 SQ1LevelUp:
-.include "bin/Bank01/SQ1LevelUp.dat"
+.incbin "bin/Bank01/SQ1LevelUp.bin"
 SQ2LevelUp:
-.include "bin/Bank01/SQ2LevelUp.dat"
+.incbin "bin/Bank01/SQ2LevelUp.bin"
 SQ1Princess:
-.include "bin/Bank01/SQ1Princess.dat"
+.incbin "bin/Bank01/SQ1Princess.bin"
 SQ2Princess:
-.include "bin/Bank01/SQ2Princess.dat"
+.incbin "bin/Bank01/SQ2Princess.bin"
 TRIPrincess:
-.include "bin/Bank01/TRIPrincess.dat"
+.incbin "bin/Bank01/TRIPrincess.bin"
 SQ1Inn:
-.include "bin/Bank01/SQ1Inn.dat"
+.incbin "bin/Bank01/SQ1Inn.bin"
 SQ2Inn:
-.include "bin/Bank01/SQ2Inn.dat"
+.incbin "bin/Bank01/SQ2Inn.bin"
 SQ2Victory:
 L8707:  .byte $06                   ;6 counts.
 L8708:  .byte $FE             ;Jump to new music address.
@@ -619,14 +619,14 @@ L8715:  .byte $00                   ;End music.
 L8716:  .byte $FC            ;Continue last music.
 
 SQVictory:
-.include "bin/Bank01/SQVictory.dat"
+.incbin "bin/Bank01/SQVictory.bin"
 SQ1Village:
-.include "bin/Bank01/SQ1Village.dat"
+.incbin "bin/Bank01/SQ1Village.bin"
 SQ1VillageLoop:
 .include "bin/Bank01/SQ1VillageLoop.dat"
 L8770:  .word SQ1VillageLoop        ;($8731).
 SQ1Village2:
-.include "bin/Bank01/SQ1Village2.dat"
+.incbin "bin/Bank01/SQ1Village2.bin"
 TRIVillage:
 L87A2:  .byte $FB,    $00   ;12.5% duty, len counter yes, env yes, vol=0.
 L87A4:  .byte $18                   ;24 counts.
@@ -669,14 +669,14 @@ L87EB:  .byte $FE             ;Jump to new music address.
 L87EC:  .word TRIVillage            ;($87A2).
 
 TRIVillage2:
-.include "bin/Bank01/TRIVillage2.dat"
+.incbin "bin/Bank01/TRIVillage2.bin"
 TRIOutdoor:
-.include "bin/Bank01/TRIOutdoor.dat"
+.incbin "bin/Bank01/TRIOutdoor.bin"
 TRIOutdoorLoop:
 .include "bin/Bank01/TRIOutdoorLoop.dat"
 L8842:  .word TRIOutdoorLoop        ;($881B).
 SQ1Outdoor:
-.include "bin/Bank01/SQ1Outdoor.dat"
+.incbin "bin/Bank01/SQ1Outdoor.bin"
 SQ1OutdoorLoop:
 .include "bin/Bank01/SQ1OutdoorLoop.dat"
 L8889:  .word SQ1OutdoorLoop        ;($8848).
@@ -724,17 +724,17 @@ L88C7:  .byte $FE             ;Jump to new music address.
 L88C8:  .word SQ1Dngn               ;($888B).
 
 SQ1Dngn2:
-.include "bin/Bank01/SQ1Dngn2.dat"
+.incbin "bin/Bank01/SQ1Dngn2.bin"
 SQ1Dngn3:
-.include "bin/Bank01/SQ1Dngn3.dat"
+.incbin "bin/Bank01/SQ1Dngn3.bin"
 SQ1Dngn4:
-.include "bin/Bank01/SQ1Dngn4.dat"
+.incbin "bin/Bank01/SQ1Dngn4.bin"
 SQ1Dngn5:
-.include "bin/Bank01/SQ1Dngn5.dat"
+.incbin "bin/Bank01/SQ1Dngn5.bin"
 SQ1Dngn6:
-.include "bin/Bank01/SQ1Dngn6.dat"
+.incbin "bin/Bank01/SQ1Dngn6.bin"
 SQ1Dngn7:
-.include "bin/Bank01/SQ1Dngn7.dat"
+.incbin "bin/Bank01/SQ1Dngn7.bin"
 TRIDngn1:
 L891D:  .byte $F9, $09   ;Note offset of 9 notes.
 L891F:  .byte $FF,     $69   ;60/1.43=42 counts per second.
@@ -776,7 +776,7 @@ L8947:  .byte $FF,     $4B   ;60/2.0=30 counts per second.
 L8949:  .byte $FE             ;Jump to new music address.
 L894A:  .word TRIDngn               ;($8950).
 TRIDngn8:
-.include "bin/Bank01/TRIDngn8.dat"
+.incbin "bin/Bank01/TRIDngn8.bin"
 TRIDngn:
 .include "bin/Bank01/TRIDngn.dat"
 L897F:  .word TRIDngn9              ;($8991).
@@ -791,9 +791,9 @@ L898C:  .byte $A9, $30              ;F5,  48 counts.
 L898E:  .byte $FE             ;Jump to new music address.
 L898F:  .word TRIDngn               ;($8950).
 TRIDngn9:
-.include "bin/Bank01/TRIDngn9.dat"
+.incbin "bin/Bank01/TRIDngn9.bin"
 TRIDngn10:
-.include "bin/Bank01/TRIDngn10.dat"
+.incbin "bin/Bank01/TRIDngn10.bin"
 SQ1EntFight:
 L89A9:  .byte $FF,     $50   ;60/1.88=32 counts per second.
 L89AB:  .byte $FB,    $4F   ;25% duty, len counter yes, env yes, vol=15.
@@ -809,7 +809,7 @@ L89BB:  .byte $9A, $06              ;D4,   6 counts.
 L89BD:  .byte $9C, $06              ;E4,   6 counts.
 
 SQ1Fight:
-.include "bin/Bank01/SQ1Fight.dat"
+.incbin "bin/Bank01/SQ1Fight.bin"
 
 SQ1FightLoop:
 .include "bin/Bank01/SQ1FightLoop_0.dat"
@@ -822,9 +822,9 @@ L89FC:  .word SQ1Fight2             ;($8ABF).
 L8AA9:  .word SQ1FightLoop          ;($89C1).
 
 EntFight:
-.include "bin/Bank01/EntFight.dat"
+.incbin "bin/Bank01/EntFight.bin"
 SQ1Fight2:
-.include "bin/Bank01/SQ1Fight2.dat"
+.incbin "bin/Bank01/SQ1Fight2.bin"
 TRIEntFight:
 L8ACF:  .byte $FB,    $30   ;12.5% duty, len counter no, env no, vol=0.
 L8AD1:  .byte $FE             ;Jump to new music address.
@@ -840,7 +840,7 @@ L8ADF:  .byte $9C, $06              ;E4,   6 counts.
 TRIFight:
 .include "bin/Bank01/TRIFight.dat"
 SQ1EndBoss:
-.include "bin/Bank01/SQ1EndBoss.dat"
+.incbin "bin/Bank01/SQ1EndBoss.bin"
 SQ1EndBoss2:
 L8B64:  .byte $FE             ;Jump to new music address.
 L8B65:  .word SQ1EndBoss3           ;($8BA1).
@@ -851,9 +851,9 @@ L8B6B:  .word SQ1EndBoss3           ;($8BA1).
 .include "bin/Bank01/SQ1EndBoss2.dat"
 L8B9F:  .word SQ1EndBoss2           ;($8B64).
 SQ1EndBoss3:
-.include "bin/Bank01/SQ1EndBoss3.dat"
+.incbin "bin/Bank01/SQ1EndBoss3.bin"
 SQEndBoss:
-.include "bin/Bank01/SQEndBoss.dat"
+.incbin "bin/Bank01/SQEndBoss.bin"
 SQ2EndBoss:
 L8BE6:  .byte $F7, $0C   ;12 counts between notes.
 L8BE8:  .byte $FE             ;Jump to new music address.
@@ -874,13 +874,13 @@ L8BFD:  .byte $FE             ;Jump to new music address.
 L8BFE:  .word SQ2EndBoss            ;($8BE6).
 
 SQ2EndBoss2:
-.include "bin/Bank01/SQ2EndBoss2.dat"
+.incbin "bin/Bank01/SQ2EndBoss2.bin"
 SQ2EndBoss3:
-.include "bin/Bank01/SQ2EndBoss3.dat"
+.incbin "bin/Bank01/SQ2EndBoss3.bin"
 SQ2EndBoss4:
-.include "bin/Bank01/SQ2EndBoss4.dat"
+.incbin "bin/Bank01/SQ2EndBoss4.bin"
 TRIEndBoss:
-.include "bin/Bank01/TRIEndBoss.dat"
+.incbin "bin/Bank01/TRIEndBoss.bin"
 TRIEndBossLoop:
 L8C1E:  .byte $9A, $98, $9A, $98    ;D4,  C4,  D4,  C4.
 L8C22:  .byte $9A, $98, $9A, $98    ;D4,  C4,  D4,  C4.
@@ -896,25 +896,25 @@ L8C32:  .byte $FE             ;Jump to new music address.
 L8C33:  .word TRIEndBossLoop        ;($8C1E).
 
 TRIEndBoss2:
-.include "bin/Bank01/TRIEndBoss2.dat"
+.incbin "bin/Bank01/TRIEndBoss2.bin"
 TRIEndBoss3:
-.include "bin/Bank01/TRIEndBoss3.dat"
+.incbin "bin/Bank01/TRIEndBoss3.bin"
 SQ2SlvrHrp:
-.include "bin/Bank01/SQ2SlvrHrp.dat"
+.incbin "bin/Bank01/SQ2SlvrHrp.bin"
 SQ1SlvrHrp:
-.include "bin/Bank01/SQ1SlvrHrp.dat"
+.incbin "bin/Bank01/SQ1SlvrHrp.bin"
 TRIFryFlute:
-.include "bin/Bank01/TRIFryFlute.dat"
+.incbin "bin/Bank01/TRIFryFlute.bin"
 SQ2RnbwBrdg:
-.include "bin/Bank01/SQ2RnbwBrdg.dat"
+.incbin "bin/Bank01/SQ2RnbwBrdg.bin"
 SQ1RnbwBrdg:
-.include "bin/Bank01/SQ1RnbwBrdg.dat"
+.incbin "bin/Bank01/SQ1RnbwBrdg.bin"
 SQ2Death:
-.include "bin/Bank01/SQ2Death.dat"
+.incbin "bin/Bank01/SQ2Death.bin"
 SQ1Death:
-.include "bin/Bank01/SQ1Death.dat"
+.incbin "bin/Bank01/SQ1Death.bin"
 SQ2Cursed:
-.include "bin/Bank01/SQ2Cursed.dat"
+.incbin "bin/Bank01/SQ2Cursed.bin"
 SQ1Cursed:
 L8D4B:  .byte $FF,     $96   ;60/1 = 60 counts per second.
 L8D4D:  .byte $FB,    $45   ;25% duty, len counter yes, env yes, vol=5.
@@ -936,19 +936,19 @@ L8D66:  .byte $00                   ;End music.
 L8D67:  .byte $FC            ;Continue previous music.
 
 SQCursed2:
-.include "bin/Bank01/SQCursed2.dat"
+.incbin "bin/Bank01/SQCursed2.bin"
 SQ1Intro:
-.include "bin/Bank01/SQ1Intro.dat"
+.incbin "bin/Bank01/SQ1Intro.bin"
 SQ1IntroLoop:
 .include "bin/Bank01/SQ1IntroLoop.dat"
 L8E3B:  .word SQ1IntroLoop          ;($8DA6).
 SQ2Intro:
-.include "bin/Bank01/SQ2Intro.dat"
+.incbin "bin/Bank01/SQ2Intro.bin"
 SQ2IntroLoop:
 .include "bin/Bank01/SQ2IntroLoop.dat"
 L8F04:  .word SQ2IntroLoop          ;($8E72).
 TriIntro:
-.include "bin/Bank01/TriIntro.dat"
+.incbin "bin/Bank01/TriIntro.bin"
 TRIIntroLoop:
 .include "bin/Bank01/TRIIntroLoop.dat"
 L8F60:  .word TRIIntroLoop          ;($8F13).
@@ -984,13 +984,13 @@ L900E:  .word SQ1EndGame5           ;($9026).
 .include "bin/Bank01/SQ1EndGame_1.dat"
 
 SQ1EndGame4:
-.include "bin/Bank01/SQ1EndGame4.dat"
+.incbin "bin/Bank01/SQ1EndGame4.bin"
 SQ1EndGame5:
-.include "bin/Bank01/SQ1EndGame5.dat"
+.incbin "bin/Bank01/SQ1EndGame5.bin"
 SQ1EndGame2:
-.include "bin/Bank01/SQ1EndGame2.dat"
+.incbin "bin/Bank01/SQ1EndGame2.bin"
 SQ1EndGame3:
-.include "bin/Bank01/SQ1EndGame3.dat"
+.incbin "bin/Bank01/SQ1EndGame3.bin"
 SQ2EndGame:
 .include "bin/Bank01/SQ2EndGame.dat"
 L90E9:  .word SQ2EndGame2           ;($9159).
@@ -1028,13 +1028,13 @@ L9142:  .byte $8C, $8C, $8C, $8C    ;C3,  C3,  C3,  C3.
 L9146:  .byte $00                   ;End music.
 
 SQ2EndGame4:
-.include "bin/Bank01/SQ2EndGame4.dat"
+.incbin "bin/Bank01/SQ2EndGame4.bin"
 SQ2EndGame5:
-.include "bin/Bank01/SQ2EndGame5.dat"
+.incbin "bin/Bank01/SQ2EndGame5.bin"
 SQ2EndGame2:
-.include "bin/Bank01/SQ2EndGame2.dat"
+.incbin "bin/Bank01/SQ2EndGame2.bin"
 SQ2EndGame3:
-.include "bin/Bank01/SQ2EndGame3.dat"
+.incbin "bin/Bank01/SQ2EndGame3.bin"
 TRIEndGame:
 .include "bin/Bank01/TriEndGame_0.dat"
 L925E:  .word TRIEndGame2           ;($92BF).
@@ -1048,9 +1048,9 @@ L9269:  .byte $FE             ;Jump to new music address.
 L926A:  .word TRIEndGame2           ;($92BF).
 .include "bin/Bank01/TRIEndGame.dat"
 TRIEndGame2:
-.include "bin/Bank01/TRIEndGame2.dat"
+.incbin "bin/Bank01/TRIEndGame2.bin"
 TRIEndGame3:
-.include "bin/Bank01/TRIEndGame3.dat"
+.incbin "bin/Bank01/TRIEndGame3.bin"
 EndGameClearPPU:
 L9354:  LDA #%00000000          ;Turn off sprites and background.
 L9356:  STA PPUControl1         ;
