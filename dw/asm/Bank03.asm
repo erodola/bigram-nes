@@ -1,4 +1,4 @@
-.segment "BANK_03_CODE"
+.segment "BANK_FIXED"
 .org $C000
 
 .include "Defines.inc"

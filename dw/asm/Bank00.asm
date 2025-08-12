@@ -1,4 +1,4 @@
-.segment "BANK_00_CODE"
+.segment "BANK_00"
 .org $8000
 
 .include "Defines.inc"

@@ -1,4 +1,4 @@
-.segment "BANK_01_CODE"
+.segment "BANK_01"
 .org $8000
 
 .include "Defines.inc"
@@ -1698,7 +1698,7 @@ LA221: BIT WndOptions          ;
 LA224:  BVC LA22C                   ;This bit is never set. Branch always.
 LA226:  LDA (WndDatPtr),Y       ;
 
-.ifndef inject
+.ifndef retroai
 LA228:  STA WndUnused1          ;
 .endif
 
@@ -1728,7 +1728,7 @@ InitWindowEngine:
 LA248:  JSR ClearWndLineBuf     ;($A646)Clear window line buffer.
 LA24B:  LDA #$FF                ;
 
-.ifndef inject
+.ifndef retroai
 LA24D:  STA WndUnused64FB       ;Written to but never accessed.
 .endif
 
@@ -3039,7 +3039,7 @@ LA94A:  PHA                     ;
 
 LA94B:  AND #$0F                ;Save a copy of the home X coord but it is never used.
 
-.ifndef inject
+.ifndef retroai
 LA94D:  STA WndUnused64F4       ;
 .endif
 
@@ -3521,7 +3521,7 @@ LABBD:  RTS                     ;
 NumColTbl:
 .incbin "bin/Bank01/NumColTbl.bin"
 
-.ifndef inject
+.ifndef retroai
 WndUnusedFunc2:
 LABC0:  LDA #$00                ;Unused window function.
 LABC2:  BNE WndShowHide+2       ;
@@ -3544,7 +3544,7 @@ LABD2:  JSR WndUpdateTiles      ;($ADFA)Wait until next NMI for buffer to be emp
 WndDoRowReady:
 LABD5:  LDA #$00                ;Zero out unused variable.
 
-.ifndef inject
+.ifndef retroai
 LABD7:  STA WndUnused64AB       ;
 .endif
 
@@ -3568,7 +3568,7 @@ LABF3:  AND #$0F                ;Make a copy of window width.
 LABF5:  ASL                     ;
 LABF6:  STA _WndWidth           ;
 
-.ifndef inject
+.ifndef retroai
 LABF9:  STA WndUnused64AE       ;Not used.
 .endif 
 
@@ -3940,10 +3940,6 @@ LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering na
 LAE05:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
 LAE08:  JSR WndDoSelect         ;($A8D1)Do selection window routines.
 
-.ifdef inject
-NOP
-.endif
-
 ProcessNameLoop:
 LAE0B:  JSR WndProcessChar      ;($AE53)Process name character selected by the player.
 LAE0E:  JSR WndMaxNameLength    ;($AEB2)Set carry if max length name has been reached.
@@ -3970,7 +3966,7 @@ InitNameWindow:
 LAE2C:  LDA #$00                ;
 LAE2E:  STA WndNameIndex        ;Zero out name variables.
 
-.ifndef inject
+.ifndef retroai
 LAE31:  STA WndUnused6505       ;
 .endif
 
@@ -4401,13 +4397,13 @@ LB584:  LDA #$08                ;Initialize the dialog variables.
 LB586:  STA TxtLineSpace        ;
 LB589:  LDA WndTxtXCoord        ;
 
-.ifndef inject
+.ifndef retroai
 LB58B:  STA Unused6510          ;
 .endif
 
 LB58E:  LDA WndTxtYCoord        ;
 
-.ifndef inject
+.ifndef retroai
 LB590:  STA Unused6511          ;
 .endif
 
@@ -4423,20 +4419,20 @@ LB59A:  RTS                     ;
 
 LB59B:LDX WndTxtYCoord        ;
 
-.ifndef inject
+.ifndef retroai
 LB59D:  LDA Unused6512          ;
 .endif
 
 LB5A0:  BNE LB5A5                   ;
 
-.ifndef inject
+.ifndef retroai
 LB5A2:  STX Unused6512          ;Dialog buffer not complete. Set carry.
 .endif
 
 LB5A5:LDA Unused6513          ;The other variables have no effect.
 LB5A8:  BNE LB5AD                   ;
 
-.ifndef inject
+.ifndef retroai
 LB5AA:  STX Unused6513          ;
 .endif
 

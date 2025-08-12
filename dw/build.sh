@@ -10,6 +10,13 @@ magenta=$(tput setaf 5)
 cyan=$(tput setaf 6)
 reset=$(tput sgr0)
 
+# Check for required subfolders
+if [ ! -d "asm/bin" ]; then
+    echo "ERROR: asm/bin/ folder not found."
+    echo "You should run extract.sh before running the build."
+    exit 1
+fi
+
 printf "\n${magenta}Deleting previous build files...${reset}\n"
 rm -rf build
 mkdir -p build
@@ -21,7 +28,7 @@ ca65 -o build/Header.o asm/Header.asm
 
 # PRG banks
 ca65 -o build/Bank00.o asm/Bank00.asm
-ca65 -o build/Bank01.o asm/Bank01.asm
+ca65 -o build/Bank01.o asm/Bank01.asm -D retroai
 ca65 -o build/Bank02.o asm/Bank02.asm
 ca65 -o build/Bank03.o asm/Bank03.asm
 
@@ -59,6 +66,9 @@ if [ "$final_md5" = "$expected_md5" ]; then
 else
     printf "${red}Final ROM checksum mismatch!${reset}\n\n"
 fi
+
+printf "\n${magenta}Running size check...${reset}\n\n"
+bash ./scripts/check_limits.sh
 
 printf "${green}Build complete.${reset}\n"
 printf "Output written to: build/DragonWarrior.nes\n"
