@@ -424,7 +424,7 @@ L8204:  RTS                     ;
 ;1790000/16/(hhhllllllll + 1).
 
 MusicalNotesTbl:
-.include "bin/Bank01/MusicalNotesTbl.dat"
+.incbin "bin/Bank01/MusicalNotesTbl.bin"
 MscStrtIndxTbl:
 L8297:  .word SQNoSnd,     SQNoSnd,     TRINoSnd    ;($84CB, $84CB, $84CE)No sound.
 L829D:  .word SQ1Intro,    SQ2Intro,    TriIntro    ;($8D6D, $8E3D, $8F06)Intro.
@@ -1470,43 +1470,43 @@ L9A2E:  .word RBDgnSprts -$8000 ;($1D7B)Red dragon.
 L9A30:  .word DgLdSprts  -$8000 ;($1B67)Dragonlord, initial form.
 
 DKnightSprts:
-.include "bin/Bank01/DKnightSprts.dat"
+.incbin "bin/Bank01/DKnightSprts.bin"
 SkelSprts:
-.include "bin/Bank01/SkelSprts.dat"
+.incbin "bin/Bank01/SkelSprts.bin"
 DrollSprts:
-.include "bin/Bank01/DrollSprts.dat"
+.incbin "bin/Bank01/DrollSprts.bin"
 DrakeeSprts:
-.include "bin/Bank01/DrakeeSprts.dat"
+.incbin "bin/Bank01/DrakeeSprts.bin"
 DruinSprts:
-.include "bin/Bank01/DruinSprts.dat"
+.incbin "bin/Bank01/DruinSprts.bin"
 SlimeSprts:
-.include "bin/Bank01/SlimeSprts.dat"
+.incbin "bin/Bank01/SlimeSprts.bin"
 WizSprts:
-.include "bin/Bank01/WizSprts.dat"
+.incbin "bin/Bank01/WizSprts.bin"
 MagSprts:
-.include "bin/Bank01/MagSprts.dat"
+.incbin "bin/Bank01/MagSprts.bin"
 DgLdSprts:
-.include "bin/Bank01/DgLdSprts.dat"
+.incbin "bin/Bank01/DgLdSprts.bin"
 GhstSprts:
-.include "bin/Bank01/GhstSprts.dat"
+.incbin "bin/Bank01/GhstSprts.bin"
 WyvrnSprts:
-.include "bin/Bank01/WyvrnSprts.dat"
+.incbin "bin/Bank01/WyvrnSprts.bin"
 WolfSprts:
-.include "bin/Bank01/WolfSprts.dat"
+.incbin "bin/Bank01/WolfSprts.bin"
 GolemSprts:
-.include "bin/Bank01/GolemSprts.dat"
+.incbin "bin/Bank01/GolemSprts.bin"
 ScorpSprts:
-.include "bin/Bank01/ScorpSprts.dat"
+.incbin "bin/Bank01/ScorpSprts.bin"
 ArKntSprts:
-.include "bin/Bank01/ArKntSprts.dat"
+.incbin "bin/Bank01/ArKntSprts.bin"
 AxKntSprts:
-.include "bin/Bank01/AxKntSprts.dat"
+.incbin "bin/Bank01/AxKntSprts.bin"
 KntSprts:
-.include "bin/Bank01/KntSprts.dat"
+.incbin "bin/Bank01/KntSprts.bin"
 RBDgnSprts:
-.include "bin/Bank01/RBDgnSprts.dat"
+.incbin "bin/Bank01/RBDgnSprts.bin"
 DgnSprts:
-.include "bin/Bank01/DgnSprts.dat"
+.incbin "bin/Bank01/DgnSprts.bin"
 TreasureTbl:
 L9DCD:  .byte MAP_TANTCSTL_GF, $01, $0D, TRSR_GLD2  ;Tant castle, GF at 1,13: 6-13g.
 L9DD1:  .byte MAP_TANTCSTL_GF, $01, $0F, TRSR_GLD2  ;Tant castle, GF at 1,15: 6-13g.
@@ -4220,71 +4220,71 @@ LAFAC:  .word EraseLogDat       ;($B4D4)Erase log window.
 LAFAE:  .word YesNo2Dat         ;($B50D)Yes/no selection window, variant 2.
 
 PopupDat:
-.include "bin/Bank01/PopupDat.dat"
+.incbin "bin/Bank01/PopupDat.bin"
 StatusDat:
-.include "bin/Bank01/StatusDat.dat"
+.incbin "bin/Bank01/StatusDat.bin"
 DialogDat:
-.include "bin/Bank01/DialogDat.dat"
+.incbin "bin/Bank01/DialogDat.bin"
 CmdNonCmbtDat:
-.include "bin/Bank01/CmdNonCmbtDat.dat"
+.incbin "bin/Bank01/CmdNonCmbtDat.bin"
 CmdCmbtDat:
-.include "bin/Bank01/CmdCmbtDat.dat"
+.incbin "bin/Bank01/CmdCmbtDat.bin"
 SpellDat:
-.include "bin/Bank01/SpellDat.dat"
+.incbin "bin/Bank01/SpellDat.bin"
 PlayerInvDat:
-.include "bin/Bank01/PlayerInvDat.dat"
+.incbin "bin/Bank01/PlayerInvDat.bin"
 ShopInvDat:
-.include "bin/Bank01/ShopInvDat.dat"
+.incbin "bin/Bank01/ShopInvDat.bin"
 YesNo1Dat:
-.include "bin/Bank01/YesNo1Dat.dat"
+.incbin "bin/Bank01/YesNo1Dat.bin"
 BuySellDat:
-.include "bin/Bank01/BuySellDat.dat"
+.incbin "bin/Bank01/BuySellDat.bin"
 AlphabetDat:
-.include "bin/Bank01/AlphabetDat.dat"
+.incbin "bin/Bank01/AlphabetDat.bin"
 MsgSpeedDat:
-.include "bin/Bank01/MsgSpeedDat.dat"
+.incbin "bin/Bank01/MsgSpeedDat.bin"
 InputNameDat:
-.include "bin/Bank01/InputNameDat.dat"
+.incbin "bin/Bank01/InputNameDat.bin"
 NameEntryDat:
-.include "bin/Bank01/NameEntryDat.dat"
+.incbin "bin/Bank01/NameEntryDat.bin"
 ContChngErsDat:
-.include "bin/Bank01/ContChngErsDat.dat"
+.incbin "bin/Bank01/ContChngErsDat.bin"
 FullMenuDat:
-.include "bin/Bank01/FullMenuDat.dat"
+.incbin "bin/Bank01/FullMenuDat.bin"
 NewQuestDat:
-.include "bin/Bank01/NewQuestDat.dat"
+.incbin "bin/Bank01/NewQuestDat.bin"
 LogList1Dat1:
-.include "bin/Bank01/LogList1Dat1.dat"
+.incbin "bin/Bank01/LogList1Dat1.bin"
 LogList2Dat1:
-.include "bin/Bank01/LogList2Dat1.dat"
+.incbin "bin/Bank01/LogList2Dat1.bin"
 LogList12Dat1:
-.include "bin/Bank01/LogList12Dat1.dat"
+.incbin "bin/Bank01/LogList12Dat1.bin"
 LogList3Dat1:
-.include "bin/Bank01/LogList3Dat1.dat"
+.incbin "bin/Bank01/LogList3Dat1.bin"
 LogList13Dat1:
-.include "bin/Bank01/LogList13Dat1.dat"
+.incbin "bin/Bank01/LogList13Dat1.bin"
 LogList23Dat1:
-.include "bin/Bank01/LogList23Dat1.dat"
+.incbin "bin/Bank01/LogList23Dat1.bin"
 LogList123Dat1:
-.include "bin/Bank01/LogList123Dat1.dat"
+.incbin "bin/Bank01/LogList123Dat1.bin"
 LogList1Dat2:
-.include "bin/Bank01/LogList1Dat2.dat"
+.incbin "bin/Bank01/LogList1Dat2.bin"
 LogList2Dat2:
-.include "bin/Bank01/LogList2Dat2.dat"
+.incbin "bin/Bank01/LogList2Dat2.bin"
 LogList12Dat2:
-.include "bin/Bank01/LogList12Dat2.dat"
+.incbin "bin/Bank01/LogList12Dat2.bin"
 LogList3Dat2:
-.include "bin/Bank01/LogList3Dat2.dat"
+.incbin "bin/Bank01/LogList3Dat2.bin"
 LogList13Dat2:
-.include "bin/Bank01/LogList13Dat2.dat"
+.incbin "bin/Bank01/LogList13Dat2.bin"
 LogList23Dat2:
-.include "bin/Bank01/LogList23Dat2.dat"
+.incbin "bin/Bank01/LogList23Dat2.bin"
 LogList123Dat2:
-.include "bin/Bank01/LogList123Dat2.dat"
+.incbin "bin/Bank01/LogList123Dat2.bin"
 EraseLogDat:
-.include "bin/Bank01/EraseLogDat.dat"
+.incbin "bin/Bank01/EraseLogDat.bin"
 YesNo2Dat:
-.include "bin/Bank01/YesNo2Dat.dat"
+.incbin "bin/Bank01/YesNo2Dat.bin"
 DoDialog:
 LB51D:  JSR FindDialogEntry     ;($B532)Get pointer to desired dialog text.
 LB520:  JSR InitDialogVars      ;($B576)Initialize the dialog variables.
@@ -5288,7 +5288,7 @@ LBA52:  SEC                     ;Set carry and return.
 LBA53:  RTS                     ;
 
 VowelTbl:
-.include "bin/Bank01/VowelTbl.dat"
+.incbin "bin/Bank01/VowelTbl.bin"
 DoWait:
 LBA59:  JSR TxtCheckInput       ;($BA97)Check for player button press.
 LBA5C:  BNE TxtBtnPressed       ;Has A or B been pressed? If so, branch.
