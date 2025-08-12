@@ -569,7 +569,7 @@ SQ1ThrnRm3:
 TRIThrnRm:
 L853E:  .byte $FE             ;Jump to new music address.
 L853F:  .word TRITantagel2          ;($85EB).
-.include "bin/Bank01/TRIThrnRm.dat"
+.incbin "bin/Bank01/TRIThrnRm.bin"
 L85A8:  .word TRIThrnRm             ;($853E).
 SQ1Tantagel:
 L85AA:  .byte $FF,     $7D   ;60/1.2=50 counts per second.
@@ -622,9 +622,15 @@ SQVictory:
 .incbin "bin/Bank01/SQVictory.bin"
 SQ1Village:
 .incbin "bin/Bank01/SQ1Village.bin"
+
 SQ1VillageLoop:
-.include "bin/Bank01/SQ1VillageLoop.dat"
+.incbin "bin/Bank01/SQ1VillageLoop.bin"
+L8750:  .word SQ1Village2           ;($8772).
+.incbin "bin/Bank01/SQ1VillageLoop_0.bin"
+L875E:  .word SQ1Village2           ;($8772).
+.incbin "bin/Bank01/SQ1VillageLoop_1.bin"
 L8770:  .word SQ1VillageLoop        ;($8731).
+
 SQ1Village2:
 .incbin "bin/Bank01/SQ1Village2.bin"
 TRIVillage:
@@ -673,12 +679,12 @@ TRIVillage2:
 TRIOutdoor:
 .incbin "bin/Bank01/TRIOutdoor.bin"
 TRIOutdoorLoop:
-.include "bin/Bank01/TRIOutdoorLoop.dat"
+.incbin "bin/Bank01/TRIOutdoorLoop.bin"
 L8842:  .word TRIOutdoorLoop        ;($881B).
 SQ1Outdoor:
 .incbin "bin/Bank01/SQ1Outdoor.bin"
 SQ1OutdoorLoop:
-.include "bin/Bank01/SQ1OutdoorLoop.dat"
+.incbin "bin/Bank01/SQ1OutdoorLoop.bin"
 L8889:  .word SQ1OutdoorLoop        ;($8848).
 SQ1Dngn:
 L888B:  .byte $FE             ;Jump to new music address.
@@ -778,7 +784,7 @@ L894A:  .word TRIDngn               ;($8950).
 TRIDngn8:
 .incbin "bin/Bank01/TRIDngn8.bin"
 TRIDngn:
-.include "bin/Bank01/TRIDngn.dat"
+.incbin "bin/Bank01/TRIDngn.bin"
 L897F:  .word TRIDngn9              ;($8991).
 L8981:  .byte $FE             ;Jump to new music address.
 L8982:  .word TRIDngn9              ;($8991).
@@ -812,13 +818,13 @@ SQ1Fight:
 .incbin "bin/Bank01/SQ1Fight.bin"
 
 SQ1FightLoop:
-.include "bin/Bank01/SQ1FightLoop_0.dat"
+.incbin "bin/Bank01/SQ1FightLoop_0.bin"
 L89D8:  .word SQ1Fight2             ;($8ABF).
-.include "bin/Bank01/SQ1FightLoop_1.dat"
+.incbin "bin/Bank01/SQ1FightLoop_1.bin"
 L89F9:  .word SQ1Fight2             ;($8ABF).
 L89FB:  .byte $FE             ;Jump to new music address.
 L89FC:  .word SQ1Fight2             ;($8ABF).
-.include "bin/Bank01/SQ1FightLoop.dat"
+.incbin "bin/Bank01/SQ1FightLoop.bin"
 L8AA9:  .word SQ1FightLoop          ;($89C1).
 
 EntFight:
@@ -838,7 +844,7 @@ L8ADD:  .byte $9A, $06              ;D4,   6 counts.
 L8ADF:  .byte $9C, $06              ;E4,   6 counts.
 
 TRIFight:
-.include "bin/Bank01/TRIFight.dat"
+.incbin "bin/Bank01/TRIFight.bin"
 SQ1EndBoss:
 .incbin "bin/Bank01/SQ1EndBoss.bin"
 SQ1EndBoss2:
@@ -848,7 +854,7 @@ L8B67:  .byte $FE             ;Jump to new music address.
 L8B68:  .word SQEndBoss             ;($8BB4).
 L8B6A:  .byte $FE             ;Jump to new music address.
 L8B6B:  .word SQ1EndBoss3           ;($8BA1).
-.include "bin/Bank01/SQ1EndBoss2.dat"
+.incbin "bin/Bank01/SQ1EndBoss2.bin"
 L8B9F:  .word SQ1EndBoss2           ;($8B64).
 SQ1EndBoss3:
 .incbin "bin/Bank01/SQ1EndBoss3.bin"
@@ -940,21 +946,21 @@ SQCursed2:
 SQ1Intro:
 .incbin "bin/Bank01/SQ1Intro.bin"
 SQ1IntroLoop:
-.include "bin/Bank01/SQ1IntroLoop.dat"
+.incbin "bin/Bank01/SQ1IntroLoop.bin"
 L8E3B:  .word SQ1IntroLoop          ;($8DA6).
 SQ2Intro:
 .incbin "bin/Bank01/SQ2Intro.bin"
 SQ2IntroLoop:
-.include "bin/Bank01/SQ2IntroLoop.dat"
+.incbin "bin/Bank01/SQ2IntroLoop.bin"
 L8F04:  .word SQ2IntroLoop          ;($8E72).
 TriIntro:
 .incbin "bin/Bank01/TriIntro.bin"
 TRIIntroLoop:
-.include "bin/Bank01/TRIIntroLoop.dat"
+.incbin "bin/Bank01/TRIIntroLoop.bin"
 L8F60:  .word TRIIntroLoop          ;($8F13).
 
 SQ1EndGame:
-.include "bin/Bank01/SQ1EndGame.dat"
+.incbin "bin/Bank01/SQ1EndGame.bin"
 L8FA3:  .word SQ1EndGame2           ;($902F).
 L8FA5:  .byte $FE             ;Jump to new music address.
 L8FA6:  .word SQ1EndGame3           ;($9072).
@@ -964,7 +970,7 @@ L8FAB:  .byte $FE             ;Jump to new music address.
 L8FAC:  .word SQ1EndGame3           ;($9072).
 L8FAE:  .byte $FE             ;Jump to new music address.
 L8FAF:  .word SQ1EndGame2           ;($902F).
-.include "bin/Bank01/SQ1EndGame_0.dat"
+.incbin "bin/Bank01/SQ1EndGame_0.bin"
 L8FF7:  .word SQ1EndGame4           ;($901D).
 L8FF9:  .byte $FE             ;Jump to new music address.
 L8FFA:  .word SQ1EndGame4           ;($901D).
@@ -981,7 +987,7 @@ L900A:  .byte $FE             ;Jump to new music address.
 L900B:  .word SQ1EndGame5           ;($9026).
 L900D:  .byte $FE             ;Jump to new music address.
 L900E:  .word SQ1EndGame5           ;($9026).
-.include "bin/Bank01/SQ1EndGame_1.dat"
+.incbin "bin/Bank01/SQ1EndGame_1.bin"
 
 SQ1EndGame4:
 .incbin "bin/Bank01/SQ1EndGame4.bin"
@@ -992,7 +998,7 @@ SQ1EndGame2:
 SQ1EndGame3:
 .incbin "bin/Bank01/SQ1EndGame3.bin"
 SQ2EndGame:
-.include "bin/Bank01/SQ2EndGame.dat"
+.incbin "bin/Bank01/SQ2EndGame.bin"
 L90E9:  .word SQ2EndGame2           ;($9159).
 L90EB:  .byte $FB,    $8F   ;50% duty, len counter yes, env yes, vol=15.
 L90ED:  .byte $FE             ;Jump to new music address.
@@ -1004,7 +1010,7 @@ L90F5:  .byte $FE             ;Jump to new music address.
 L90F6:  .word SQ2EndGame3           ;($91A0).
 L90F8:  .byte $FE             ;Jump to new music address.
 L90F9:  .word SQ2EndGame2           ;($9159).
-.include "bin/Bank01/SQ2EndGame_2.dat"
+.incbin "bin/Bank01/SQ2EndGame_2.bin"
 L9125:  .word SQ2EndGame4           ;($9147).
 L9127:  .byte $FE             ;Jump to new music address.
 L9128:  .word SQ2EndGame4           ;($9147).
@@ -1036,7 +1042,7 @@ SQ2EndGame2:
 SQ2EndGame3:
 .incbin "bin/Bank01/SQ2EndGame3.bin"
 TRIEndGame:
-.include "bin/Bank01/TriEndGame_0.dat"
+.incbin "bin/Bank01/TriEndGame_0.bin"
 L925E:  .word TRIEndGame2           ;($92BF).
 L9260:  .byte $FE             ;Jump to new music address.
 L9261:  .word TRIEndGame3           ;($92F2).
@@ -1046,7 +1052,7 @@ L9266:  .byte $FE             ;Jump to new music address.
 L9267:  .word TRIEndGame3           ;($92F2).
 L9269:  .byte $FE             ;Jump to new music address.
 L926A:  .word TRIEndGame2           ;($92BF).
-.include "bin/Bank01/TRIEndGame.dat"
+.incbin "bin/Bank01/TRIEndGame.bin"
 TRIEndGame2:
 .incbin "bin/Bank01/TRIEndGame2.bin"
 TRIEndGame3:
@@ -1293,7 +1299,7 @@ L9488:  JMP DoClearPPU          ;($93F7)Prepare to load next screen of credits.
 EndCreditDatPtr:
 L948B:  .word EndCreditDat      ;($948D)Start of data below.
 EndCreditDat:
-.include "bin/Bank01/EndCreditDat.dat"
+.incbin "bin/Bank01/EndCreditDat.bin"
 CopyTrsrTbl:
 L994F:  PHA                     ;
 L9950:  TXA                     ;Save A and X.
@@ -1557,11 +1563,11 @@ EnStatTblPtr:                   ;Pointer to the table below.
 L9E49:  .word EnStatTbl
 
 EnStatTbl:
-.include "bin/Bank01/EnStatTbl.dat"
+.incbin "bin/Bank01/EnStatTbl.bin"
 LA0CB:  .word BaseStatsTbl
 
 BaseStatsTbl:
-.include "bin/Bank01/BaseStatsTbl.dat"
+.incbin "bin/Bank01/BaseStatsTbl.bin"
 WndUnusedFunc1:
 LA181:  PLA                     ;Pull the value off the stack.
 
@@ -2524,13 +2530,13 @@ LA686:  LDA WpnArmrConvTbL-9,X  ;Get proper description byte for weapon, armor a
 LA689:  RTS                     ;
 
 PlyrInvConvTbl:
-.include "bin/Bank01/PlyrInvConvTbl.dat"
+.incbin "bin/Bank01/PlyrInvConvTbl.bin"
 ItmShopConvTbl:
-.include "bin/Bank01/ItmShopConvTbl.dat"
+.incbin "bin/Bank01/ItmShopConvTbl.bin"
 WpnShopConvTbl:
-.include "bin/Bank01/WpnShopConvTbl.dat"
+.incbin "bin/Bank01/WpnShopConvTbl.bin"
 WpnArmrConvTbL:
-.include "bin/Bank01/WpnArmrConvTbL.dat"
+.incbin "bin/Bank01/WpnArmrConvTbL.bin"
 WndCntrlPtrTbl:
 LA6C3:  .word WndBlankTiles     ;($A31C)Place blank tiles.
 LA6C5:  .word WndHorzTiles      ;($A338)Place horizontal border tiles.
@@ -2551,7 +2557,7 @@ LA6E1:  .word WndAddToBuf       ;($A543)Non-control character processing.
 LA6E3:  .word WndAddToBuf       ;($A543)Non-control character processing.
 
 AttribVarTbl:
-.include "bin/Bank01/AttribVarTbl.dat"
+.incbin "bin/Bank01/AttribVarTbl.bin"
 IndexedMult:
 LA6EB:  STA IndMultByte         ;
 LA6EE:  LDA #$00                ;
@@ -3500,7 +3506,7 @@ LABBD:  RTS                     ;
 ;This table contains the number of columns for selection windows with more than a single column.
 
 NumColTbl:
-.include "bin/Bank01/NumColTbl.dat"
+.incbin "bin/Bank01/NumColTbl.bin"
 WndUnusedFunc2:
 LABC0:  LDA #$00                ;Unused window function.
 LABC2:  BNE WndShowHide+2       ;
@@ -4076,7 +4082,7 @@ LAED5:  JMP AddPPUBufEntry      ;($C690)Add data to PPU buffer.
 ;window to the corresponding symbols in the nametable.
 
 SymbolConvTbl:
-.include "bin/Bank01/SymbolConvTbl.dat"
+.incbin "bin/Bank01/SymbolConvTbl.bin"
 DoWindowPrep:
 LAEE1:  PHA                     ;Save window type byte on the stack.
 
@@ -4130,7 +4136,7 @@ LAF1F:  RTS                     ;
 ;----------------------------------------------------------------------------------------------------
 
 WindowType1Tbl:
-.include "bin/Bank01/WindowType1Tbl.dat"
+.incbin "bin/Bank01/WindowType1Tbl.bin"
 WndEraseParams:
 LAF24:  CMP #WND_ALPHBT         ;Special case. Erase alphabet window.
 LAF26:  BEQ WndErsAlphabet      ;
@@ -5379,7 +5385,7 @@ WndCostTblPtr:
 LBE0E:  .word WndCostTbl        ;($BE10)Pointer to table below.
 
 WndCostTbl:
-.include "bin/Bank01/WndCostTbl.dat"
+.incbin "bin/Bank01/WndCostTbl.bin"
 SpellNameTbl:
 .incbin "bin/Bank01/SpellNameTbl.bin"
 NMI:
