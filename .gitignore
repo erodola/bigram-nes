@@ -10,8 +10,6 @@ dev/utils/dat
 vanilla/build
 
 dw/asm/bin
-dw/asm/*.dat
-dw/asm/Bank01.asm
 dw/scripts
 dw/build
 
