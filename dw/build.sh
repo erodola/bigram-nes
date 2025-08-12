@@ -18,7 +18,6 @@ printf "\n${magenta}Assembling with ca65...${reset}\n\n"
 
 # Header (should emit exactly 16 bytes from $0000)
 ca65 -o build/Header.o asm/Header.asm
-ld65 -C asm/header.cfg -o build/Header.bin build/Header.o
 
 # PRG banks
 ca65 -o build/Bank00.o asm/Bank00.asm
@@ -26,10 +25,10 @@ ca65 -o build/Bank01.o asm/Bank01.asm
 ca65 -o build/Bank02.o asm/Bank02.asm
 ca65 -o build/Bank03.o asm/Bank03.asm
 
-ld65 -C asm/prg_bank.cfg -o build/Bank00.bin build/Bank00.o
-ld65 -C asm/prg_bank.cfg -o build/Bank01.bin build/Bank01.o
-ld65 -C asm/prg_bank.cfg -o build/Bank02.bin build/Bank02.o
-ld65 -C asm/prg_bank.cfg -o build/Bank03.bin build/Bank03.o
+ld65 -C asm/nes.cfg \
+    build/Header.o \
+    build/Bank00.o build/Bank01.o build/Bank02.o build/Bank03.o \
+    --mapfile build/map.txt
 
 # ------------------------------------------------------------------------------
 # Combine into final .nes:
@@ -47,8 +46,8 @@ cat build/Header.bin \
     > build/DragonWarrior.nes
 
 printf "${magenta}Cleaning up intermediate files......${reset}\n"	
-#rm -f build/*.o
-#rm -f build/*.bin
+rm -f build/*.o
+rm -f build/*.bin
 
 printf "\n${magenta}Verifying final ROM checksum...${reset}\n\n"
 final_md5=($(md5sum build/DragonWarrior.nes))

@@ -1,3 +1,4 @@
+.segment "BANK_01_CODE"
 .org $8000
 
 .include "Defines.inc"
@@ -1568,6 +1569,8 @@ LA0CB:  .word BaseStatsTbl
 
 BaseStatsTbl:
 .incbin "bin/Bank01/BaseStatsTbl.bin"
+
+.ifndef retroai
 WndUnusedFunc1:
 LA181:  PLA                     ;Pull the value off the stack.
 
@@ -1584,6 +1587,7 @@ LA18F:  PHA                     ;
 
 LA190:  LDY #$00                ;Use the pointer to retreive a byte from memory.
 LA192:  LDA (GenPtr3E),Y        ;
+.endif
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -1693,7 +1697,10 @@ LA220:  INY                     ;
 LA221: BIT WndOptions          ;
 LA224:  BVC LA22C                   ;This bit is never set. Branch always.
 LA226:  LDA (WndDatPtr),Y       ;
+
+.ifndef inject
 LA228:  STA WndUnused1          ;
+.endif
 
 LA22B:  INY                     ;
 LA22C: STY WndDatIndex         ;Save index into current window data table.
@@ -1720,7 +1727,10 @@ LA247:  RTS                     ;
 InitWindowEngine:
 LA248:  JSR ClearWndLineBuf     ;($A646)Clear window line buffer.
 LA24B:  LDA #$FF                ;
+
+.ifndef inject
 LA24D:  STA WndUnused64FB       ;Written to but never accessed.
+.endif
 
 LA250:  LDA #$00                ;
 LA252:  STA WndXPos             ;
@@ -3028,7 +3038,10 @@ LA947:  LDA WndCursorHome       ;Save a copy of the cursor X,Y home position.
 LA94A:  PHA                     ;
 
 LA94B:  AND #$0F                ;Save a copy of the home X coord but it is never used.
+
+.ifndef inject
 LA94D:  STA WndUnused64F4       ;
+.endif
 
 LA950:  CLC                     ;
 LA951:  ADC WndCursorXPos       ;Convert home X coord from window coord to screen coord.
@@ -3507,9 +3520,12 @@ LABBD:  RTS                     ;
 
 NumColTbl:
 .incbin "bin/Bank01/NumColTbl.bin"
+
+.ifndef inject
 WndUnusedFunc2:
 LABC0:  LDA #$00                ;Unused window function.
 LABC2:  BNE WndShowHide+2       ;
+.endif
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -3527,7 +3543,10 @@ LABD2:  JSR WndUpdateTiles      ;($ADFA)Wait until next NMI for buffer to be emp
 
 WndDoRowReady:
 LABD5:  LDA #$00                ;Zero out unused variable.
+
+.ifndef inject
 LABD7:  STA WndUnused64AB       ;
+.endif
 
 LABDA:  PLA                     ;Restore A. Always 0.
 LABDB:  JSR WndStartRow         ;($AD10)Set nametable and X,Y start position of window line.
@@ -3549,7 +3568,10 @@ LABF3:  AND #$0F                ;Make a copy of window width.
 LABF5:  ASL                     ;
 LABF6:  STA _WndWidth           ;
 
+.ifndef inject
 LABF9:  STA WndUnused64AE       ;Not used.
+.endif 
+
 LABFC:  .byte $AE, $04, $00     ;LDX $0004(PPUBufCount)Get index for next buffer entry.
 
 WndRowLoop:
@@ -3918,6 +3940,10 @@ LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering na
 LAE05:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
 LAE08:  JSR WndDoSelect         ;($A8D1)Do selection window routines.
 
+.ifdef inject
+NOP
+.endif
+
 ProcessNameLoop:
 LAE0B:  JSR WndProcessChar      ;($AE53)Process name character selected by the player.
 LAE0E:  JSR WndMaxNameLength    ;($AEB2)Set carry if max length name has been reached.
@@ -3943,7 +3969,10 @@ LAE2B:  RTS                     ;
 InitNameWindow:
 LAE2C:  LDA #$00                ;
 LAE2E:  STA WndNameIndex        ;Zero out name variables.
+
+.ifndef inject
 LAE31:  STA WndUnused6505       ;
+.endif
 
 LAE34:  LDA #WND_NM_ENTRY       ;Show name entry window.
 LAE36:  JSR ShowWindow          ;($A194)Display window.
@@ -4371,9 +4400,17 @@ LB581:  STA WrkBufBytsDone      ;
 LB584:  LDA #$08                ;Initialize the dialog variables.
 LB586:  STA TxtLineSpace        ;
 LB589:  LDA WndTxtXCoord        ;
+
+.ifndef inject
 LB58B:  STA Unused6510          ;
+.endif
+
 LB58E:  LDA WndTxtYCoord        ;
+
+.ifndef inject
 LB590:  STA Unused6511          ;
+.endif
+
 LB593:  RTS                     ;
 
 ;----------------------------------------------------------------------------------------------------
@@ -4385,12 +4422,24 @@ LB599:  CLC                     ;If so, clear the carry flag.
 LB59A:  RTS                     ;
 
 LB59B:LDX WndTxtYCoord        ;
+
+.ifndef inject
 LB59D:  LDA Unused6512          ;
+.endif
+
 LB5A0:  BNE LB5A5                   ;
+
+.ifndef inject
 LB5A2:  STX Unused6512          ;Dialog buffer not complete. Set carry.
+.endif
+
 LB5A5:LDA Unused6513          ;The other variables have no effect.
 LB5A8:  BNE LB5AD                   ;
+
+.ifndef inject
 LB5AA:  STX Unused6513          ;
+.endif
+
 LB5AD:SEC                     ;
 LB5AE:  RTS                     ;
 
