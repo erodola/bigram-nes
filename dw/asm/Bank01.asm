@@ -5364,24 +5364,24 @@ LBAB6:  RTS                     ;
 
 ;Item descriptions, first table, first half.
 ItemNames11TbL:
-.include "bin/Bank01/ItemNames11TbL.dat"
+.incbin "bin/Bank01/ItemNames11TbL.bin"
 ItemNames21TbL:
-.include "bin/Bank01/ItemNames21TbL.dat"
+.incbin "bin/Bank01/ItemNames21TbL.bin"
 ItemNames12TbL:
-.include "bin/Bank01/ItemNames12TbL.dat"
+.incbin "bin/Bank01/ItemNames12TbL.bin"
 ItemNames22TbL:
-.include "bin/Bank01/ItemNames22TbL.dat"
+.incbin "bin/Bank01/ItemNames22TbL.bin"
 EnNames1Tbl:
-.include "bin/Bank01/EnNames1Tbl.dat"
+.incbin "bin/Bank01/EnNames1Tbl.bin"
 EnNames2Tbl:
-.include "bin/Bank01/EnNames2Tbl.dat"
+.incbin "bin/Bank01/EnNames2Tbl.bin"
 WndCostTblPtr:
 LBE0E:  .word WndCostTbl        ;($BE10)Pointer to table below.
 
 WndCostTbl:
 .include "bin/Bank01/WndCostTbl.dat"
 SpellNameTbl:
-.include "bin/Bank01/SpellNameTbl.dat"
+.incbin "bin/Bank01/SpellNameTbl.bin"
 NMI:
 RESET:
 IRQ:
