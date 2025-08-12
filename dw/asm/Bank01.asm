@@ -1565,8 +1565,12 @@ L9E49:  .word EnStatTbl
 
 EnStatTbl:
 .incbin "bin/Bank01/EnStatTbl.bin"
-LA0CB:  .word BaseStatsTbl
 
+;The table below provides the base stats per level.  The bytes represent the following stats:
+;Byte 1-Strength, byte 2-Agility, byte 3-Max HP, byte 4-Max MP, byte 5-Healmore and Hurtmore
+;spell flags, byte 6-All other spell flags.
+
+LA0CB:  .word BaseStatsTbl
 BaseStatsTbl:
 .incbin "bin/Bank01/BaseStatsTbl.bin"
 
@@ -5431,8 +5435,38 @@ LBE0E:  .word WndCostTbl        ;($BE10)Pointer to table below.
 
 WndCostTbl:
 .incbin "bin/Bank01/WndCostTbl.bin"
+
+;----------------------------------------------------------------------------------------------------
+
 SpellNameTbl:
 .incbin "bin/Bank01/SpellNameTbl.bin"
+
+.ifndef retroai
+;Unused.
+LBE9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF 
+LBEAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBEBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBECF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBEDF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBEEF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBEFF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF0F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF1F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF2F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF3F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF4F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF5F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF6F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF7F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF8F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBFAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBFBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBFCF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+.endif
+
+;----------------------------------------------------------------------------------------------------
+
 NMI:
 RESET:
 IRQ:
