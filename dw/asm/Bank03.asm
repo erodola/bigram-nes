@@ -5,7 +5,7 @@
 
 ;--------------------------------------[ Exports ]--------------------------------------
 
-; Export all functions that other banks need to reference
+; [RETRO AI] Export all functions that other banks need to reference
 .export ClearPPU
 .export CalcPPUBufAddr
 .export GetJoypadStatus
@@ -20,10 +20,31 @@
 .export GetBankDataByte
 .export WaitForNMI
 .export _DoReset
+.export ModAttribBits
+.export GetNPCSpriteIndex
+.export WordMultiply
+.export ByteDivide
+.export PalFadeOut
+.export PalFadeIn
+.export ClearAttribByte
+.export UpdateRandNum
+.export DoAddrCalc
+.export IdleUpdate
+.export CheckForTriggers
+.export ChangeMaps
+.export MapTargetTbl
+.export GFXTilesPtr
+
+; [RETRO AI] Export CHR/NT bank switching functions with expected names
+.export Bank1ToCHR0
+.export Bank0ToCHR0
+.export Bank0ToCHR1
+.export Bank2ToCHR1
+.export Bank3ToCHR1
 
 ;--------------------------------------[ Imports ]--------------------------------------
 
-; Import Bank01 functions instead of hard-coding addresses
+; [RETRO AI] Import Bank01 functions instead of hard-coding addresses
 .import BankPointers
 .import UpdateSound
 
@@ -10359,6 +10380,15 @@ Bank3ToNT1:
 LFCB8:  PHA                     ;
 LFCB9:  LDA #CHR_BANK_3         ;Indicate CHR ROM bank 3 to be loaded.
 LFCBB:  BNE SetActiveNT1        ;
+
+;----------------------------------------------------------------------------------------------------
+
+; Aliases for CHR function names that other banks expect
+Bank1ToCHR0 = Bank1ToNT0        ; $FC98
+Bank0ToCHR0 = Bank0ToNT0        ; $FCA3
+Bank0ToCHR1 = Bank0ToNT1        ; $FCA8
+Bank2ToCHR1 = Bank2ToNT1        ; $FCAD
+Bank3ToCHR1 = Bank3ToNT1        ; $FCB8
 
 ;----------------------------------------------------------------------------------------------------
 

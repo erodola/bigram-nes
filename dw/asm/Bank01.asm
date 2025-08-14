@@ -5,9 +5,7 @@
 
 ;--------------------------------------[ Imports ]--------------------------------------
 
-Bank0ToCHR0     = $FCA3
-
-; Import all Bank03 functions instead of hard-coding addresses
+; [RETRO AI] Import all Bank03 functions instead of hard-coding addresses
 .import ClearPPU
 .import CalcPPUBufAddr
 .import GetJoypadStatus
@@ -16,6 +14,7 @@ Bank0ToCHR0     = $FCA3
 .import DoWindow
 .import DoDialogHiBlock
 .import WndLoadGameDat
+.import Bank0ToCHR0
 .import GetAndStrDatPtr
 .import GetBankDataByte
 .import WaitForNMI
@@ -23,7 +22,7 @@ Bank0ToCHR0     = $FCA3
 
 ;--------------------------------------[ Exports ]--------------------------------------
 
-; Export Bank01 functions that other banks call via BRK mechanism
+; [RETRO AI] Export Bank01 functions that other banks call via BRK mechanism
 .export BankPointers
 .export UpdateSound
 .export InitMusicSFX

@@ -5,10 +5,7 @@
 
 ;--------------------------------------[ Imports ]--------------------------------------
 
-; Import Bank01 functions for BRK mechanism
-.import InitMusicSFX
-
-; Import Bank03 functions instead of hard-coding addresses
+; [RETRO AI] Import Bank03 functions instead of hard-coding addresses
 .import GetJoypadStatus
 .import PrepSPPalLoad
 .import PrepBGPalLoad
