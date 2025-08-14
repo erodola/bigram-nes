@@ -8,14 +8,13 @@
 ; Import Bank01 functions for BRK mechanism
 .import InitMusicSFX
 
-;--------------------------------------[ Forward declarations ]--------------------------------------
-
-GetJoypadStatus = $C608
-PrepSPPalLoad   = $C632
-PrepBGPalLoad   = $C63D
-AddPPUBufEntry  = $C690
-WaitForNMI      = $FF74
-_DoReset        = $FF8E
+; Import Bank03 functions instead of hard-coding addresses
+.import GetJoypadStatus
+.import PrepSPPalLoad
+.import PrepBGPalLoad
+.import AddPPUBufEntry
+.import WaitForNMI
+.import _DoReset
 
 ;-----------------------------------------[ Start of code ]------------------------------------------
 

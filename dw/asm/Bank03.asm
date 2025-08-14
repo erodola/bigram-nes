@@ -9,6 +9,8 @@
 .export ClearPPU
 .export CalcPPUBufAddr
 .export GetJoypadStatus
+.export PrepSPPalLoad
+.export PrepBGPalLoad
 .export AddPPUBufEntry
 .export ClearSpriteRAM
 .export DoWindow
@@ -27,6 +29,7 @@
 
 ;--------------------------------------[ Forward Declarations ]--------------------------------------
 
+; [RETRO AI] These point to Bank00 and Bank02, we only care about Bank01 in this hack
 NPCMobPtrTbl       = $9734
 NPCStatPtrTbl      = $974C
 MapEntryDirTbl     = $9914
