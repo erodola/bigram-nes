@@ -3,21 +3,31 @@
 
 .include "Defines.inc"
 
-;--------------------------------------[ Forward declarations ]--------------------------------------
+;--------------------------------------[ Imports ]--------------------------------------
 
-ClearPPU        = $C17A
-CalcPPUBufAddr  = $C596
-GetJoypadStatus = $C608
-AddPPUBufEntry  = $C690
-ClearSpriteRAM  = $C6BB
-DoWindow        = $C6F0
-DoDialogHiBlock = $C7C5
-WndLoadGameDat  = $F685
 Bank0ToCHR0     = $FCA3
-GetAndStrDatPtr = $FD00
-GetBankDataByte = $FD1C
-WaitForNMI      = $FF74
-_DoReset        = $FF8E
+
+; Import all Bank03 functions instead of hard-coding addresses
+.import ClearPPU
+.import CalcPPUBufAddr
+.import GetJoypadStatus
+.import AddPPUBufEntry
+.import ClearSpriteRAM
+.import DoWindow
+.import DoDialogHiBlock
+.import WndLoadGameDat
+.import GetAndStrDatPtr
+.import GetBankDataByte
+.import WaitForNMI
+.import _DoReset
+
+;--------------------------------------[ Exports ]--------------------------------------
+
+; Export Bank01 functions that other banks call via BRK mechanism
+.export BankPointers
+.export UpdateSound
+.export InitMusicSFX
+.export WndEraseParams
 
 ;-----------------------------------------[ Start of code ]------------------------------------------
 

@@ -3,6 +3,12 @@
 
 .include "Defines.inc"
 
+;--------------------------------------[ Imports ]--------------------------------------
+
+; Import Bank01 functions for BRK mechanism
+.import InitMusicSFX
+.import WndEraseParams
+
 ;--------------------------------------[ Forward declarations ]--------------------------------------
 
 ModAttribBits     = $C006

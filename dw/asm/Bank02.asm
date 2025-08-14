@@ -3,6 +3,11 @@
 
 .include "Defines.inc"
 
+;--------------------------------------[ Imports ]--------------------------------------
+
+; Import Bank01 functions for BRK mechanism
+.import InitMusicSFX
+
 ;--------------------------------------[ Forward declarations ]--------------------------------------
 
 GetJoypadStatus = $C608

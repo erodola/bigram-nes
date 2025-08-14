@@ -3,10 +3,30 @@
 
 .include "Defines.inc"
 
+;--------------------------------------[ Exports ]--------------------------------------
+
+; Export all functions that other banks need to reference
+.export ClearPPU
+.export CalcPPUBufAddr
+.export GetJoypadStatus
+.export AddPPUBufEntry
+.export ClearSpriteRAM
+.export DoWindow
+.export DoDialogHiBlock
+.export WndLoadGameDat
+.export GetAndStrDatPtr
+.export GetBankDataByte
+.export WaitForNMI
+.export _DoReset
+
+;--------------------------------------[ Imports ]--------------------------------------
+
+; Import Bank01 functions instead of hard-coding addresses
+.import BankPointers
+.import UpdateSound
+
 ;--------------------------------------[ Forward Declarations ]--------------------------------------
 
-BankPointers       = $8000
-UpdateSound        = $8028
 NPCMobPtrTbl       = $9734
 NPCStatPtrTbl      = $974C
 MapEntryDirTbl     = $9914

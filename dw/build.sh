@@ -28,7 +28,7 @@ ca65 -o build/Header.o asm/Header.asm
 
 # PRG banks
 ca65 -o build/Bank00.o asm/Bank00.asm
-ca65 -o build/Bank01.o asm/Bank01.asm -D retroai
+ca65 -o build/Bank01.o asm/Bank01.asm # -D retroai
 ca65 -o build/Bank02.o asm/Bank02.asm
 ca65 -o build/Bank03.o asm/Bank03.asm
 
