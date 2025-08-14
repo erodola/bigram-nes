@@ -1,15 +1,17 @@
+.segment "BANK_02"
 .org $8000
 
 .include "Defines.inc"
 
-;--------------------------------------[ Forward declarations ]--------------------------------------
+;--------------------------------------[ Imports ]--------------------------------------
 
-GetJoypadStatus = $C608
-PrepSPPalLoad   = $C632
-PrepBGPalLoad   = $C63D
-AddPPUBufEntry  = $C690
-WaitForNMI      = $FF74
-_DoReset        = $FF8E
+; [RETRO AI] Import Bank03 functions instead of hard-coding addresses
+.import GetJoypadStatus
+.import PrepSPPalLoad
+.import PrepBGPalLoad
+.import AddPPUBufEntry
+.import WaitForNMI
+.import _DoReset
 
 ;-----------------------------------------[ Start of code ]------------------------------------------
 

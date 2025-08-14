@@ -1,34 +1,36 @@
+.segment "BANK_00"
 .org $8000
 
 .include "Defines.inc"
 
-;--------------------------------------[ Forward declarations ]--------------------------------------
+;--------------------------------------[ Imports ]--------------------------------------
 
-ModAttribBits     = $C006
-GetNPCSpriteIndex = $C0F4
-WordMultiply      = $C1C9
-ByteDivide        = $C1F0
-PalFadeOut        = $C212
-PalFadeIn         = $C529
-ClearAttribByte   = $C244
-UpdateRandNum     = $C55B
-CalcPPUBufAddr    = $C596
-DoAddrCalc        = $C5AA
-PrepSPPalLoad     = $C632
-PrepBGPalLoad     = $C63D
-AddPPUBufEntry    = $C690
-ClearSpriteRAM    = $C6BB
-IdleUpdate        = $CB30
-CheckForTriggers  = $CBF7
-ChangeMaps        = $D9E2
-MapTargetTbl      = $F461
-GFXTilesPtr       = $F5B3
-Bank1ToCHR0       = $FC98
-Bank0ToCHR0       = $FCA3
-Bank0ToCHR1       = $FCA8
-Bank2ToCHR1       = $FCAD
-WaitForNMI        = $FF74
-_DoReset          = $FF8E
+; [RETRO AI] Import Bank03 functions
+.import Bank1ToCHR0
+.import Bank0ToCHR0
+.import Bank0ToCHR1
+.import Bank2ToCHR1
+.import WaitForNMI
+.import _DoReset
+.import CalcPPUBufAddr
+.import PrepSPPalLoad
+.import PrepBGPalLoad
+.import AddPPUBufEntry
+.import ClearSpriteRAM
+.import ModAttribBits
+.import GetNPCSpriteIndex
+.import WordMultiply
+.import ByteDivide
+.import PalFadeOut
+.import PalFadeIn
+.import ClearAttribByte
+.import UpdateRandNum
+.import DoAddrCalc
+.import IdleUpdate
+.import CheckForTriggers
+.import ChangeMaps
+.import MapTargetTbl
+.import GFXTilesPtr
 
 ;-----------------------------------------[ Start of code ]------------------------------------------
 

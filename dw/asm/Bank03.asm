@@ -1,11 +1,56 @@
+.segment "BANK_FIXED"
 .org $C000
 
 .include "Defines.inc"
 
+;--------------------------------------[ Exports ]--------------------------------------
+
+; [RETRO AI] Export all functions that other banks need to reference
+.export ClearPPU
+.export CalcPPUBufAddr
+.export GetJoypadStatus
+.export PrepSPPalLoad
+.export PrepBGPalLoad
+.export AddPPUBufEntry
+.export ClearSpriteRAM
+.export DoWindow
+.export DoDialogHiBlock
+.export WndLoadGameDat
+.export GetAndStrDatPtr
+.export GetBankDataByte
+.export WaitForNMI
+.export _DoReset
+.export ModAttribBits
+.export GetNPCSpriteIndex
+.export WordMultiply
+.export ByteDivide
+.export PalFadeOut
+.export PalFadeIn
+.export ClearAttribByte
+.export UpdateRandNum
+.export DoAddrCalc
+.export IdleUpdate
+.export CheckForTriggers
+.export ChangeMaps
+.export MapTargetTbl
+.export GFXTilesPtr
+
+; [RETRO AI] Export CHR/NT bank switching functions with expected names
+.export Bank1ToCHR0
+.export Bank0ToCHR0
+.export Bank0ToCHR1
+.export Bank2ToCHR1
+.export Bank3ToCHR1
+
+;--------------------------------------[ Imports ]--------------------------------------
+
+; [RETRO AI] Import Bank01 functions instead of hard-coding addresses
+.import BankPointers
+.import UpdateSound
+
 ;--------------------------------------[ Forward Declarations ]--------------------------------------
 
-BankPointers       = $8000
-UpdateSound        = $8028
+; [RETRO AI] These point to Bank00 and Bank02, we only care about Bank01 in this hack
 NPCMobPtrTbl       = $9734
 NPCStatPtrTbl      = $974C
 MapEntryDirTbl     = $9914
@@ -10335,6 +10380,15 @@ Bank3ToNT1:
 LFCB8:  PHA                     ;
 LFCB9:  LDA #CHR_BANK_3         ;Indicate CHR ROM bank 3 to be loaded.
 LFCBB:  BNE SetActiveNT1        ;
+
+;----------------------------------------------------------------------------------------------------
+
+; Aliases for CHR function names that other banks expect
+Bank1ToCHR0 = Bank1ToNT0        ; $FC98
+Bank0ToCHR0 = Bank0ToNT0        ; $FCA3
+Bank0ToCHR1 = Bank0ToNT1        ; $FCA8
+Bank2ToCHR1 = Bank2ToNT1        ; $FCAD
+Bank3ToCHR1 = Bank3ToNT1        ; $FCB8
 
 ;----------------------------------------------------------------------------------------------------
 

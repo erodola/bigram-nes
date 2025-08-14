@@ -1,22 +1,30 @@
+.segment "BANK_01"
 .org $8000
 
 .include "Defines.inc"
 
-;--------------------------------------[ Forward declarations ]--------------------------------------
+;--------------------------------------[ Imports ]--------------------------------------
 
-ClearPPU        = $C17A
-CalcPPUBufAddr  = $C596
-GetJoypadStatus = $C608
-AddPPUBufEntry  = $C690
-ClearSpriteRAM  = $C6BB
-DoWindow        = $C6F0
-DoDialogHiBlock = $C7C5
-WndLoadGameDat  = $F685
-Bank0ToCHR0     = $FCA3
-GetAndStrDatPtr = $FD00
-GetBankDataByte = $FD1C
-WaitForNMI      = $FF74
-_DoReset        = $FF8E
+; [RETRO AI] Import all Bank03 functions instead of hard-coding addresses
+.import ClearPPU
+.import CalcPPUBufAddr
+.import GetJoypadStatus
+.import AddPPUBufEntry
+.import ClearSpriteRAM
+.import DoWindow
+.import DoDialogHiBlock
+.import WndLoadGameDat
+.import Bank0ToCHR0
+.import GetAndStrDatPtr
+.import GetBankDataByte
+.import WaitForNMI
+.import _DoReset
+
+;--------------------------------------[ Exports ]--------------------------------------
+
+; [RETRO AI] Export Bank01 functions that other banks call via BRK mechanism
+.export BankPointers
+.export UpdateSound
 
 ;-----------------------------------------[ Start of code ]------------------------------------------
 
@@ -1564,10 +1572,16 @@ L9E49:  .word EnStatTbl
 
 EnStatTbl:
 .incbin "bin/Bank01/EnStatTbl.bin"
-LA0CB:  .word BaseStatsTbl
 
+;The table below provides the base stats per level.  The bytes represent the following stats:
+;Byte 1-Strength, byte 2-Agility, byte 3-Max HP, byte 4-Max MP, byte 5-Healmore and Hurtmore
+;spell flags, byte 6-All other spell flags.
+
+LA0CB:  .word BaseStatsTbl
 BaseStatsTbl:
 .incbin "bin/Bank01/BaseStatsTbl.bin"
+
+.ifndef retroai
 WndUnusedFunc1:
 LA181:  PLA                     ;Pull the value off the stack.
 
@@ -1584,6 +1598,7 @@ LA18F:  PHA                     ;
 
 LA190:  LDY #$00                ;Use the pointer to retreive a byte from memory.
 LA192:  LDA (GenPtr3E),Y        ;
+.endif
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -1693,7 +1708,10 @@ LA220:  INY                     ;
 LA221: BIT WndOptions          ;
 LA224:  BVC LA22C                   ;This bit is never set. Branch always.
 LA226:  LDA (WndDatPtr),Y       ;
+
+.ifndef retroai
 LA228:  STA WndUnused1          ;
+.endif
 
 LA22B:  INY                     ;
 LA22C: STY WndDatIndex         ;Save index into current window data table.
@@ -1720,7 +1738,10 @@ LA247:  RTS                     ;
 InitWindowEngine:
 LA248:  JSR ClearWndLineBuf     ;($A646)Clear window line buffer.
 LA24B:  LDA #$FF                ;
+
+.ifndef retroai
 LA24D:  STA WndUnused64FB       ;Written to but never accessed.
+.endif
 
 LA250:  LDA #$00                ;
 LA252:  STA WndXPos             ;
@@ -3028,7 +3049,10 @@ LA947:  LDA WndCursorHome       ;Save a copy of the cursor X,Y home position.
 LA94A:  PHA                     ;
 
 LA94B:  AND #$0F                ;Save a copy of the home X coord but it is never used.
+
+.ifndef retroai
 LA94D:  STA WndUnused64F4       ;
+.endif
 
 LA950:  CLC                     ;
 LA951:  ADC WndCursorXPos       ;Convert home X coord from window coord to screen coord.
@@ -3507,9 +3531,12 @@ LABBD:  RTS                     ;
 
 NumColTbl:
 .incbin "bin/Bank01/NumColTbl.bin"
+
+.ifndef retroai
 WndUnusedFunc2:
 LABC0:  LDA #$00                ;Unused window function.
 LABC2:  BNE WndShowHide+2       ;
+.endif
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -3527,7 +3554,10 @@ LABD2:  JSR WndUpdateTiles      ;($ADFA)Wait until next NMI for buffer to be emp
 
 WndDoRowReady:
 LABD5:  LDA #$00                ;Zero out unused variable.
+
+.ifndef retroai
 LABD7:  STA WndUnused64AB       ;
+.endif
 
 LABDA:  PLA                     ;Restore A. Always 0.
 LABDB:  JSR WndStartRow         ;($AD10)Set nametable and X,Y start position of window line.
@@ -3549,7 +3579,10 @@ LABF3:  AND #$0F                ;Make a copy of window width.
 LABF5:  ASL                     ;
 LABF6:  STA _WndWidth           ;
 
+.ifndef retroai
 LABF9:  STA WndUnused64AE       ;Not used.
+.endif 
+
 LABFC:  .byte $AE, $04, $00     ;LDX $0004(PPUBufCount)Get index for next buffer entry.
 
 WndRowLoop:
@@ -3914,9 +3947,11 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 ;----------------------------------------------------------------------------------------------------
 
 WndEnterName:
+.ifndef retroai
 LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering name.
 LAE05:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
 LAE08:  JSR WndDoSelect         ;($A8D1)Do selection window routines.
+.endif
 
 ProcessNameLoop:
 LAE0B:  JSR WndProcessChar      ;($AE53)Process name character selected by the player.
@@ -3943,7 +3978,10 @@ LAE2B:  RTS                     ;
 InitNameWindow:
 LAE2C:  LDA #$00                ;
 LAE2E:  STA WndNameIndex        ;Zero out name variables.
+
+.ifndef retroai
 LAE31:  STA WndUnused6505       ;
+.endif
 
 LAE34:  LDA #WND_NM_ENTRY       ;Show name entry window.
 LAE36:  JSR ShowWindow          ;($A194)Display window.
@@ -3964,17 +4002,22 @@ ClearNameBufLoop:
 LAE4C:  STA TempBuffer,X        ;Place blank tile value in temp buffer.
 LAE4F:  DEX                     ;
 LAE50:  BPL ClearNameBufLoop    ;Have 12 values been written to the buffer?
+
 LAE52:  RTS                     ;If not, branch to write another.
 
 ;----------------------------------------------------------------------------------------------------
 
 WndProcessChar:
+.ifndef retroai
 LAE53:  CMP #WND_ABORT          ;Did player press the B button?
 LAE55:  BEQ WndDoBackspace      ;If so, back up 1 character.
+.endif
 
+LDA #$04
 LAE57:  CMP #$1A                ;Did player select character A-Z?
 LAE59:  BCC WndUprCaseConvert   ;If so, branch to covert to nametables values.
 
+.ifndef retroai
 LAE5B:  CMP #$21                ;Did player select symbol -'!?() or _?
 LAE5D:  BCC WndSymbConvert1     ;If so, branch to covert to nametables values.
 
@@ -3986,6 +4029,7 @@ LAE65:  BCC WndSymbConvert2     ;If so, branch to covert to nametables values.
 
 LAE67:  CMP #$3D                ;Did player select BACK?
 LAE69:  BEQ WndDoBackspace      ;If so, back up 1 character.
+.endif
 
 LAE6B:  LDA #$08                ;Player must have selected END.
 LAE6D:  STA WndNameIndex        ;Set name index to max value to indicate the end.
@@ -4371,9 +4415,17 @@ LB581:  STA WrkBufBytsDone      ;
 LB584:  LDA #$08                ;Initialize the dialog variables.
 LB586:  STA TxtLineSpace        ;
 LB589:  LDA WndTxtXCoord        ;
+
+.ifndef retroai
 LB58B:  STA Unused6510          ;
+.endif
+
 LB58E:  LDA WndTxtYCoord        ;
+
+.ifndef retroai
 LB590:  STA Unused6511          ;
+.endif
+
 LB593:  RTS                     ;
 
 ;----------------------------------------------------------------------------------------------------
@@ -4385,12 +4437,24 @@ LB599:  CLC                     ;If so, clear the carry flag.
 LB59A:  RTS                     ;
 
 LB59B:LDX WndTxtYCoord        ;
+
+.ifndef retroai
 LB59D:  LDA Unused6512          ;
+.endif
+
 LB5A0:  BNE LB5A5                   ;
+
+.ifndef retroai
 LB5A2:  STX Unused6512          ;Dialog buffer not complete. Set carry.
+.endif
+
 LB5A5:LDA Unused6513          ;The other variables have no effect.
 LB5A8:  BNE LB5AD                   ;
+
+.ifndef retroai
 LB5AA:  STX Unused6513          ;
+.endif
+
 LB5AD:SEC                     ;
 LB5AE:  RTS                     ;
 
@@ -5386,8 +5450,45 @@ LBE0E:  .word WndCostTbl        ;($BE10)Pointer to table below.
 
 WndCostTbl:
 .incbin "bin/Bank01/WndCostTbl.bin"
+
+;----------------------------------------------------------------------------------------------------
+
 SpellNameTbl:
 .incbin "bin/Bank01/SpellNameTbl.bin"
+
+.ifndef retroai
+;Unused.
+LBE9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF 
+LBEAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBEBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBECF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBEDF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBEEF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBEFF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF0F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF1F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF2F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF3F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF4F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF5F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF6F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF7F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF8F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBF9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBFAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBFBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+LBFCF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+.endif
+
+.ifdef retroai
+NOP  ; [RETRO AI] we'll plug our code here
+NOP
+NOP
+NOP
+.endif
+
+;----------------------------------------------------------------------------------------------------
+
 NMI:
 RESET:
 IRQ:
