@@ -25,8 +25,6 @@
 ; [RETRO AI] Export Bank01 functions that other banks call via BRK mechanism
 .export BankPointers
 .export UpdateSound
-.export InitMusicSFX
-.export WndEraseParams
 
 ;-----------------------------------------[ Start of code ]------------------------------------------
 
@@ -3949,9 +3947,11 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 ;----------------------------------------------------------------------------------------------------
 
 WndEnterName:
+.ifndef retroai
 LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering name.
 LAE05:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
 LAE08:  JSR WndDoSelect         ;($A8D1)Do selection window routines.
+.endif
 
 ProcessNameLoop:
 LAE0B:  JSR WndProcessChar      ;($AE53)Process name character selected by the player.
@@ -4002,17 +4002,22 @@ ClearNameBufLoop:
 LAE4C:  STA TempBuffer,X        ;Place blank tile value in temp buffer.
 LAE4F:  DEX                     ;
 LAE50:  BPL ClearNameBufLoop    ;Have 12 values been written to the buffer?
+
 LAE52:  RTS                     ;If not, branch to write another.
 
 ;----------------------------------------------------------------------------------------------------
 
 WndProcessChar:
+.ifndef retroai
 LAE53:  CMP #WND_ABORT          ;Did player press the B button?
 LAE55:  BEQ WndDoBackspace      ;If so, back up 1 character.
+.endif
 
+LDA #$04
 LAE57:  CMP #$1A                ;Did player select character A-Z?
 LAE59:  BCC WndUprCaseConvert   ;If so, branch to covert to nametables values.
 
+.ifndef retroai
 LAE5B:  CMP #$21                ;Did player select symbol -'!?() or _?
 LAE5D:  BCC WndSymbConvert1     ;If so, branch to covert to nametables values.
 
@@ -4024,6 +4029,7 @@ LAE65:  BCC WndSymbConvert2     ;If so, branch to covert to nametables values.
 
 LAE67:  CMP #$3D                ;Did player select BACK?
 LAE69:  BEQ WndDoBackspace      ;If so, back up 1 character.
+.endif
 
 LAE6B:  LDA #$08                ;Player must have selected END.
 LAE6D:  STA WndNameIndex        ;Set name index to max value to indicate the end.
@@ -5472,6 +5478,13 @@ LBF9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $
 LBFAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 LBFBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 LBFCF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+.endif
+
+.ifdef retroai
+NOP  ; [RETRO AI] we'll plug our code here
+NOP
+NOP
+NOP
 .endif
 
 ;----------------------------------------------------------------------------------------------------
