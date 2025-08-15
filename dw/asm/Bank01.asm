@@ -3983,6 +3983,20 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         ADC #$23           ; corresponding uppercase tile (TXT_UPR_A - 1)
         RTS
 
+    ShowChar:
+        JSR ItoS
+        STA DispName0,X
+        STX WndNameIndex
+        LDY #$04
+        STY ScrnTxtYCoord
+        STA PPUDataByte
+        LDA WndNameIndex
+        CLC
+        ADC #$0C
+        STA ScrnTxtXCoord
+        JSR WndCalcPPUAddr
+        JMP AddPPUBufEntry
+
     WndEnterName:   ; [RETRO AI] ($ADE5) we jump here directly from Bank03
         JSR InitNameWindow
 
@@ -3996,35 +4010,24 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 
         ; assuming X = 0 from the clear loop above
         LDA #$03 ; 'C'
-        JSR ItoS
-        STA DispName0,X
-        
-        ; TEST: trying to show name on screen
-        LDY #$04
-        STY ScrnTxtYCoord
-        STA PPUDataByte
-        STX WndNameIndex
-        LDA WndNameIndex
-        CLC
-        ADC #$0C
-        STA ScrnTxtXCoord
-        JSR WndCalcPPUAddr
-        JMP AddPPUBufEntry
-
-        INX
+        JSR ShowChar
+        INC WndNameIndex
+        LDX WndNameIndex
 
         LDA #$09 ; 'I'
-        JSR ItoS
-        STA DispName0,X
-        INX
+        JSR ShowChar
+        INC WndNameIndex
+        LDX WndNameIndex
+
         LDA #$01 ; 'A'
-        JSR ItoS
-        STA DispName0,X
-        INX
+        JSR ShowChar
+        INC WndNameIndex
+        LDX WndNameIndex
+
         LDA #$0F ; 'O'
-        JSR ItoS
-        STA DispName0,X
-        INX
+        JSR ShowChar
+        INC WndNameIndex
+        LDX WndNameIndex
 
         LDA #$08         ; signal that 8 name characters have been inputted
         STA WndNameIndex ;
@@ -4162,22 +4165,22 @@ LAE52:  RTS                     ;If not, branch to write another.
     WndUndrscrYPos:
     LAEBE:  LDX #$09                ;Set Y position for underscore character.
     LAEC0:  BNE WndShowNameChar     ;Branch always.
+
+    WndNameCharYPos:
+    LAEC2:  LDX #$08                ;Set Y position for name character.
+
+    WndShowNameChar:
+    LAEC4:  STX ScrnTxtYCoord       ;Calculate X position for character to add to name window.
+    LAEC7:  STA PPUDataByte         ;
+
+    LAEC9:  LDA WndNameIndex        ;
+    LAECC:  CLC                     ;Calculate Y position for character to add to name window.
+    LAECD:  ADC #$0C                ;
+    LAECF:  STA ScrnTxtXCoord       ;
+
+    LAED2:  JSR WndCalcPPUAddr      ;($ADC0)Calculate PPU address for window/text byte.
+    LAED5:  JMP AddPPUBufEntry      ;($C690)Add data to PPU buffer.
 .endif
-
-WndNameCharYPos:
-LAEC2:  LDX #$08                ;Set Y position for name character.
-
-WndShowNameChar:
-LAEC4:  STX ScrnTxtYCoord       ;Calculate X position for character to add to name window.
-LAEC7:  STA PPUDataByte         ;
-
-LAEC9:  LDA WndNameIndex        ;
-LAECC:  CLC                     ;Calculate Y position for character to add to name window.
-LAECD:  ADC #$0C                ;
-LAECF:  STA ScrnTxtXCoord       ;
-
-LAED2:  JSR WndCalcPPUAddr      ;($ADC0)Calculate PPU address for window/text byte.
-LAED5:  JMP AddPPUBufEntry      ;($C690)Add data to PPU buffer.
 
 ;----------------------------------------------------------------------------------------------------
 
