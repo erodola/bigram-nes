@@ -19,6 +19,7 @@
 .import GetBankDataByte
 .import WaitForNMI
 .import _DoReset
+.import UpdateRandNum ; [RETRO AI] needed for multinomial sampling
 
 ;--------------------------------------[ Exports ]--------------------------------------
 
@@ -4007,6 +4008,9 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
             STA DispName0,X
             STA DispName4,X
             BNE ClearNameBufLoop
+
+        ; JSR UpdateRandNum    ; Generate new random number
+        ; LDA RandNumLB
 
         ; assuming X = 0 from the clear loop above
         LDA #$03 ; 'C'
