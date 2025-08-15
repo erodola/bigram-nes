@@ -35,6 +35,8 @@
 .export MapTargetTbl
 .export GFXTilesPtr
 
+.export NameLetters
+
 ; [RETRO AI] Export CHR/NT bank switching functions with expected names
 .export Bank1ToCHR0
 .export Bank0ToCHR0
@@ -628,7 +630,12 @@ LC287:  RTS                     ;
 
 ;This section appears to be unused code from Dragon Quest.
 
-LC288: .byte $20, $74, $FF, $20, $97, $C2, $E6, $99, $D0, $F9, $E6, $9A, $4C, $8B, $C2, $A5
+NameLetters: ; [RETRO AI] here we'll store the first 24 rows of the transition matrix
+.ifdef retroai
+    LC288: .byte $0F, $01, $09, $03, $3D, $3D, $3D, $3D, $D0, $F9, $E6, $9A, $4C, $8B, $C2, $A5
+.else
+    LC288: .byte $20, $74, $FF, $20, $97, $C2, $E6, $99, $D0, $F9, $E6, $9A, $4C, $8B, $C2, $A5
+.endif
 LC298: .byte $D6, $F0, $0B, $C6, $D6, $A5, $99, $C6, $99, $A8, $D0, $02, $C6, $9A, $A0, $00
 LC2A8: .byte $B1, $99, $C9, $F7, $D0, $13, $C8, $B1, $99, $85, $D6, $A5, $99, $18, $69, $03
 LC2B8: .byte $85, $99, $90, $02, $E6, $9A, $4C, $97, $C2, $C9, $FF, $F0, $31, $C9, $FC, $D0

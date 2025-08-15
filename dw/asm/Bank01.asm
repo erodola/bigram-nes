@@ -20,6 +20,7 @@
 .import WaitForNMI
 .import _DoReset
 .import UpdateRandNum ; [RETRO AI] needed for multinomial sampling
+.import NameLetters
 
 ;--------------------------------------[ Exports ]--------------------------------------
 
@@ -4026,8 +4027,8 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         STA WndNameIndex
         RTS
 
-    NameLetters:                  ; blank tiles = #TL_BLANK_TILE2 - $23
-        .byte $03, $09, $01, $0F, $3D, $3D, $3D, $3D
+    ; NameLetters:                  ; blank tiles = #TL_BLANK_TILE2 - $23
+    ;     .byte $03, $09, $01, $0F, $3D, $3D, $3D, $3D
 .endif
 
 ;----------------------------------------------------------------------------------------------------
