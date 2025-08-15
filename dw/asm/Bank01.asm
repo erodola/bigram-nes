@@ -3975,39 +3975,47 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 
 .ifdef retroai
     ItoS:
-    BNE @NotDot        ; A is not 0?
-    LDA #TXT_BLANK1    ; white space tile
-    RTS
-    @NotDot:
-    CLC
-    ADC #$23           ; corresponding uppercase tile (TXT_UPR_A - 1)
-    RTS
+        BNE @NotDot        ; A is not 0?
+        LDA #TXT_BLANK1    ; white space tile
+        RTS
+        @NotDot:
+        CLC
+        ADC #$23           ; corresponding uppercase tile (TXT_UPR_A - 1)
+        RTS
 
-    WndEnterName:   ; [RETRO AI] $ADE5
-    JSR InitNameWindow
+    WndEnterName:   ; [RETRO AI] ($ADE5) we jump here directly from Bank03
+        JSR InitNameWindow
 
-    LDX #$00
-    LDA #$03 ; 'C'
-    JSR ItoS
-    STA DispName0,X
-    INX
-    LDA #$09 ; 'I'
-    JSR ItoS
-    STA DispName0,X
-    INX
-    LDA #$01 ; 'A'
-    JSR ItoS
-    STA DispName0,X
-    INX
-    LDA #$0F ; 'O'
-    JSR ItoS
-    STA DispName0,X
-    INX
+        LDA #TL_BLANK_TILE2
+        LDX #$04
+        ClearNameBufLoop:
+            DEX
+            STA DispName0,X
+            STA DispName4,X
+            BNE ClearNameBufLoop
 
-    LDA #$08         ; signal that 8 name characters have been inputted
-    STA WndNameIndex ;
+        ; assuming X = 0 from the clear loop above
+        LDA #$03 ; 'C'
+        JSR ItoS
+        STA DispName0,X
+        INX
+        LDA #$09 ; 'I'
+        JSR ItoS
+        STA DispName0,X
+        INX
+        LDA #$01 ; 'A'
+        JSR ItoS
+        STA DispName0,X
+        INX
+        LDA #$0F ; 'O'
+        JSR ItoS
+        STA DispName0,X
+        INX
 
-    RTS
+        LDA #$08         ; signal that 8 name characters have been inputted
+        STA WndNameIndex ;
+
+        RTS
 .endif
 
 ;----------------------------------------------------------------------------------------------------
