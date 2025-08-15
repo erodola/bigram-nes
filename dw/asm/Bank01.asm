@@ -3998,7 +3998,21 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         LDA #$03 ; 'C'
         JSR ItoS
         STA DispName0,X
+        
+        ; TEST: trying to show name on screen
+        LDY #$04
+        STY ScrnTxtYCoord
+        STA PPUDataByte
+        STX WndNameIndex
+        LDA WndNameIndex
+        CLC
+        ADC #$0C
+        STA ScrnTxtXCoord
+        JSR WndCalcPPUAddr
+        JMP AddPPUBufEntry
+
         INX
+
         LDA #$09 ; 'I'
         JSR ItoS
         STA DispName0,X
@@ -4109,30 +4123,26 @@ LAE52:  RTS                     ;If not, branch to write another.
 
     WndProcessCharEnd1:
     LAE95:  RTS                     ;End character processing.
-.endif
 
-WndUpdateName:
-LAE96:  PHA                     ;Save name character on stack.
-LAE97:  JSR WndHideUnderscore   ;($AEBC)Remove underscore character from screen.
+    WndUpdateName:
+    LAE96:  PHA                     ;Save name character on stack.
+    LAE97:  JSR WndHideUnderscore   ;($AEBC)Remove underscore character from screen.
 
-LAE9A:  PLA                     ;Restore name character and add it to the buffer.
-LAE9B:  LDX WndNameIndex        ;
-LAE9E:  STA TempBuffer,X        ;
-LAEA1:  JSR WndNameCharYPos     ;($AEC2)Place selected name character on screen.
+    LAE9A:  PLA                     ;Restore name character and add it to the buffer.
+    LAE9B:  LDX WndNameIndex        ;
+    LAE9E:  STA TempBuffer,X        ;
+    LAEA1:  JSR WndNameCharYPos     ;($AEC2)Place selected name character on screen.
 
-LAEA4:  INC WndNameIndex        ;Increment index for player's name.
-LAEA7:  LDA WndNameIndex        ;
-LAEAA:  CMP #$08                ;Have 8 character been entered for player's name?
-LAEAC:  BCS WndProcessCharEnd2  ;If so, branch to end.
+    LAEA4:  INC WndNameIndex        ;Increment index for player's name.
+    LAEA7:  LDA WndNameIndex        ;
+    LAEAA:  CMP #$08                ;Have 8 character been entered for player's name?
+    LAEAC:  BCS WndProcessCharEnd2  ;If so, branch to end.
 
-LAEAE:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
+    LAEAE:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
 
-WndProcessCharEnd2:
-LAEB1:  RTS                     ;End character processing.
+    WndProcessCharEnd2:
+    LAEB1:  RTS                     ;End character processing.
 
-;----------------------------------------------------------------------------------------------------
-
-.ifndef retroai
     WndMaxNameLength:
     LAEB2:  LDA WndNameIndex        ;Have 8 name characters been inputted?
     LAEB5:  CMP #$08                ;
@@ -4141,16 +4151,18 @@ LAEB1:  RTS                     ;End character processing.
 
 ;----------------------------------------------------------------------------------------------------
 
-WndShowUnderscore:
-LAEB8:  LDA #TL_TOP1            ;Border pattern - upper border(Underscore below selected entry).
-LAEBA:  BNE WndUndrscrYPos      ;Branch always.
+.ifndef retroai
+    WndShowUnderscore:
+    LAEB8:  LDA #TL_TOP1            ;Border pattern - upper border(Underscore below selected entry).
+    LAEBA:  BNE WndUndrscrYPos      ;Branch always.
 
-WndHideUnderscore:
-LAEBC:  LDA #TL_BLANK_TILE1     ;Prepare to erase underscore character.
+    WndHideUnderscore:
+    LAEBC:  LDA #TL_BLANK_TILE1     ;Prepare to erase underscore character.
 
-WndUndrscrYPos:
-LAEBE:  LDX #$09                ;Set Y position for underscore character.
-LAEC0:  BNE WndShowNameChar     ;Branch always.
+    WndUndrscrYPos:
+    LAEBE:  LDX #$09                ;Set Y position for underscore character.
+    LAEC0:  BNE WndShowNameChar     ;Branch always.
+.endif
 
 WndNameCharYPos:
 LAEC2:  LDX #$08                ;Set Y position for name character.
