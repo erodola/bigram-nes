@@ -3951,7 +3951,6 @@ WndEnterName:
 LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering name.
 LAE05:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
 LAE08:  JSR WndDoSelect         ;($A8D1)Do selection window routines.
-.endif
 
 ProcessNameLoop:
 LAE0B:  JSR WndProcessChar      ;($AE53)Process name character selected by the player.
@@ -3972,6 +3971,24 @@ LAE26:  INX                     ;
 LAE27:  CPX #$04                ;Have all 8 characters been saved?
 LAE29:  BNE StoreNameLoop       ;If not, branch to save the next 2.
 LAE2B:  RTS                     ;
+.endif
+
+.ifdef retroai
+LDX #$00
+LDA #$26 ; 'C'
+STA DispName0,X
+INX
+LDA #$2C ; 'I'
+STA DispName0,X
+INX
+LDA #$24 ; 'A'
+STA DispName0,X
+INX
+LDA #$32 ; 'O'
+STA DispName0,X
+INX
+RTS
+.endif
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -4013,7 +4030,6 @@ LAE53:  CMP #WND_ABORT          ;Did player press the B button?
 LAE55:  BEQ WndDoBackspace      ;If so, back up 1 character.
 .endif
 
-LDA #$04
 LAE57:  CMP #$1A                ;Did player select character A-Z?
 LAE59:  BCC WndUprCaseConvert   ;If so, branch to covert to nametables values.
 
