@@ -3974,17 +3974,31 @@ LAE2B:  RTS                     ;
 .endif
 
 .ifdef retroai
+ItoS:
+BNE @NotDot        ; A is not 0?
+LDA #TXT_BLANK1    ; white space tile
+RTS
+@NotDot:
+CLC
+ADC #TXT_UPR_A    ; convert to uppercase
+RTS
+
+InjectFixedName:
 LDX #$00
-LDA #$26 ; 'C'
+LDA #$02 ; 'C'
+JSR ItoS
 STA DispName0,X
 INX
-LDA #$2C ; 'I'
+LDA #$08 ; 'I'
+JSR ItoS
 STA DispName0,X
 INX
-LDA #$24 ; 'A'
+LDA #$00 ; 'A'
+JSR ItoS
 STA DispName0,X
 INX
-LDA #$32 ; 'O'
+LDA #$0F ; 'O'
+JSR ItoS
 STA DispName0,X
 INX
 RTS
