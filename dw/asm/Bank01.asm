@@ -3983,7 +3983,9 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
     ADC #$23           ; corresponding uppercase tile (TXT_UPR_A - 1)
     RTS
 
-    WndEnterName:
+    WndEnterName:   ; [RETRO AI] $ADE5
+    JSR InitNameWindow
+
     LDX #$00
     LDA #$03 ; 'C'
     JSR ItoS
@@ -3997,10 +3999,14 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
     JSR ItoS
     STA DispName0,X
     INX
-    LDA #$0F ; 'O'  ; now remove the trailing 0000 if any
+    LDA #$0F ; 'O'
     JSR ItoS
     STA DispName0,X
     INX
+
+    LDA #$08         ; signal that 8 name characters have been inputted
+    STA WndNameIndex ;
+
     RTS
 .endif
 
@@ -4017,37 +4023,38 @@ LAE2E:  STA WndNameIndex        ;Zero out name variables.
 LAE34:  LDA #WND_NM_ENTRY       ;Show name entry window.
 LAE36:  JSR ShowWindow          ;($A194)Display window.
 
-LAE39:  LDA #WND_ALPHBT         ;Show alphabet window.
-LAE3B:  JSR ShowWindow          ;($A194)Display window.
+.ifndef retroai
+    LAE39:  LDA #WND_ALPHBT         ;Show alphabet window.
+    LAE3B:  JSR ShowWindow          ;($A194)Display window.
 
-LAE3E:  LDA #$12                ;Set window columns to 18. Special value for the alphabet window.
-LAE40:  STA WndColumns          ;
+    LAE3E:  LDA #$12                ;Set window columns to 18. Special value for the alphabet window.
+    LAE40:  STA WndColumns          ;
 
-LAE43:  LDA #$21                ;Set starting cursor position to 2,1.
-LAE45:  STA WndCursorHome       ;
+    LAE43:  LDA #$21                ;Set starting cursor position to 2,1.
+    LAE45:  STA WndCursorHome       ;
 
-LAE48:  LDA #TL_BLANK_TILE2     ;Prepare to clear temp buffer.
-LAE4A:  LDX #$0C                ;
+    LAE48:  LDA #TL_BLANK_TILE2     ;Prepare to clear temp buffer.
+    LAE4A:  LDX #$0C                ;
 
-ClearNameBufLoop:
-LAE4C:  STA TempBuffer,X        ;Place blank tile value in temp buffer.
-LAE4F:  DEX                     ;
-LAE50:  BPL ClearNameBufLoop    ;Have 12 values been written to the buffer?
+    ClearNameBufLoop:
+    LAE4C:  STA TempBuffer,X        ;Place blank tile value in temp buffer.
+    LAE4F:  DEX                     ;
+    LAE50:  BPL ClearNameBufLoop    ;Have 12 values been written to the buffer?
+.endif
 
 LAE52:  RTS                     ;If not, branch to write another.
 
 ;----------------------------------------------------------------------------------------------------
 
-WndProcessChar:
 .ifndef retroai
+    WndProcessChar:
+
     LAE53:  CMP #WND_ABORT          ;Did player press the B button?
     LAE55:  BEQ WndDoBackspace      ;If so, back up 1 character.
-.endif
 
-LAE57:  CMP #$1A                ;Did player select character A-Z?
-LAE59:  BCC WndUprCaseConvert   ;If so, branch to covert to nametables values.
+    LAE57:  CMP #$1A                ;Did player select character A-Z?
+    LAE59:  BCC WndUprCaseConvert   ;If so, branch to covert to nametables values.
 
-.ifndef retroai
     LAE5B:  CMP #$21                ;Did player select symbol -'!?() or _?
     LAE5D:  BCC WndSymbConvert1     ;If so, branch to covert to nametables values.
 
@@ -4059,42 +4066,42 @@ LAE59:  BCC WndUprCaseConvert   ;If so, branch to covert to nametables values.
 
     LAE67:  CMP #$3D                ;Did player select BACK?
     LAE69:  BEQ WndDoBackspace      ;If so, back up 1 character.
+
+    LAE6B:  LDA #$08                ;Player must have selected END.
+    LAE6D:  STA WndNameIndex        ;Set name index to max value to indicate the end.
+    LAE70:  RTS                     ;
+
+    WndUprCaseConvert:
+    LAE71:  CLC                     ;
+    LAE72:  ADC #TXT_UPR_A          ;Add value to convert to nametable character.
+    LAE74:  BNE WndUpdateName       ;
+
+    WndLwrCaseConvert:
+    LAE76:  SEC                     ;
+    LAE77:  SBC #$17                ;Subtract value to convert to nametable character.
+    LAE79:  BNE WndUpdateName       ;
+
+    WndSymbConvert1:
+    LAE7B:  TAX                     ;
+    LAE7C:  LDA SymbolConvTbl-$1A,X ;Use table to convert to nametable character.
+    LAE7F:  BNE WndUpdateName       ;
+
+    WndSymbConvert2:
+    LAE81:  TAX                     ;
+    LAE82:  LDA SymbolConvTbl-$34,X ;Use table to convert to nametable character.
+    LAE85:  BNE WndUpdateName       ;
+
+    WndDoBackspace:
+    LAE87:  LDA WndNameIndex        ;Is the name index already 0?
+    LAE8A:  BEQ WndProcessCharEnd1  ;If so, branch to exit, can't go back any further.
+
+    LAE8C:  JSR WndHideUnderscore   ;($AEBC)Remove underscore character from screen.
+    LAE8F:  DEC WndNameIndex        ;Move underscore back 1 character.
+    LAE92:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
+
+    WndProcessCharEnd1:
+    LAE95:  RTS                     ;End character processing.
 .endif
-
-LAE6B:  LDA #$08                ;Player must have selected END.
-LAE6D:  STA WndNameIndex        ;Set name index to max value to indicate the end.
-LAE70:  RTS                     ;
-
-WndUprCaseConvert:
-LAE71:  CLC                     ;
-LAE72:  ADC #TXT_UPR_A          ;Add value to convert to nametable character.
-LAE74:  BNE WndUpdateName       ;
-
-WndLwrCaseConvert:
-LAE76:  SEC                     ;
-LAE77:  SBC #$17                ;Subtract value to convert to nametable character.
-LAE79:  BNE WndUpdateName       ;
-
-WndSymbConvert1:
-LAE7B:  TAX                     ;
-LAE7C:  LDA SymbolConvTbl-$1A,X ;Use table to convert to nametable character.
-LAE7F:  BNE WndUpdateName       ;
-
-WndSymbConvert2:
-LAE81:  TAX                     ;
-LAE82:  LDA SymbolConvTbl-$34,X ;Use table to convert to nametable character.
-LAE85:  BNE WndUpdateName       ;
-
-WndDoBackspace:
-LAE87:  LDA WndNameIndex        ;Is the name index already 0?
-LAE8A:  BEQ WndProcessCharEnd1  ;If so, branch to exit, can't go back any further.
-
-LAE8C:  JSR WndHideUnderscore   ;($AEBC)Remove underscore character from screen.
-LAE8F:  DEC WndNameIndex        ;Move underscore back 1 character.
-LAE92:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
-
-WndProcessCharEnd1:
-LAE95:  RTS                     ;End character processing.
 
 WndUpdateName:
 LAE96:  PHA                     ;Save name character on stack.
@@ -4117,10 +4124,12 @@ LAEB1:  RTS                     ;End character processing.
 
 ;----------------------------------------------------------------------------------------------------
 
-WndMaxNameLength:
-LAEB2:  LDA WndNameIndex        ;Have 8 name characters been inputted?
-LAEB5:  CMP #$08                ;
-LAEB7:  RTS                     ;If so, set carry.
+.ifndef retroai
+    WndMaxNameLength:
+    LAEB2:  LDA WndNameIndex        ;Have 8 name characters been inputted?
+    LAEB5:  CMP #$08                ;
+    LAEB7:  RTS                     ;If so, set carry.
+.endif
 
 ;----------------------------------------------------------------------------------------------------
 
@@ -4154,9 +4163,9 @@ LAED5:  JMP AddPPUBufEntry      ;($C690)Add data to PPU buffer.
 
 ;The following table converts to the symbols in the alphabet
 ;window to the corresponding symbols in the nametable.
-
 SymbolConvTbl:
 .incbin "bin/Bank01/SymbolConvTbl.bin"
+
 DoWindowPrep:
 LAEE1:  PHA                     ;Save window type byte on the stack.
 
@@ -4325,8 +4334,22 @@ MsgSpeedDat:
 .incbin "bin/Bank01/MsgSpeedDat.bin"
 InputNameDat:
 .incbin "bin/Bank01/InputNameDat.bin"
+
 NameEntryDat:
+
+.byte $01
+.ifdef retroai
+    .byte $02  ; height of the name window
+    .byte $0C
+    .byte $15  ; position (moved up)
+.else
+    .byte $03
+    .byte $0C
+    .byte $35
+.endif
+
 .incbin "bin/Bank01/NameEntryDat.bin"
+
 ContChngErsDat:
 .incbin "bin/Bank01/ContChngErsDat.bin"
 FullMenuDat:
