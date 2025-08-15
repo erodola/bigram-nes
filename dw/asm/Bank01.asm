@@ -1582,22 +1582,22 @@ BaseStatsTbl:
 .incbin "bin/Bank01/BaseStatsTbl.bin"
 
 .ifndef retroai
-WndUnusedFunc1:
-LA181:  PLA                     ;Pull the value off the stack.
+    WndUnusedFunc1:
+    LA181:  PLA                     ;Pull the value off the stack.
 
-LA182:  CLC                     ;
-LA183:  ADC #$01                ;
-LA185:  STA GenPtr3ELB          ;Add the value to the pointer.
-LA187:  PLA                     ;
-LA188:  ADC #$00                ;
-LA18A:  STA GenPtr3EUB          ;
+    LA182:  CLC                     ;
+    LA183:  ADC #$01                ;
+    LA185:  STA GenPtr3ELB          ;Add the value to the pointer.
+    LA187:  PLA                     ;
+    LA188:  ADC #$00                ;
+    LA18A:  STA GenPtr3EUB          ;
 
-LA18C:  PHA                     ;
-LA18D:  LDA GenPtr3ELB          ;Push the new pointer value on the stack.
-LA18F:  PHA                     ;
+    LA18C:  PHA                     ;
+    LA18D:  LDA GenPtr3ELB          ;Push the new pointer value on the stack.
+    LA18F:  PHA                     ;
 
-LA190:  LDY #$00                ;Use the pointer to retreive a byte from memory.
-LA192:  LDA (GenPtr3E),Y        ;
+    LA190:  LDY #$00                ;Use the pointer to retreive a byte from memory.
+    LA192:  LDA (GenPtr3E),Y        ;
 .endif
 
 ;----------------------------------------------------------------------------------------------------
@@ -1710,7 +1710,7 @@ LA224:  BVC LA22C                   ;This bit is never set. Branch always.
 LA226:  LDA (WndDatPtr),Y       ;
 
 .ifndef retroai
-LA228:  STA WndUnused1          ;
+    LA228:  STA WndUnused1          ;
 .endif
 
 LA22B:  INY                     ;
@@ -1740,7 +1740,7 @@ LA248:  JSR ClearWndLineBuf     ;($A646)Clear window line buffer.
 LA24B:  LDA #$FF                ;
 
 .ifndef retroai
-LA24D:  STA WndUnused64FB       ;Written to but never accessed.
+    LA24D:  STA WndUnused64FB       ;Written to but never accessed.
 .endif
 
 LA250:  LDA #$00                ;
@@ -3051,7 +3051,7 @@ LA94A:  PHA                     ;
 LA94B:  AND #$0F                ;Save a copy of the home X coord but it is never used.
 
 .ifndef retroai
-LA94D:  STA WndUnused64F4       ;
+    LA94D:  STA WndUnused64F4       ;
 .endif
 
 LA950:  CLC                     ;
@@ -3533,9 +3533,9 @@ NumColTbl:
 .incbin "bin/Bank01/NumColTbl.bin"
 
 .ifndef retroai
-WndUnusedFunc2:
-LABC0:  LDA #$00                ;Unused window function.
-LABC2:  BNE WndShowHide+2       ;
+    WndUnusedFunc2:
+    LABC0:  LDA #$00                ;Unused window function.
+    LABC2:  BNE WndShowHide+2       ;
 .endif
 
 ;----------------------------------------------------------------------------------------------------
@@ -3556,7 +3556,7 @@ WndDoRowReady:
 LABD5:  LDA #$00                ;Zero out unused variable.
 
 .ifndef retroai
-LABD7:  STA WndUnused64AB       ;
+    LABD7:  STA WndUnused64AB       ;
 .endif
 
 LABDA:  PLA                     ;Restore A. Always 0.
@@ -3580,7 +3580,7 @@ LABF5:  ASL                     ;
 LABF6:  STA _WndWidth           ;
 
 .ifndef retroai
-LABF9:  STA WndUnused64AE       ;Not used.
+    LABF9:  STA WndUnused64AE       ;Not used.
 .endif 
 
 LABFC:  .byte $AE, $04, $00     ;LDX $0004(PPUBufCount)Get index for next buffer entry.
@@ -3946,62 +3946,62 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 
 ;----------------------------------------------------------------------------------------------------
 
-WndEnterName:
 .ifndef retroai
-LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering name.
-LAE05:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
-LAE08:  JSR WndDoSelect         ;($A8D1)Do selection window routines.
+    WndEnterName:
+    LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering name.
+    LAE05:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
+    LAE08:  JSR WndDoSelect         ;($A8D1)Do selection window routines.
 
-ProcessNameLoop:
-LAE0B:  JSR WndProcessChar      ;($AE53)Process name character selected by the player.
-LAE0E:  JSR WndMaxNameLength    ;($AEB2)Set carry if max length name has been reached.
-LAE11:  BCS WndStorePlyrName    ;Has player finished entering name? If so, branch to exit loop.
-LAE13:  JSR _WndDoSelectLoop    ;($A8E0)Wait for player to select the next character.
-LAE16:  JMP ProcessNameLoop     ;($AE0B)Loop to get name selected by player.
+    ProcessNameLoop:
+    LAE0B:  JSR WndProcessChar      ;($AE53)Process name character selected by the player.
+    LAE0E:  JSR WndMaxNameLength    ;($AEB2)Set carry if max length name has been reached.
+    LAE11:  BCS WndStorePlyrName    ;Has player finished entering name? If so, branch to exit loop.
+    LAE13:  JSR _WndDoSelectLoop    ;($A8E0)Wait for player to select the next character.
+    LAE16:  JMP ProcessNameLoop     ;($AE0B)Loop to get name selected by player.
 
-WndStorePlyrName:
-LAE19:  LDX #$00                ;Set index to 0 for storing the player's name.
+    WndStorePlyrName:
+    LAE19:  LDX #$00                ;Set index to 0 for storing the player's name.
 
-StoreNameLoop:
-LAE1B:  LDA TempBuffer,X        ;Save the 8 characters of the player's name to the name registers.
-LAE1E:  STA DispName0,X         ;
-LAE20:  LDA TempBuffer+4,X      ;
-LAE23:  STA DispName4,X         ;
-LAE26:  INX                     ;
-LAE27:  CPX #$04                ;Have all 8 characters been saved?
-LAE29:  BNE StoreNameLoop       ;If not, branch to save the next 2.
-LAE2B:  RTS                     ;
+    StoreNameLoop:
+    LAE1B:  LDA TempBuffer,X        ;Save the 8 characters of the player's name to the name registers.
+    LAE1E:  STA DispName0,X         ;
+    LAE20:  LDA TempBuffer+4,X      ;
+    LAE23:  STA DispName4,X         ;
+    LAE26:  INX                     ;
+    LAE27:  CPX #$04                ;Have all 8 characters been saved?
+    LAE29:  BNE StoreNameLoop       ;If not, branch to save the next 2.
+    LAE2B:  RTS                     ;
 .endif
 
 .ifdef retroai
-ItoS:
-BNE @NotDot        ; A is not 0?
-LDA #TXT_BLANK1    ; white space tile
-RTS
-@NotDot:
-CLC
-ADC #TXT_UPR_A    ; convert to uppercase
-RTS
+    ItoS:
+    BNE @NotDot        ; A is not 0?
+    LDA #TXT_BLANK1    ; white space tile
+    RTS
+    @NotDot:
+    CLC
+    ADC #$23           ; corresponding uppercase tile (TXT_UPR_A - 1)
+    RTS
 
-InjectFixedName:
-LDX #$00
-LDA #$02 ; 'C'
-JSR ItoS
-STA DispName0,X
-INX
-LDA #$08 ; 'I'
-JSR ItoS
-STA DispName0,X
-INX
-LDA #$00 ; 'A'
-JSR ItoS
-STA DispName0,X
-INX
-LDA #$0F ; 'O'
-JSR ItoS
-STA DispName0,X
-INX
-RTS
+    WndEnterName:
+    LDX #$00
+    LDA #$03 ; 'C'
+    JSR ItoS
+    STA DispName0,X
+    INX
+    LDA #$09 ; 'I'
+    JSR ItoS
+    STA DispName0,X
+    INX
+    LDA #$01 ; 'A'
+    JSR ItoS
+    STA DispName0,X
+    INX
+    LDA #$0F ; 'O'  ; now remove the trailing 0000 if any
+    JSR ItoS
+    STA DispName0,X
+    INX
+    RTS
 .endif
 
 ;----------------------------------------------------------------------------------------------------
@@ -4011,7 +4011,7 @@ LAE2C:  LDA #$00                ;
 LAE2E:  STA WndNameIndex        ;Zero out name variables.
 
 .ifndef retroai
-LAE31:  STA WndUnused6505       ;
+    LAE31:  STA WndUnused6505       ;
 .endif
 
 LAE34:  LDA #WND_NM_ENTRY       ;Show name entry window.
@@ -4040,25 +4040,25 @@ LAE52:  RTS                     ;If not, branch to write another.
 
 WndProcessChar:
 .ifndef retroai
-LAE53:  CMP #WND_ABORT          ;Did player press the B button?
-LAE55:  BEQ WndDoBackspace      ;If so, back up 1 character.
+    LAE53:  CMP #WND_ABORT          ;Did player press the B button?
+    LAE55:  BEQ WndDoBackspace      ;If so, back up 1 character.
 .endif
 
 LAE57:  CMP #$1A                ;Did player select character A-Z?
 LAE59:  BCC WndUprCaseConvert   ;If so, branch to covert to nametables values.
 
 .ifndef retroai
-LAE5B:  CMP #$21                ;Did player select symbol -'!?() or _?
-LAE5D:  BCC WndSymbConvert1     ;If so, branch to covert to nametables values.
+    LAE5B:  CMP #$21                ;Did player select symbol -'!?() or _?
+    LAE5D:  BCC WndSymbConvert1     ;If so, branch to covert to nametables values.
 
-LAE5F:  CMP #$3B                ;Did player select character a-z?
-LAE61:  BCC WndLwrCaseConvert   ;If so, branch to covert to nametables values.
+    LAE5F:  CMP #$3B                ;Did player select character a-z?
+    LAE61:  BCC WndLwrCaseConvert   ;If so, branch to covert to nametables values.
 
-LAE63:  CMP #$3D                ;Did player select symbol , or .?
-LAE65:  BCC WndSymbConvert2     ;If so, branch to covert to nametables values.
+    LAE63:  CMP #$3D                ;Did player select symbol , or .?
+    LAE65:  BCC WndSymbConvert2     ;If so, branch to covert to nametables values.
 
-LAE67:  CMP #$3D                ;Did player select BACK?
-LAE69:  BEQ WndDoBackspace      ;If so, back up 1 character.
+    LAE67:  CMP #$3D                ;Did player select BACK?
+    LAE69:  BEQ WndDoBackspace      ;If so, back up 1 character.
 .endif
 
 LAE6B:  LDA #$08                ;Player must have selected END.
@@ -4447,13 +4447,13 @@ LB586:  STA TxtLineSpace        ;
 LB589:  LDA WndTxtXCoord        ;
 
 .ifndef retroai
-LB58B:  STA Unused6510          ;
+    LB58B:  STA Unused6510          ;
 .endif
 
 LB58E:  LDA WndTxtYCoord        ;
 
 .ifndef retroai
-LB590:  STA Unused6511          ;
+    LB590:  STA Unused6511          ;
 .endif
 
 LB593:  RTS                     ;
@@ -4469,20 +4469,20 @@ LB59A:  RTS                     ;
 LB59B:LDX WndTxtYCoord        ;
 
 .ifndef retroai
-LB59D:  LDA Unused6512          ;
+    LB59D:  LDA Unused6512          ;
 .endif
 
 LB5A0:  BNE LB5A5                   ;
 
 .ifndef retroai
-LB5A2:  STX Unused6512          ;Dialog buffer not complete. Set carry.
+    LB5A2:  STX Unused6512          ;Dialog buffer not complete. Set carry.
 .endif
 
 LB5A5:LDA Unused6513          ;The other variables have no effect.
 LB5A8:  BNE LB5AD                   ;
 
 .ifndef retroai
-LB5AA:  STX Unused6513          ;
+    LB5AA:  STX Unused6513          ;
 .endif
 
 LB5AD:SEC                     ;
@@ -5487,34 +5487,27 @@ SpellNameTbl:
 .incbin "bin/Bank01/SpellNameTbl.bin"
 
 .ifndef retroai
-;Unused.
-LBE9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF 
-LBEAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBEBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBECF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBEDF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBEEF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBEFF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF0F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF1F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF2F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF3F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF4F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF5F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF6F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF7F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF8F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBF9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBFAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBFBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-LBFCF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
-.endif
-
-.ifdef retroai
-NOP  ; [RETRO AI] we'll plug our code here
-NOP
-NOP
-NOP
+    ;Unused.
+    LBE9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF 
+    LBEAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBEBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBECF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBEDF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBEEF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBEFF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF0F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF1F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF2F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF3F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF4F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF5F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF6F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF7F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF8F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBF9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBFAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBFBF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    LBFCF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 .endif
 
 ;----------------------------------------------------------------------------------------------------
