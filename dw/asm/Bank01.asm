@@ -3975,7 +3975,7 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 .endif
 
 .ifdef retroai
-    ItoS:
+    ItoS:         ; [RETRO AI] ($ADDC)
         BNE @NotDot        ; A is not 0?
         LDA #TXT_BLANK1    ; white space tile
         RTS
@@ -3984,59 +3984,50 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         ADC #$23           ; corresponding uppercase tile (TXT_UPR_A - 1)
         RTS
 
-    ShowChar:
+    ShowChar:      ; [RETRO AI] ($ADE5)
         JSR ItoS
         STA DispName0,X
         STX WndNameIndex
-        LDY #$04
-        STY ScrnTxtYCoord
         STA PPUDataByte
+        LDA #$04
+        STA ScrnTxtYCoord
         LDA WndNameIndex
         CLC
         ADC #$0C
         STA ScrnTxtXCoord
         JSR WndCalcPPUAddr
-        JMP AddPPUBufEntry
+        JMP AddPPUBufEntry  ; clobbers X
 
-    WndEnterName:   ; [RETRO AI] ($ADE5) we jump here directly from Bank03
+    WndEnterName:   ; [RETRO AI] ($AE03) we jump here directly from Bank03
         JSR InitNameWindow
 
-        LDA #TL_BLANK_TILE2
-        LDX #$04
-        ClearNameBufLoop:
-            DEX
-            STA DispName0,X
-            STA DispName4,X
-            BNE ClearNameBufLoop
+        ; LDA #TL_BLANK_TILE2
+        ; LDX #$04
+        ; ClearNameBufLoop:
+            ; DEX
+            ; STA DispName0,X
+            ; STA DispName4,X
+            ; BNE ClearNameBufLoop
 
         ; JSR UpdateRandNum    ; Generate new random number
         ; LDA RandNumLB
 
-        ; assuming X = 0 from the clear loop above
-        LDA #$03 ; 'C'
-        JSR ShowChar
-        INC WndNameIndex
-        LDX WndNameIndex
+        LDY #$00
+        @loop:
+            TYA
+            TAX
+            LDA NameLetters,X
+            JSR ShowChar
+            INY
+            CPY #$08
+            BNE @loop
 
-        LDA #$09 ; 'I'
-        JSR ShowChar
-        INC WndNameIndex
-        LDX WndNameIndex
-
-        LDA #$01 ; 'A'
-        JSR ShowChar
-        INC WndNameIndex
-        LDX WndNameIndex
-
-        LDA #$0F ; 'O'
-        JSR ShowChar
-        INC WndNameIndex
-        LDX WndNameIndex
-
-        LDA #$08         ; signal that 8 name characters have been inputted
-        STA WndNameIndex ;
-
+        LDA #$08
+        STA WndNameIndex
         RTS
+
+    NameLetters:                  ; blank tiles = #TL_BLANK_TILE2 - $23
+        .byte $03, $09, $01, $0F, $3D, $3D, $3D, $3D
 .endif
 
 ;----------------------------------------------------------------------------------------------------
