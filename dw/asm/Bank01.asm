@@ -19,8 +19,12 @@
 .import GetBankDataByte
 .import WaitForNMI
 .import _DoReset
-.import UpdateRandNum ; [RETRO AI] needed for multinomial sampling
-.import NameLetters
+
+.ifdef retroai
+.import UpdateRandNum        ; [RETRO AI] needed for multinomial sampling
+.import TransitionMat_0_23   ; [RETRO AI] transition matrix, split in two parts
+.import TransitionMat_24_26
+.endif
 
 ;--------------------------------------[ Exports ]--------------------------------------
 
@@ -4027,8 +4031,8 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         STA WndNameIndex
         RTS
 
-    ; NameLetters:                  ; blank tiles = #TL_BLANK_TILE2 - $23
-    ;     .byte $03, $09, $01, $0F, $3D, $3D, $3D, $3D
+    NameLetters:                  ; blank tiles = #TL_BLANK_TILE2 - $23
+        .byte $03, $09, $01, $0F, $3D, $3D, $3D, $3D
 .endif
 
 ;----------------------------------------------------------------------------------------------------
