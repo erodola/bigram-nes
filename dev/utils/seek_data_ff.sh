@@ -9,7 +9,7 @@ BIN_DIR="../../ff1/asm/bin/"
 DAT_DIR="../../ff1/asm/dat/"
 ROM="ff1.nes"
 
-OUTFILE="offsets"
+OUTFILE="offsets_ff"
 
 # Clear the output file
 > "$OUTFILE"

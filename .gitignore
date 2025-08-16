@@ -9,7 +9,9 @@ dev/utils/dat
 
 vanilla/build
 
-dw/
+dw/build
+dw/asm/bin
+dw/scripts
 
 ff1/asm/*.o
 ff1/build
