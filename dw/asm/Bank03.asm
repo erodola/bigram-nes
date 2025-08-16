@@ -5,7 +5,7 @@
 
 ;--------------------------------------[ Exports ]--------------------------------------
 
-; [RETRO AI] Export all functions that other banks need to reference
+; [BIGRAM-NES] Export all functions that other banks need to reference
 .export ClearPPU
 .export CalcPPUBufAddr
 .export GetJoypadStatus
@@ -35,28 +35,28 @@
 .export MapTargetTbl
 .export GFXTilesPtr
 
-; [RETRO AI] Export CHR/NT bank switching functions with expected names
+; [BIGRAM-NES] Export CHR/NT bank switching functions with expected names
 .export Bank1ToCHR0
 .export Bank0ToCHR0
 .export Bank0ToCHR1
 .export Bank2ToCHR1
 .export Bank3ToCHR1
 
-; [RETRO AI] The transition matrix (model weights)
-.ifdef retroai
+; [BIGRAM-NES] The transition matrix (model weights)
+.ifdef namegen
 .export TransitionMat_0_23
 .export TransitionMat_24_26
 .endif
 
 ;--------------------------------------[ Imports ]--------------------------------------
 
-; [RETRO AI] Import Bank01 functions instead of hard-coding addresses
+; [BIGRAM-NES] Import Bank01 functions instead of hard-coding addresses
 .import BankPointers
 .import UpdateSound
 
 ;--------------------------------------[ Forward Declarations ]--------------------------------------
 
-; [RETRO AI] These point to Bank00 and Bank02, we only care about Bank01 in this hack
+; [BIGRAM-NES] These point to Bank00 and Bank02, we only care about Bank01 in this hack
 NPCMobPtrTbl       = $9734
 NPCStatPtrTbl      = $974C
 MapEntryDirTbl     = $9914
@@ -634,8 +634,8 @@ LC287:  RTS                     ;
 
 ;This section appears to be unused code from Dragon Quest.
 
-.ifdef retroai
-TransitionMat_0_23: ; [RETRO AI] just the first 24 rows (24*27=648 bytes)
+.ifdef namegen
+TransitionMat_0_23: ; [BIGRAM-NES] just the first 24 rows (24*27=648 bytes)
     .include "T_matrix_0_23.asm"
 
     ; unused byte trail from the original code
@@ -1217,8 +1217,8 @@ LC7EB:  RTS                     ;
 
 ;This section appears to be unused code from Dragon Quest.
 
-.ifdef retroai
-TransitionMat_24_26: ; [RETRO AI] the remaining 3 rows (3*27=81 bytes)
+.ifdef namegen
+TransitionMat_24_26: ; [BIGRAM-NES] the remaining 3 rows (3*27=81 bytes)
     .include "T_matrix_24_26.asm"
 
     ; unused byte trail from the original code

@@ -1368,3 +1368,6 @@ PAL_BLACK = $0F     ;Black background palette value.
 WND_FOREGROUND = $00     ;Window overlaps another window.
 WND_BACKGROUND = $FF     ;Window is a background window.
 INV_FULL = $04     ;Player's inventory is full.
+
+; [BIGRAM-NES] pointer to the transition matrix
+probs_ptr = GenWord42

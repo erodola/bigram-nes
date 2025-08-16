@@ -5,7 +5,7 @@
 
 ;--------------------------------------[ Imports ]--------------------------------------
 
-; [RETRO AI] Import all Bank03 functions instead of hard-coding addresses
+; [BIGRAM-NES] Import all Bank03 functions instead of hard-coding addresses
 .import ClearPPU
 .import CalcPPUBufAddr
 .import GetJoypadStatus
@@ -20,15 +20,15 @@
 .import WaitForNMI
 .import _DoReset
 
-.ifdef retroai
-.import UpdateRandNum        ; [RETRO AI] needed for multinomial sampling
-.import TransitionMat_0_23   ; [RETRO AI] transition matrix, split in two parts
+.ifdef namegen
+.import UpdateRandNum        ; [BIGRAM-NES] needed for multinomial sampling
+.import TransitionMat_0_23   ; [BIGRAM-NES] transition matrix, split in two parts
 .import TransitionMat_24_26
 .endif
 
 ;--------------------------------------[ Exports ]--------------------------------------
 
-; [RETRO AI] Export Bank01 functions that other banks call via BRK mechanism
+; [BIGRAM-NES] Export Bank01 functions that other banks call via BRK mechanism
 .export BankPointers
 .export UpdateSound
 
@@ -1587,7 +1587,7 @@ LA0CB:  .word BaseStatsTbl
 BaseStatsTbl:
 .incbin "bin/Bank01/BaseStatsTbl.bin"
 
-.ifndef retroai
+.ifndef namegen
     WndUnusedFunc1:
     LA181:  PLA                     ;Pull the value off the stack.
 
@@ -1715,7 +1715,7 @@ LA221: BIT WndOptions          ;
 LA224:  BVC LA22C                   ;This bit is never set. Branch always.
 LA226:  LDA (WndDatPtr),Y       ;
 
-.ifndef retroai
+.ifndef namegen
     LA228:  STA WndUnused1          ;
 .endif
 
@@ -1745,7 +1745,7 @@ InitWindowEngine:
 LA248:  JSR ClearWndLineBuf     ;($A646)Clear window line buffer.
 LA24B:  LDA #$FF                ;
 
-.ifndef retroai
+.ifndef namegen
     LA24D:  STA WndUnused64FB       ;Written to but never accessed.
 .endif
 
@@ -3056,7 +3056,7 @@ LA94A:  PHA                     ;
 
 LA94B:  AND #$0F                ;Save a copy of the home X coord but it is never used.
 
-.ifndef retroai
+.ifndef namegen
     LA94D:  STA WndUnused64F4       ;
 .endif
 
@@ -3538,7 +3538,7 @@ LABBD:  RTS                     ;
 NumColTbl:
 .incbin "bin/Bank01/NumColTbl.bin"
 
-.ifndef retroai
+.ifndef namegen
     WndUnusedFunc2:
     LABC0:  LDA #$00                ;Unused window function.
     LABC2:  BNE WndShowHide+2       ;
@@ -3561,7 +3561,7 @@ LABD2:  JSR WndUpdateTiles      ;($ADFA)Wait until next NMI for buffer to be emp
 WndDoRowReady:
 LABD5:  LDA #$00                ;Zero out unused variable.
 
-.ifndef retroai
+.ifndef namegen
     LABD7:  STA WndUnused64AB       ;
 .endif
 
@@ -3585,7 +3585,7 @@ LABF3:  AND #$0F                ;Make a copy of window width.
 LABF5:  ASL                     ;
 LABF6:  STA _WndWidth           ;
 
-.ifndef retroai
+.ifndef namegen
     LABF9:  STA WndUnused64AE       ;Not used.
 .endif 
 
@@ -3952,7 +3952,7 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 
 ;----------------------------------------------------------------------------------------------------
 
-.ifndef retroai
+.ifndef namegen
     WndEnterName:
     LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering name.
     LAE05:  JSR WndShowUnderscore   ;($AEB8)Show underscore below selected letter in name window.
@@ -3979,8 +3979,10 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
     LAE2B:  RTS                     ;
 .endif
 
-.ifdef retroai
-    ItoS:         ; [RETRO AI] ($ADDC)
+.ifdef namegen
+    VOCAB_SIZE = 27
+
+    ItoS:         ; [BIGRAM-NES] ($ADDC)
         BNE @NotDot        ; A is not 0?
         LDA #TXT_BLANK1    ; white space tile
         RTS
@@ -3989,9 +3991,30 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         ADC #$23           ; corresponding uppercase tile (TXT_UPR_A - 1)
         RTS
 
-    ShowChar:      ; [RETRO AI] ($ADE5)
+    Multinomial:
+        JSR UpdateRandNum    ; get a random number in RandNumLB
+        LDA #0              ; acc = 0
+        TAY                 ; i = 0
+
+        @Loop:
+            CLC
+            ADC (probs_ptr),Y   ; acc += probs[i]
+            CMP RandNumLB
+            BCS @Done           ; acc >= random number?
+
+            INY                 ; i++
+            CPY #VOCAB_SIZE     ; i < VOCAB_SIZE?
+            BCC @Loop
+
+            DEY                 ; fallback to VOCAB_SIZE-1 if random number was 255
+
+        @Done:
+            TYA                 ; A = i
+            RTS
+
+    ShowChar:      ; [BIGRAM-NES] ($ADE5)
         JSR ItoS
-        STA DispName0,X
+        STA DispName0,X  ; FIXME: must be DispName4 for the last four bytes!
         STX WndNameIndex
         STA PPUDataByte
         LDA #$04
@@ -4003,7 +4026,7 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         JSR WndCalcPPUAddr
         JMP AddPPUBufEntry  ; clobbers X
 
-    WndEnterName:   ; [RETRO AI] ($AE03) we jump here directly from Bank03
+    WndEnterName:   ; [BIGRAM-NES] ($AE03) we jump here directly from Bank03
         JSR InitNameWindow
 
         ; LDA #TL_BLANK_TILE2
@@ -4013,9 +4036,6 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
             ; STA DispName0,X
             ; STA DispName4,X
             ; BNE ClearNameBufLoop
-
-        ; JSR UpdateRandNum    ; Generate new random number
-        ; LDA RandNumLB
 
         LDY #$00
         @loop:
@@ -4041,14 +4061,14 @@ InitNameWindow:
 LAE2C:  LDA #$00                ;
 LAE2E:  STA WndNameIndex        ;Zero out name variables.
 
-.ifndef retroai
+.ifndef namegen
     LAE31:  STA WndUnused6505       ;
 .endif
 
 LAE34:  LDA #WND_NM_ENTRY       ;Show name entry window.
 LAE36:  JSR ShowWindow          ;($A194)Display window.
 
-.ifndef retroai
+.ifndef namegen
     LAE39:  LDA #WND_ALPHBT         ;Show alphabet window.
     LAE3B:  JSR ShowWindow          ;($A194)Display window.
 
@@ -4071,7 +4091,7 @@ LAE52:  RTS                     ;If not, branch to write another.
 
 ;----------------------------------------------------------------------------------------------------
 
-.ifndef retroai
+.ifndef namegen
     WndProcessChar:
 
     LAE53:  CMP #WND_ABORT          ;Did player press the B button?
@@ -4154,7 +4174,7 @@ LAE52:  RTS                     ;If not, branch to write another.
 
 ;----------------------------------------------------------------------------------------------------
 
-.ifndef retroai
+.ifndef namegen
     WndShowUnderscore:
     LAEB8:  LDA #TL_TOP1            ;Border pattern - upper border(Underscore below selected entry).
     LAEBA:  BNE WndUndrscrYPos      ;Branch always.
@@ -4361,7 +4381,7 @@ InputNameDat:
 NameEntryDat:
 
 .byte $01
-.ifdef retroai
+.ifdef namegen
     .byte $02  ; height of the name window
     .byte $0C
     .byte $15  ; position (moved up)
@@ -4492,13 +4512,13 @@ LB584:  LDA #$08                ;Initialize the dialog variables.
 LB586:  STA TxtLineSpace        ;
 LB589:  LDA WndTxtXCoord        ;
 
-.ifndef retroai
+.ifndef namegen
     LB58B:  STA Unused6510          ;
 .endif
 
 LB58E:  LDA WndTxtYCoord        ;
 
-.ifndef retroai
+.ifndef namegen
     LB590:  STA Unused6511          ;
 .endif
 
@@ -4514,20 +4534,20 @@ LB59A:  RTS                     ;
 
 LB59B:LDX WndTxtYCoord        ;
 
-.ifndef retroai
+.ifndef namegen
     LB59D:  LDA Unused6512          ;
 .endif
 
 LB5A0:  BNE LB5A5                   ;
 
-.ifndef retroai
+.ifndef namegen
     LB5A2:  STX Unused6512          ;Dialog buffer not complete. Set carry.
 .endif
 
 LB5A5:LDA Unused6513          ;The other variables have no effect.
 LB5A8:  BNE LB5AD                   ;
 
-.ifndef retroai
+.ifndef namegen
     LB5AA:  STX Unused6513          ;
 .endif
 
@@ -5532,7 +5552,7 @@ WndCostTbl:
 SpellNameTbl:
 .incbin "bin/Bank01/SpellNameTbl.bin"
 
-.ifndef retroai
+.ifndef namegen
     ;Unused.
     LBE9F:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF 
     LBEAF:  .byte $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
