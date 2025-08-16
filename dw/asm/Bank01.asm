@@ -3952,6 +3952,7 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 
 ;----------------------------------------------------------------------------------------------------
 
+; [BIGRAM-NES] comment out the name entry code, will be replaced by bigram model
 .ifndef namegen
     WndEnterName:
     LAE02:  JSR InitNameWindow      ;($AE2C)Initialize window used while entering name.
@@ -3980,21 +3981,38 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
 .endif
 
 .ifdef namegen
-    VOCAB_SIZE = 27
 
-    ItoS:         ; [BIGRAM-NES] ($ADDC)
-        BNE @NotDot        ; A is not 0?
-        LDA #TXT_BLANK1    ; white space tile
+    VOCAB_SIZE = 27             ; number of tokens (alphabet + BOS/EOS)
+
+    ;
+    ; Convert token index (uchar) to tile index.
+    ;
+    ; Input:  A = token index (0 to VOCAB_SIZE-1)
+    ; Output: A = tile index ($60, and $24 to $3D)
+    ;
+    ; Trashes: A
+    ; 
+    ItoS:                       ; ($ADDC)
+        BNE @NotDot             ; A is not 0?
+        LDA #TXT_BLANK1         ; white space tile
         RTS
         @NotDot:
         CLC
-        ADC #$23           ; corresponding uppercase tile (TXT_UPR_A - 1)
+        ADC #$23                ; corresponding uppercase tile (TXT_UPR_A - 1)
         RTS
 
-    Multinomial:
-        JSR UpdateRandNum    ; get a random number in RandNumLB
-        LDA #0              ; acc = 0
-        TAY                 ; i = 0
+    ;
+    ; Draw one sample from a 8bit distribution.
+    ; 
+    ; Input:  probs_ptr = pointer to an array of VOCAB_SIZE probabilities (8-bit values)
+    ; Output: A = selected index (0 to VOCAB_SIZE-1)
+    ;
+    ; Trashes: A, Y
+    ;
+    Multinomial:                ; ($ADE5)
+        JSR UpdateRandNum       ; get a random number in RandNumLB
+        LDA #0                  ; acc = 0
+        TAY                     ; i = 0
 
         @Loop:
             CLC
@@ -4012,21 +4030,70 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
             TYA                 ; A = i
             RTS
 
-    ShowChar:      ; [BIGRAM-NES] ($ADE5)
+    ; FIXME must work with TransitionMat_0_23 and TransitionMat_24_26
+    ; Set the probs_ptr to point to the transition matrix row for the given index.
+    ;
+    ; Input:  A = row index (0 to VOCAB_SIZE-1)
+    ; Output: probs_ptr = pointer to the row in the transition matrix
+    ; 
+    ; Trashes: A, X
+    ;
+    LoadRowPtr:                  ; ($ADFA)
+        TAX
+
+        LDA #<TransitionMat_0_23 ; point probs_ptr to the transition matrix
+        STA probs_ptr
+        LDA #>TransitionMat_0_23
+        STA probs_ptr+1
+
+        TXA
+        BEQ @Done                ; if index==0, we are done
+
+        @Loop:                   ; implements tok_idx*VOCAB_SIZE by summing VOCAB_SIZE for tok_idx times
+        CLC
+        LDA probs_ptr
+        ADC #VOCAB_SIZE
+        STA probs_ptr
+        BCC @SkipInc
+        INC probs_ptr+1
+
+        @SkipInc:
+        DEX
+        BNE @Loop
+
+        @Done:
+        RTS
+
+    ;
+    ; Show character on name window.
+    ; This is a rewrite of the original ROM code.
+    ;
+    ; Input:  A = token index (0 to VOCAB_SIZE-1)
+    ;         X = character index (0 to 7)
+    ; Output: None. The character is displayed on screen.
+    ;
+    ; Trashes: A, X
+    ;
+    ShowChar:               ; ($AE15)
         JSR ItoS
-        STA DispName0,X  ; FIXME: must be DispName4 for the last four bytes!
+        STA DispName0,X     ; FIXME: must be DispName4 for the last four bytes!
         STX WndNameIndex
         STA PPUDataByte
-        LDA #$04
+        LDA #$04            ; set vertical position on screen
         STA ScrnTxtYCoord
         LDA WndNameIndex
         CLC
-        ADC #$0C
+        ADC #$0C            ; set horizontal position on screen
         STA ScrnTxtXCoord
         JSR WndCalcPPUAddr
-        JMP AddPPUBufEntry  ; clobbers X
+        JMP AddPPUBufEntry  ; (clobbers X)
 
-    WndEnterName:   ; [BIGRAM-NES] ($AE03) we jump here directly from Bank03
+    ; TODO
+    ; Generate a new name via a simple bigram model.
+    ;
+    ; Trashes: A, X, Y
+    ;
+    WndEnterName:              ; ($AE33) we jump here directly from Bank03
         JSR InitNameWindow
 
         ; LDA #TL_BLANK_TILE2

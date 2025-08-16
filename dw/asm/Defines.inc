@@ -1369,5 +1369,5 @@ WND_FOREGROUND = $00     ;Window overlaps another window.
 WND_BACKGROUND = $FF     ;Window is a background window.
 INV_FULL = $04     ;Player's inventory is full.
 
-; [BIGRAM-NES] pointer to the transition matrix
+; [BIGRAM-NES] pointer to a row in the transition matrix
 probs_ptr = GenWord42
