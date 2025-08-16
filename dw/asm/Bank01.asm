@@ -4076,8 +4076,24 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
     ;
     ShowChar:               ; ($AE15)
         JSR ItoS
-        STA DispName0,X     ; FIXME: must be DispName4 for the last four bytes!
         STX WndNameIndex
+
+        CPX #$04
+        BCC @lo4            ; X = 0..3 -> DispName0
+
+        @hi4:               ; X = 4..7 -> DispName4
+        DEX                 ; X = X-4
+        DEX
+        DEX
+        DEX
+        STA DispName4,X
+        LDX WndNameIndex    ; restore input X
+        JMP @StoreDone
+
+        @lo4:
+        STA DispName0,X
+        
+        @StoreDone:
         STA PPUDataByte
         LDA #$04            ; set vertical position on screen
         STA ScrnTxtYCoord
