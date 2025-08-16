@@ -4030,7 +4030,7 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
             TYA                 ; A = i
             RTS
 
-    ; FIXME must work with TransitionMat_0_23 and TransitionMat_24_26
+    ;
     ; Set the probs_ptr to point to the transition matrix row for the given index.
     ;
     ; Input:  A = row index (0 to VOCAB_SIZE-1)
@@ -4041,12 +4041,29 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
     LoadRowPtr:                  ; ($ADFA)
         TAX
 
-        LDA #<TransitionMat_0_23 ; point probs_ptr to the transition matrix
+        CPX #24
+        BCC @UseLow              ; 0..23 => TransitionMat_0_23
+
+        ; 24..26 => TransitionMat_24_26, then X := X-24
+        LDA #<TransitionMat_24_26
+        STA probs_ptr
+        LDA #>TransitionMat_24_26
+        STA probs_ptr+1
+        TXA
+        SEC
+        SBC #24
+        TAX
+        JMP @OffsetRows
+
+        ; 0..23
+        @UseLow:
+        LDA #<TransitionMat_0_23
         STA probs_ptr
         LDA #>TransitionMat_0_23
         STA probs_ptr+1
 
-        TXA
+        @OffsetRows:
+        CPX #0
         BEQ @Done                ; if index==0, we are done
 
         @Loop:                   ; implements tok_idx*VOCAB_SIZE by summing VOCAB_SIZE for tok_idx times
