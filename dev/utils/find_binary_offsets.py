@@ -34,7 +34,7 @@ def search_snippets_in_rom(snippets_folder, rom_path):
                 offsets = find_all_offsets(snippet_data, rom_data)
 
                 if len(offsets) != 1:
-                    raise ValueError(f"{file} {len(offsets)} matches found (expected exactly 1)")
+                    print(f"WARNING: {file} {len(offsets)} matches found (expected exactly 1)", file=sys.stderr)
 
                 offset = offsets[0]
                 print(f"{file} {offset} {len(snippet_data)}")

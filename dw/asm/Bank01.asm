@@ -535,11 +535,11 @@ OpnChestSFX:
 OpnDoorSFX:
 .incbin "bin/Bank01/OpnDoorSFX.bin"
 SQNoSnd:
-.incbin "bin/Bank01/SQNoSnd.bin"
+.byte $FB, $30, $00
 TRINoSnd:
 .incbin "bin/Bank01/TRINoSnd.bin"
 SQ1ThrnRm:
-.incbin "bin/Bank01/SQ1ThrnRm.bin"
+.byte $FF, $7E
 SQ1ThrnRmLoop:
 L84D5:  .byte $FB,    $8F   ;50% duty, len counter yes, env yes, vol=15.
 L84D7:  .byte $FE             ;Jump to new music address.
@@ -635,7 +635,7 @@ L8716:  .byte $FC            ;Continue last music.
 SQVictory:
 .incbin "bin/Bank01/SQVictory.bin"
 SQ1Village:
-.incbin "bin/Bank01/SQ1Village.bin"
+.byte $FF, $73
 
 SQ1VillageLoop:
 .incbin "bin/Bank01/SQ1VillageLoop.bin"
@@ -829,7 +829,7 @@ L89BB:  .byte $9A, $06              ;D4,   6 counts.
 L89BD:  .byte $9C, $06              ;E4,   6 counts.
 
 SQ1Fight:
-.incbin "bin/Bank01/SQ1Fight.bin"
+.byte $FF, $78
 
 SQ1FightLoop:
 .incbin "bin/Bank01/SQ1FightLoop_0.bin"
@@ -860,7 +860,7 @@ L8ADF:  .byte $9C, $06              ;E4,   6 counts.
 TRIFight:
 .incbin "bin/Bank01/TRIFight.bin"
 SQ1EndBoss:
-.incbin "bin/Bank01/SQ1EndBoss.bin"
+.byte $FF, $50
 SQ1EndBoss2:
 L8B64:  .byte $FE             ;Jump to new music address.
 L8B65:  .word SQ1EndBoss3           ;($8BA1).
@@ -896,11 +896,11 @@ L8BFE:  .word SQ2EndBoss            ;($8BE6).
 SQ2EndBoss2:
 .incbin "bin/Bank01/SQ2EndBoss2.bin"
 SQ2EndBoss3:
-.incbin "bin/Bank01/SQ2EndBoss3.bin"
+.byte $92, $8F, $92, $8F
 SQ2EndBoss4:
 .incbin "bin/Bank01/SQ2EndBoss4.bin"
 TRIEndBoss:
-.incbin "bin/Bank01/TRIEndBoss.bin"
+.byte $FB, $30, $F7, $0C
 TRIEndBossLoop:
 L8C1E:  .byte $9A, $98, $9A, $98    ;D4,  C4,  D4,  C4.
 L8C22:  .byte $9A, $98, $9A, $98    ;D4,  C4,  D4,  C4.
@@ -916,25 +916,25 @@ L8C32:  .byte $FE             ;Jump to new music address.
 L8C33:  .word TRIEndBossLoop        ;($8C1E).
 
 TRIEndBoss2:
-.incbin "bin/Bank01/TRIEndBoss2.bin"
+.byte $9E, $9B, $9E, $9B
 TRIEndBoss3:
 .incbin "bin/Bank01/TRIEndBoss3.bin"
 SQ2SlvrHrp:
-.incbin "bin/Bank01/SQ2SlvrHrp.bin"
+.byte $03
 SQ1SlvrHrp:
 .incbin "bin/Bank01/SQ1SlvrHrp.bin"
 TRIFryFlute:
 .incbin "bin/Bank01/TRIFryFlute.bin"
 SQ2RnbwBrdg:
-.incbin "bin/Bank01/SQ2RnbwBrdg.bin"
+.byte $03
 SQ1RnbwBrdg:
 .incbin "bin/Bank01/SQ1RnbwBrdg.bin"
 SQ2Death:
-.incbin "bin/Bank01/SQ2Death.bin"
+.byte $02
 SQ1Death:
 .incbin "bin/Bank01/SQ1Death.bin"
 SQ2Cursed:
-.incbin "bin/Bank01/SQ2Cursed.bin"
+.byte $01
 SQ1Cursed:
 L8D4B:  .byte $FF,     $96   ;60/1 = 60 counts per second.
 L8D4D:  .byte $FB,    $45   ;25% duty, len counter yes, env yes, vol=5.

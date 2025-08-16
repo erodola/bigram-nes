@@ -138,7 +138,7 @@ TB3E0:
 TB3E1:
 .incbin "bin/Bank02/TB3E1.bin"
 TB3E2:
-.incbin "bin/Bank02/TB3E2.bin"
+.incbin "bin/Bank02/TB2E3.bin"  ; TB2E3 and TB3E2 are the same
 TB3E3:
 .incbin "bin/Bank02/TB3E3.bin"
 TB3E4:
