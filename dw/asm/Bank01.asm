@@ -4112,7 +4112,7 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         
         @StoreDone:
         STA PPUDataByte
-        LDA #$04            ; set vertical position on screen
+        LDA #$06            ; set vertical position on screen
         STA ScrnTxtYCoord
         LDA WndNameIndex
         CLC
@@ -4551,8 +4551,8 @@ NameEntryDat:
 .byte $01
 .ifdef namegen
     .byte $02  ; height of the name window
-    .byte $0C
-    .byte $15  ; position (moved up)
+    .byte $0C  ; width
+    .byte $25  ; position (moved up)
 .else
     .byte $03
     .byte $0C
