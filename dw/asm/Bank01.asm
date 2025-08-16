@@ -4130,13 +4130,13 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         JSR InitNameWindow
 
         ; ------------------------------------------------------------------
-        ; Generate the name auto-regressively
+        ; Generate the name auto-regressively (3-8 letters)
         ; ------------------------------------------------------------------
         LDA #0
         STA tok_idx            ; tok_idx = 0
         STA j_count            ; j = 0
 
-        @CharLoop:             ; we'll ensure the name has at least 3 letters
+        @CharLoop:             ; ensure at least 3 letters
         LDA #0
         STA attempts           ; attempts = 0
 
@@ -4150,43 +4150,28 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         BEQ @ForceA            ; attempts==255, force letter 'A'
 
         LDA tok_idx
-        BEQ @AttemptLoop       ; do another attempt if tok_idx==0
+        BEQ @AttemptLoop       ; resample if tok_idx==0
 
         @ForceA:
         LDA tok_idx
-        BNE @GotChar           ; tok_idx != 0? then don't force 'A', otherwise...
+        BNE @GotChar           ; tok_idx != 0? then keep it, otherwise...
         LDA #1                 ; ...force 'A'
         STA tok_idx            ; store tok_idx for the next iteration
 
         @GotChar:
         LDY j_count
-        STA NameBuffer,Y      ; new_name[j] = A
+        STA NameBuffer,Y       ; new_name[j] = A
         INY                    ; j++
         STY j_count
         CPY #3                 ; j < 3?
         BCC @CharLoop
 
-        @FourthChar:
-        LDA tok_idx
-        JSR LoadRowPtr
-        JSR Multinomial
-        STA tok_idx
-        LDY j_count
-        STA NameBuffer,Y
-        INY
-        STY j_count
+        ; letters 4-7 via loop
 
-        @FifthChar:
-        LDA tok_idx
-        JSR LoadRowPtr
-        JSR Multinomial
-        STA tok_idx
-        LDY j_count
-        STA NameBuffer,Y
-        INY
-        STY j_count
+        LDA #4
+        STA attempts           ; reuse variable to loop 4 times
 
-        @SixthChar:
+        @MidCharsLoop:
         LDA tok_idx
         JSR LoadRowPtr
         JSR Multinomial
@@ -4195,16 +4180,8 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         STA NameBuffer,Y
         INY
         STY j_count
-
-        @SeventhChar:
-        LDA tok_idx
-        JSR LoadRowPtr
-        JSR Multinomial
-        STA tok_idx
-        LDY j_count
-        STA NameBuffer,Y
-        INY
-        STY j_count
+        DEC attempts
+        BNE @MidCharsLoop
 
         @LastChar:
         LDA tok_idx
