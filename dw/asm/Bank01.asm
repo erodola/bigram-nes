@@ -4553,13 +4553,20 @@ NameEntryDat:
     .byte $02  ; height of the name window
     .byte $0C  ; width
     .byte $25  ; position (moved up)
+    .byte $8B 
+    .byte $31, $24, $30, $28 ; "NAME"
+    .byte $88, $81
+    .byte $60, $60, $60, $60, $60, $60, $60, $60 ; blank tiles
 .else
     .byte $03
     .byte $0C
     .byte $35
+    .byte $8B 
+    .byte $31, $24, $30, $28
+    .byte $88, $81
+    .byte $41, $41, $41, $41, $41, $41, $41, $41 ; asterisk
 .endif
-
-.incbin "bin/Bank01/NameEntryDat.bin"
+.byte $80
 
 ContChngErsDat:
 .incbin "bin/Bank01/ContChngErsDat.bin"
