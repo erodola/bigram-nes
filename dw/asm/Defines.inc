@@ -1371,3 +1371,6 @@ INV_FULL = $04     ;Player's inventory is full.
 
 ; [BIGRAM-NES] pointer to a row in the transition matrix
 probs_ptr = GenWord42
+tok_idx   = GenByte22
+j_count   = GenByte24
+attempts  = GenByte25

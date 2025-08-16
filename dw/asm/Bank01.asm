@@ -4091,7 +4091,7 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
     ;
     ; Trashes: A, X
     ;
-    ShowChar:               ; ($AE15)
+    ShowChar:               ; ($AE2A)
         JSR ItoS
         STX WndNameIndex
 
@@ -4121,27 +4121,106 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         JSR WndCalcPPUAddr
         JMP AddPPUBufEntry  ; (clobbers X)
 
-    ; TODO
+    ;
     ; Generate a new name via a simple bigram model.
     ;
     ; Trashes: A, X, Y
     ;
-    WndEnterName:              ; ($AE33) we jump here directly from Bank03
+    WndEnterName:              ; ($AE59) we jump here directly from Bank03
         JSR InitNameWindow
 
-        ; LDA #TL_BLANK_TILE2
-        ; LDX #$04
-        ; ClearNameBufLoop:
-            ; DEX
-            ; STA DispName0,X
-            ; STA DispName4,X
-            ; BNE ClearNameBufLoop
+        ; ------------------------------------------------------------------
+        ; Generate the name auto-regressively
+        ; ------------------------------------------------------------------
+        LDA #0
+        STA tok_idx            ; tok_idx = 0
+        STA j_count            ; j = 0
 
+        @CharLoop:             ; we'll ensure the name has at least 3 letters
+        LDA #0
+        STA attempts           ; attempts = 0
+
+        @AttemptLoop:
+        LDA tok_idx
+        JSR LoadRowPtr         ; probs_ptr = T + tok_idx*VOCAB_SIZE
+        JSR Multinomial        ; A = new tok_idx (0 - VOCAB_SIZE-1)
+        STA tok_idx
+
+        INC attempts           ; attempts++
+        BEQ @ForceA            ; attempts==255, force letter 'A'
+
+        LDA tok_idx
+        BEQ @AttemptLoop       ; do another attempt if tok_idx==0
+
+        @ForceA:
+        LDA tok_idx
+        BNE @GotChar           ; tok_idx != 0? then don't force 'A', otherwise...
+        LDA #1                 ; ...force 'A'
+        STA tok_idx            ; store tok_idx for the next iteration
+
+        @GotChar:
+        LDY j_count
+        STA NameBuffer,Y      ; new_name[j] = A
+        INY                    ; j++
+        STY j_count
+        CPY #3                 ; j < 3?
+        BCC @CharLoop
+
+        @FourthChar:
+        LDA tok_idx
+        JSR LoadRowPtr
+        JSR Multinomial
+        STA tok_idx
+        LDY j_count
+        STA NameBuffer,Y
+        INY
+        STY j_count
+
+        @FifthChar:
+        LDA tok_idx
+        JSR LoadRowPtr
+        JSR Multinomial
+        STA tok_idx
+        LDY j_count
+        STA NameBuffer,Y
+        INY
+        STY j_count
+
+        @SixthChar:
+        LDA tok_idx
+        JSR LoadRowPtr
+        JSR Multinomial
+        STA tok_idx
+        LDY j_count
+        STA NameBuffer,Y
+        INY
+        STY j_count
+
+        @SeventhChar:
+        LDA tok_idx
+        JSR LoadRowPtr
+        JSR Multinomial
+        STA tok_idx
+        LDY j_count
+        STA NameBuffer,Y
+        INY
+        STY j_count
+
+        @LastChar:
+        LDA tok_idx
+        JSR LoadRowPtr
+        JSR Multinomial
+        LDY #7
+        STA NameBuffer,Y
+
+        ; ------------------------------------------------------------------
+        ; Read the name from NameBuffer, store it and show it on screen
+        ; ------------------------------------------------------------------
         LDY #$00
         @loop:
             TYA
             TAX
-            LDA NameLetters,X
+            LDA NameBuffer,X  ; FIXME init with blank tiles ($3D)
             JSR ShowChar
             INY
             CPY #$08
@@ -4151,8 +4230,8 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         STA WndNameIndex
         RTS
 
-    NameLetters:                  ; blank tiles = #TL_BLANK_TILE2 - $23
-        .byte $03, $09, $01, $0F, $3D, $3D, $3D, $3D
+    ; NameLetters:  ; init with blank tiles, $3D = #TL_BLANK_TILE2 - $23
+        ; .byte $3D, $3D, $3D, $3D, $3D, $3D, $3D, $3D
 .endif
 
 ;----------------------------------------------------------------------------------------------------
