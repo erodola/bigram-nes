@@ -1,5 +1,7 @@
 # 🧙 Dragon Warrior: NameGen
 
+![demo](../dw-1.gif) ![demo](../dw-2.gif)
+
 This ROM hack adds a tiny AI-powered name generator to the **Dragon Warrior (NES)** character naming screen.
 
 The model produces fantasy-style names of 3–8 letters while compressing a name space of nearly 18 million possibilities into a form small enough to run on NES hardware.
