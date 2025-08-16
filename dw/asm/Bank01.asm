@@ -4176,6 +4176,9 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         JSR LoadRowPtr
         JSR Multinomial
         STA tok_idx
+        LDA tok_idx
+        BEQ @Pad               ; if EOS, pad the rest with zeros
+
         LDY j_count
         STA NameBuffer,Y
         INY
@@ -4183,13 +4186,14 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         DEC attempts
         BNE @MidCharsLoop
 
-        @LastChar:
+        @LastChar:             ; directly store in the last position, even if it's a white space
         LDA tok_idx
         JSR LoadRowPtr
         JSR Multinomial
         LDY #7
         STA NameBuffer,Y
 
+        @EndGen:
         ; ------------------------------------------------------------------
         ; Read the name from NameBuffer, store it and show it on screen
         ; ------------------------------------------------------------------
@@ -4197,7 +4201,7 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         @loop:
             TYA
             TAX
-            LDA NameBuffer,X  ; FIXME init with blank tiles ($3D)
+            LDA NameBuffer,X
             JSR ShowChar
             INY
             CPY #$08
@@ -4207,8 +4211,16 @@ LADFF:  JMP WaitForNMI          ;($FF74)Wait for VBlank interrupt.
         STA WndNameIndex
         RTS
 
-    ; NameLetters:  ; init with blank tiles, $3D = #TL_BLANK_TILE2 - $23
-        ; .byte $3D, $3D, $3D, $3D, $3D, $3D, $3D, $3D
+        @Pad:
+        LDY j_count          ; current write position (3..6)
+        LDA #0
+        @PadLoop:
+        STA NameBuffer,Y
+        INY
+        CPY #8               ; fill through index 7  
+        BCC @PadLoop
+        STY j_count          ; j_count = 8 (fully filled)
+        JMP @EndGen
 .endif
 
 ;----------------------------------------------------------------------------------------------------
