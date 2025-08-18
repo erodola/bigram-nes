@@ -4,7 +4,7 @@
 
 This ROM hack adds a tiny AI-powered name generator to the **Dragon Warrior (NES)** character naming screen.
 
-The model produces fantasy-style names of 3–8 letters while compressing a name space of nearly 18 million possibilities into a form small enough to run on NES hardware.
+The model produces fantasy-style names of 3–8 letters while compressing a name space of nearly **18 million** possibilities into a form small enough to run on NES hardware.
 
 ## 🧠 Model
 
@@ -42,7 +42,7 @@ A fresh seed is used on every run to keep results varied.
 
 ## 🔧 Building
 
-You can build the patched ROM yourself from the assembly source:
+You can either [download the binary patch](./rhdn/), or build the patched ROM yourself from the assembly source:
 
 1. **Get a clean DW ROM**
 
