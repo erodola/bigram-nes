@@ -16,6 +16,8 @@ The project includes three subprojects:
 
 Each subfolder contains its own README with instructions for building and usage.
 
+Here's a [video](https://youtu.be/pZTwpNlM-Ko) of the romhacks running on real hardware! (courtesy of [@lucentw](https://lucy.gq/))
+
 ## ⚙️ Requirements
 
 - [`cc65`](https://cc65.github.io/) toolchain
