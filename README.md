@@ -1,5 +1,16 @@
 # 🐉 Bigram NES
 
+[![License](https://img.shields.io/github/license/erodola/bigram-nes?style=flat-square)](./LICENSE)
+[![Stars](https://img.shields.io/github/stars/erodola/bigram-nes?style=flat-square)](https://github.com/erodola/bigram-nes/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/erodola/bigram-nes?style=flat-square)](https://github.com/erodola/bigram-nes/commits/main)
+[![Top Language](https://img.shields.io/github/languages/top/erodola/bigram-nes?style=flat-square)](https://github.com/erodola/bigram-nes)
+[![Commit Activity](https://img.shields.io/github/commit-activity/y/erodola/bigram-nes?style=flat-square)](https://github.com/erodola/bigram-nes/graphs/contributors)
+![Platform](https://img.shields.io/badge/platform-NES-cc0000?style=flat-square)
+![CPU](https://img.shields.io/badge/CPU-6502-2c8ebb?style=flat-square)
+![Toolchain](https://img.shields.io/badge/toolchain-cc65-00599c?style=flat-square)
+![Model](https://img.shields.io/badge/model-char--bigram-3b9c4a?style=flat-square)
+![Python](https://img.shields.io/badge/python-3.11-3776ab?style=flat-square)
+
 ![gen](./gen.gif) ![demo](./ff1-1.gif) ![demo](./ff1-2.gif)
 
 ![demo](./dw-1.gif) ![demo](./dw-2.gif)
